@@ -1,9 +1,9 @@
 name: Update Garden Data
 
 on:
-  # Run every hour
+  # Run every 5 minutes
   schedule:
-    - cron: '0 * * * *'
+    - cron: '*/5 * * * *'
   
   # Allow manual trigger
   workflow_dispatch:
