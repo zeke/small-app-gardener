@@ -1,0 +1,24 @@
+{
+  "name": "small-app-gardener",
+  "version": "1.0.0",
+  "description": "Data collection and analysis for Cloudflare's Small App Garden",
+  "type": "module",
+  "scripts": {
+    "collect": "npx tsx collect-data.ts",
+    "report": "npx tsx generate-report.ts",
+    "update": "npm run collect && npm run report",
+    "test": "npx tsx test.ts"
+  },
+  "keywords": [
+    "cloudflare",
+    "workers",
+    "replicate",
+    "analysis"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.0.0"
+  }
+}

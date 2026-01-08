@@ -1,0 +1,918 @@
+{
+  "lastUpdated": "2026-01-08",
+  "source": "https://developers.cloudflare.com/garden/",
+  "totalApps": 12,
+  "apps": [
+    {
+      "name": "Image Editing Arena",
+      "slug": "image-editing-arena",
+      "description": "AI-powered image editing arena. Upload images and apply transformations using cutting-edge models, then compare results side-by-side.",
+      "url": "https://replicate.com/",
+      "github": "https://github.com/replicate/image-editing-arena",
+      "author": {
+        "name": "replicate",
+        "github": "replicate",
+        "avatar": "https://avatars.githubusercontent.com/replicate"
+      },
+      "shippedDate": "2025-11-24",
+      "stack": {
+        "framework": "React 19",
+        "language": "TypeScript",
+        "buildTool": "Vite",
+        "packageManager": "npm",
+        "uiLibrary": null
+      },
+      "dependencies": {
+        "runtime": {
+          "lucide-react": "^0.554.0",
+          "react": "^19.2.0",
+          "react-dom": "^19.2.0",
+          "recharts": "^3.5.0"
+        },
+        "dev": {
+          "@types/node": "^22.14.0",
+          "@vitejs/plugin-react": "^5.0.0",
+          "typescript": "~5.8.2",
+          "vite": "^6.2.0",
+          "wrangler": "^3.0.0"
+        }
+      },
+      "testing": {
+        "hasTests": false,
+        "framework": null,
+        "testFiles": []
+      },
+      "ci": {
+        "hasGitHubActions": false,
+        "workflows": []
+      },
+      "cloudflare": {
+        "products": [
+          "Workers",
+          "Static Assets"
+        ],
+        "bindings": {}
+      },
+      "replicate": {
+        "usesReplicate": false,
+        "models": [],
+        "apiIntegration": null
+      },
+      "tags": []
+    },
+    {
+      "name": "Fauxto Booth",
+      "slug": "fauxto-booth",
+      "description": "Take Fake Photos with your real friends!",
+      "url": "https://fauxto-booth.craigsdemos.workers.dev",
+      "github": "https://github.com/craigsdennis/fauxto-booth",
+      "author": {
+        "name": "craigsdennis",
+        "github": "craigsdennis",
+        "avatar": "https://avatars.githubusercontent.com/craigsdennis"
+      },
+      "shippedDate": "2025-12-22",
+      "youtubeVideo": "https://youtube.com/watch?v=JvoGnXEKzfc",
+      "stack": {
+        "framework": "React + Hono",
+        "language": "TypeScript",
+        "buildTool": "Vite",
+        "packageManager": "npm",
+        "uiLibrary": "Tailwind CSS"
+      },
+      "dependencies": {
+        "runtime": {
+          "@tailwindcss/vite": "^4.1.17",
+          "agents": "^0.2.28",
+          "ai": "^5.0.106",
+          "hono": "^4.10.7",
+          "hono-agents": "^2.0.7",
+          "qrcode": "^1.5.4",
+          "react": "^19.1.1",
+          "react-dom": "^19.1.1",
+          "replicate": "^1.4.0",
+          "tailwindcss": "^4.1.17"
+        },
+        "dev": {
+          "@cloudflare/vite-plugin": "^1.16.1",
+          "@eslint/js": "^9.33.0",
+          "@types/node": "^24.10.1",
+          "@types/qrcode": "^1.5.6",
+          "@types/react": "^19.1.10",
+          "@types/react-dom": "^19.1.7",
+          "@vitejs/plugin-react": "^5.0.0",
+          "eslint": "^9.33.0",
+          "eslint-plugin-react-hooks": "^5.2.0",
+          "eslint-plugin-react-refresh": "^0.4.20",
+          "globals": "^16.3.0",
+          "typescript": "~5.8.3",
+          "typescript-eslint": "^8.39.1",
+          "vite": "^7.1.2",
+          "wrangler": "^4.56.0"
+        }
+      },
+      "testing": {
+        "hasTests": false,
+        "framework": null,
+        "testFiles": []
+      },
+      "ci": {
+        "hasGitHubActions": false,
+        "workflows": []
+      },
+      "cloudflare": {
+        "products": [
+          "Workers",
+          "R2",
+          "Durable Objects",
+          "Workflows",
+          "Images",
+          "Workers AI",
+          "Static Assets"
+        ],
+        "bindings": {}
+      },
+      "replicate": {
+        "usesReplicate": true,
+        "models": [
+          "bytedance/seedream-4.5"
+        ],
+        "apiIntegration": "replicate npm package"
+      },
+      "tags": []
+    },
+    {
+      "name": "The Coffee Cluster",
+      "slug": "the-coffee-cluster",
+      "description": "An example Next.js application for PlanetScale with Hyperdrive",
+      "url": "https://thecoffeecluster.com/",
+      "github": "https://github.com/jillesme/thecoffeecluster",
+      "author": {
+        "name": "jillesme",
+        "github": "jillesme",
+        "avatar": "https://avatars.githubusercontent.com/jillesme"
+      },
+      "shippedDate": "2025-11-23",
+      "youtubeVideo": "https://youtube.com/watch?v=Xps8IAlZ5a8",
+      "stack": {
+        "framework": "Next.js 15",
+        "language": "TypeScript",
+        "buildTool": "Turbopack",
+        "packageManager": "pnpm",
+        "uiLibrary": "Tailwind CSS + Radix UI",
+        "orm": "Drizzle ORM"
+      },
+      "dependencies": {
+        "runtime": {
+          "@opennextjs/cloudflare": "^1.11.0",
+          "@planetscale/database": "^1.19.0",
+          "@radix-ui/react-slot": "^1.2.4",
+          "@radix-ui/react-toggle": "^1.1.10",
+          "class-variance-authority": "^0.7.1",
+          "clsx": "^2.1.1",
+          "drizzle-orm": "^0.44.7",
+          "js-cookie": "^3.0.5",
+          "lucide-react": "^0.554.0",
+          "next": "15.5.6",
+          "next-themes": "^0.4.6",
+          "pg": "^8.16.3",
+          "react": "19.1.0",
+          "react-dom": "19.1.0",
+          "sonner": "^2.0.7",
+          "tailwind-merge": "^3.4.0",
+          "zustand": "^5.0.9"
+        },
+        "dev": {
+          "@eslint/eslintrc": "^3",
+          "@tailwindcss/postcss": "^4",
+          "@types/js-cookie": "^3.0.6",
+          "@types/node": "^20",
+          "@types/react": "^19",
+          "@types/react-dom": "^19",
+          "dotenv": "^17.2.3",
+          "drizzle-kit": "^0.31.7",
+          "eslint": "^9",
+          "eslint-config-next": "15.4.6",
+          "tailwindcss": "^4",
+          "tsx": "^4.20.6",
+          "tw-animate-css": "^1.4.0",
+          "typescript": "^5",
+          "wrangler": "^4.50.0"
+        }
+      },
+      "testing": {
+        "hasTests": false,
+        "framework": null,
+        "testFiles": []
+      },
+      "ci": {
+        "hasGitHubActions": false,
+        "workflows": []
+      },
+      "cloudflare": {
+        "products": [
+          "Workers",
+          "R2",
+          "Hyperdrive",
+          "Workers AI",
+          "Static Assets"
+        ],
+        "bindings": {}
+      },
+      "replicate": {
+        "usesReplicate": false,
+        "models": [],
+        "apiIntegration": null
+      },
+      "tags": []
+    },
+    {
+      "name": "Virtual Try On",
+      "slug": "virtual-try-on",
+      "description": "An app that allows users to try on an ugly winter jumper, virtually! Built with Workers and Replicate",
+      "url": "https://virtual-try-on.h-demo.workers.dev/",
+      "github": "https://github.com/harshil1712/virtual-try-on-demo",
+      "author": {
+        "name": "harshil1712",
+        "github": "harshil1712",
+        "avatar": "https://avatars.githubusercontent.com/harshil1712"
+      },
+      "shippedDate": "2025-12-23",
+      "stack": {
+        "framework": "React + Hono",
+        "language": "TypeScript",
+        "buildTool": "Vite",
+        "packageManager": "npm",
+        "uiLibrary": null
+      },
+      "dependencies": {
+        "runtime": {
+          "hono": "^4.11.1",
+          "react": "^19.1.1",
+          "react-dom": "^19.1.1",
+          "replicate": "^1.4.0"
+        },
+        "dev": {
+          "@cloudflare/vite-plugin": "^1.18.0",
+          "@eslint/js": "^9.33.0",
+          "@types/react": "^19.1.10",
+          "@types/react-dom": "^19.1.7",
+          "@vitejs/plugin-react-swc": "^4.0.0",
+          "eslint": "^9.33.0",
+          "eslint-plugin-react-hooks": "^5.2.0",
+          "eslint-plugin-react-refresh": "^0.4.20",
+          "globals": "^16.3.0",
+          "typescript": "~5.8.3",
+          "typescript-eslint": "^8.39.1",
+          "vite": "^7.1.2",
+          "wrangler": "^4.55.0"
+        }
+      },
+      "testing": {
+        "hasTests": false,
+        "framework": null,
+        "testFiles": []
+      },
+      "ci": {
+        "hasGitHubActions": false,
+        "workflows": []
+      },
+      "cloudflare": {
+        "products": [
+          "Workers",
+          "R2",
+          "Workers AI",
+          "Static Assets"
+        ],
+        "bindings": {}
+      },
+      "replicate": {
+        "usesReplicate": true,
+        "models": [
+          "google/nano-banana-pro",
+          "openai/gpt-image-1.5"
+        ],
+        "apiIntegration": "replicate npm package"
+      },
+      "tags": []
+    },
+    {
+      "name": "Kivo",
+      "slug": "kivo",
+      "description": "A modern invoicing platform for freelancers and creators. Create professional invoices, track payments, and get paid faster.",
+      "url": "https://kivo.lauragift.workers.dev",
+      "github": "https://github.com/lauragift21/kivo",
+      "author": {
+        "name": "lauragift21",
+        "github": "lauragift21",
+        "avatar": "https://avatars.githubusercontent.com/lauragift21"
+      },
+      "shippedDate": "2026-01-08",
+      "stack": {
+        "framework": "Hono",
+        "language": "TypeScript",
+        "buildTool": "Vite",
+        "packageManager": "npm",
+        "uiLibrary": "Tailwind CSS + Radix UI",
+        "monorepo": true
+      },
+      "dependencies": {
+        "runtime": {
+          "@kivo/shared": "*",
+          "hono": "^4.0.0",
+          "stripe": "^14.10.0",
+          "@fontsource/geist-sans": "^5.2.5",
+          "@fontsource/instrument-serif": "^5.2.8",
+          "@hookform/resolvers": "^3.3.4",
+          "@radix-ui/react-alert-dialog": "^1.0.5",
+          "@radix-ui/react-dialog": "^1.0.5",
+          "@radix-ui/react-dropdown-menu": "^2.0.6",
+          "@radix-ui/react-label": "^2.0.2",
+          "@radix-ui/react-select": "^2.0.0",
+          "@radix-ui/react-slot": "^1.0.2",
+          "@radix-ui/react-tabs": "^1.0.4",
+          "@radix-ui/react-toast": "^1.1.5",
+          "@radix-ui/react-tooltip": "^1.0.7",
+          "@tanstack/react-query": "^5.17.0",
+          "@tanstack/react-router": "^1.15.0",
+          "class-variance-authority": "^0.7.0",
+          "clsx": "^2.1.0",
+          "date-fns": "^3.2.0",
+          "lucide-react": "^0.309.0",
+          "react": "^18.2.0",
+          "react-dom": "^18.2.0",
+          "react-hook-form": "^7.49.3",
+          "tailwind-merge": "^2.2.0",
+          "zod": "^3.22.4"
+        },
+        "dev": {
+          "@types/node": "^20.10.0",
+          "concurrently": "^8.2.2",
+          "eslint": "^8.55.0",
+          "typescript": "^5.3.3",
+          "wrangler": "^4.54.0",
+          "@cloudflare/workers-types": "^4.20240117.0",
+          "vitest": "^1.1.0",
+          "@types/react": "^18.2.47",
+          "@types/react-dom": "^18.2.18",
+          "@vitejs/plugin-react": "^4.2.1",
+          "autoprefixer": "^10.4.16",
+          "postcss": "^8.4.33",
+          "tailwindcss": "^3.4.1",
+          "vite": "^5.0.11"
+        }
+      },
+      "testing": {
+        "hasTests": true,
+        "framework": "vitest",
+        "testFiles": [
+          "apps/api/src/durable-objects/reminder-scheduler.test.ts",
+          "packages/shared/src/utils.test.ts"
+        ]
+      },
+      "ci": {
+        "hasGitHubActions": true,
+        "workflows": [
+          "deploy.yml",
+          "opencode.yml"
+        ]
+      },
+      "cloudflare": {
+        "products": [
+          "Workers",
+          "D1",
+          "R2",
+          "Durable Objects",
+          "Workers AI",
+          "Static Assets",
+          "Cron Triggers"
+        ],
+        "bindings": {}
+      },
+      "replicate": {
+        "usesReplicate": false,
+        "models": [],
+        "apiIntegration": null
+      },
+      "tags": []
+    },
+    {
+      "name": "Unofficial Claude Code Wrapped",
+      "slug": "claude-code-wrapped",
+      "description": "Your year in code with Claude. Generated by Claude History Explorer, a Python CLI tool to explore, search and visualise your Claude Code conversation history.",
+      "url": "https://wrapped-claude-codes.adewale-883.workers.dev/",
+      "github": "https://github.com/adewale/claude-history-explorer",
+      "author": {
+        "name": "adewale",
+        "github": "adewale",
+        "avatar": "https://avatars.githubusercontent.com/adewale"
+      },
+      "shippedDate": "2025-12-23",
+      "stack": {
+        "framework": "Unknown",
+        "language": [
+          "Python"
+        ],
+        "buildTool": "Unknown",
+        "packageManager": "npm",
+        "uiLibrary": null
+      },
+      "dependencies": {
+        "runtime": {},
+        "dev": {}
+      },
+      "testing": {
+        "hasTests": true,
+        "framework": "pytest",
+        "testFiles": [
+          "tests/conftest.py",
+          "tests/fixtures/golden_urls.json",
+          "tests/fixtures/schema_test_cases.json",
+          "tests/generate_schema_test_cases.py",
+          "tests/test_backwards_compatibility.py",
+          "tests/test_cli_integration.py",
+          "tests/test_history.py",
+          "tests/test_integration.py",
+          "tests/test_modules.py",
+          "tests/test_schema_alignment.py"
+        ]
+      },
+      "ci": {
+        "hasGitHubActions": false,
+        "workflows": []
+      },
+      "cloudflare": {
+        "products": [
+          "Workers"
+        ],
+        "bindings": {}
+      },
+      "replicate": {
+        "usesReplicate": false,
+        "models": [],
+        "apiIntegration": null
+      },
+      "tags": []
+    },
+    {
+      "name": "LinkFlare",
+      "slug": "linkflare",
+      "description": "A link sharing platform similar to LinkTree, it allows one to add various links on their profile and track them. Completely open source!",
+      "url": "https://developers.cloudflare.com/garden/linkflare",
+      "github": "https://github.com/jillesme/linkflare",
+      "author": {
+        "name": "jillesme",
+        "github": "jillesme",
+        "avatar": "https://avatars.githubusercontent.com/jillesme"
+      },
+      "shippedDate": "2025-12-19",
+      "stack": {
+        "framework": "TanStack Start",
+        "language": "TypeScript",
+        "buildTool": "Vite",
+        "packageManager": "pnpm",
+        "uiLibrary": "Tailwind CSS + Radix UI",
+        "orm": "Drizzle ORM",
+        "auth": "better-auth"
+      },
+      "dependencies": {
+        "runtime": {
+          "@cloudflare/vite-plugin": "^1.19.0",
+          "@libsql/client": "^0.15.15",
+          "@marsidev/react-turnstile": "^1.4.1",
+          "@radix-ui/react-label": "^2.1.8",
+          "@radix-ui/react-separator": "^1.1.8",
+          "@radix-ui/react-slot": "^1.2.4",
+          "@tailwindcss/vite": "^4.1.18",
+          "@tanstack/react-devtools": "^0.9.0",
+          "@tanstack/react-router": "^1.144.0",
+          "@tanstack/react-router-devtools": "^1.144.0",
+          "@tanstack/react-router-ssr-query": "^1.144.0",
+          "@tanstack/react-start": "^1.145.0",
+          "@tanstack/router-plugin": "^1.144.0",
+          "better-auth": "^1.4.9",
+          "class-variance-authority": "^0.7.1",
+          "clsx": "^2.1.1",
+          "drizzle-orm": "^0.45.1",
+          "lucide-react": "^0.562.0",
+          "nanoid": "^5.1.6",
+          "react": "^19.2.3",
+          "react-dom": "^19.2.3",
+          "tailwind-merge": "^3.4.0",
+          "tailwindcss": "^4.1.18",
+          "vite-tsconfig-paths": "^5.1.4",
+          "zod": "^4.2.1"
+        },
+        "dev": {
+          "@tanstack/devtools-vite": "^0.4.0",
+          "@testing-library/dom": "^10.4.0",
+          "@testing-library/jest-dom": "^6.9.1",
+          "@testing-library/react": "^16.3.1",
+          "@types/node": "^22.10.2",
+          "@types/react": "^19.2.0",
+          "@types/react-dom": "^19.2.0",
+          "@vitejs/plugin-react": "^5.0.4",
+          "drizzle-kit": "^0.31.8",
+          "jsdom": "^27.4.0",
+          "tw-animate-css": "^1.4.0",
+          "typescript": "^5.7.2",
+          "vite": "^7.3.0",
+          "vitest": "^3.0.5",
+          "web-vitals": "^5.1.0",
+          "wrangler": "^4.56.0"
+        }
+      },
+      "testing": {
+        "hasTests": true,
+        "framework": "vitest",
+        "testFiles": [
+          "src/components/ui/button.test.tsx",
+          "src/components/ui/input.test.tsx",
+          "src/lib/reserved-usernames.test.ts",
+          "src/lib/validation.test.ts",
+          "src/routes/_authenticated/dashboard/__tests__/links.new.test.tsx"
+        ]
+      },
+      "ci": {
+        "hasGitHubActions": false,
+        "workflows": []
+      },
+      "cloudflare": {
+        "products": [
+          "Workers",
+          "D1",
+          "Workers AI",
+          "Static Assets"
+        ],
+        "bindings": {}
+      },
+      "replicate": {
+        "usesReplicate": false,
+        "models": [],
+        "apiIntegration": null
+      },
+      "tags": []
+    },
+    {
+      "name": "Keyboardia",
+      "slug": "keyboardia",
+      "description": "A multiplayer step sequencer with polyrhythmic patterns, built for real-time collaboration. Create/Collaborate. Remix. Share.",
+      "url": "https://developers.cloudflare.com/garden/keyboardia",
+      "github": "https://github.com/adewale/keyboardia",
+      "author": {
+        "name": "adewale",
+        "github": "adewale",
+        "avatar": "https://avatars.githubusercontent.com/adewale"
+      },
+      "shippedDate": "2025-12-17",
+      "stack": {
+        "framework": "Unknown",
+        "language": "Unknown",
+        "buildTool": "Unknown",
+        "packageManager": "npm",
+        "uiLibrary": null
+      },
+      "dependencies": {
+        "runtime": {},
+        "dev": {}
+      },
+      "testing": {
+        "hasTests": true,
+        "framework": null,
+        "testFiles": [
+          "app/e2e/accessibility.spec.ts",
+          "app/e2e/connection-storm.spec.ts",
+          "app/e2e/core.spec.ts",
+          "app/e2e/drag-to-paint.spec.ts",
+          "app/e2e/feature-flags.spec.ts",
+          "app/e2e/instrument-audio.spec.ts",
+          "app/e2e/keyboard.spec.ts",
+          "app/e2e/last-cell-flicker.spec.ts",
+          "app/e2e/mobile-android.spec.ts",
+          "app/e2e/mobile-iphone.spec.ts"
+        ]
+      },
+      "ci": {
+        "hasGitHubActions": true,
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "cloudflare": {
+        "products": [
+          "Workers"
+        ],
+        "bindings": {}
+      },
+      "replicate": {
+        "usesReplicate": false,
+        "models": [],
+        "apiIntegration": null
+      },
+      "tags": []
+    },
+    {
+      "name": "Docs to MCP",
+      "slug": "docs-to-mcp",
+      "description": "Convert documentation sites to MCP servers for AI assistants.",
+      "url": "https://developers.cloudflare.com/garden/docs-to-mcp",
+      "github": "https://github.com/fayazara/docs-to-mcp",
+      "author": {
+        "name": "fayazara",
+        "github": "fayazara",
+        "avatar": "https://avatars.githubusercontent.com/fayazara"
+      },
+      "shippedDate": "2025-12-10",
+      "stack": {
+        "framework": "Hono",
+        "language": "TypeScript",
+        "buildTool": "wrangler",
+        "packageManager": "pnpm",
+        "uiLibrary": null
+      },
+      "dependencies": {
+        "runtime": {
+          "@modelcontextprotocol/sdk": "1.20.2",
+          "agents": "0.2.19",
+          "hono": "4.7.6",
+          "zod": "^4.1.13"
+        },
+        "dev": {
+          "@cloudflare/workers-types": "4.20241127.0",
+          "@types/node": "^24.10.2",
+          "typescript": "5.5.4",
+          "wrangler": "4.10.0"
+        }
+      },
+      "testing": {
+        "hasTests": false,
+        "framework": null,
+        "testFiles": []
+      },
+      "ci": {
+        "hasGitHubActions": false,
+        "workflows": []
+      },
+      "cloudflare": {
+        "products": [
+          "Workers",
+          "Workers AI"
+        ],
+        "bindings": {}
+      },
+      "replicate": {
+        "usesReplicate": false,
+        "models": [],
+        "apiIntegration": null
+      },
+      "tags": []
+    },
+    {
+      "name": "Learnly",
+      "slug": "learnly",
+      "description": "A real-time virtual classroom for live teaching and learning with built-in video and audio.",
+      "url": "https://learnly.lauragift.workers.dev",
+      "github": "https://github.com/lauragift21/learnly",
+      "author": {
+        "name": "lauragift21",
+        "github": "lauragift21",
+        "avatar": "https://avatars.githubusercontent.com/lauragift21"
+      },
+      "shippedDate": "2025-11-20",
+      "youtubeVideo": "https://youtube.com/watch?v=z4ZQIjN3I7k",
+      "stack": {
+        "framework": "React 19",
+        "language": "TypeScript",
+        "buildTool": "Vite",
+        "packageManager": "npm",
+        "uiLibrary": "Tailwind CSS"
+      },
+      "dependencies": {
+        "runtime": {
+          "@cloudflare/realtimekit-react": "^1.1.7",
+          "@cloudflare/realtimekit-react-ui": "^1.0.5",
+          "@cloudflare/realtimekit-ui-addons": "^0.0.4",
+          "@tailwindcss/vite": "^4.1.16",
+          "lucide-react": "^0.552.0",
+          "react": "^19.1.1",
+          "react-dom": "^19.1.1",
+          "react-router-dom": "^7.9.5",
+          "tailwindcss": "^4.1.16"
+        },
+        "dev": {
+          "@cloudflare/vite-plugin": "^1.13.10",
+          "@eslint/js": "^9.33.0",
+          "@types/react": "^19.1.10",
+          "@types/react-dom": "^19.1.7",
+          "@vitejs/plugin-react-swc": "^4.0.0",
+          "eslint": "^9.33.0",
+          "eslint-plugin-react-hooks": "^5.2.0",
+          "eslint-plugin-react-refresh": "^0.4.20",
+          "globals": "^16.3.0",
+          "typescript": "~5.8.3",
+          "typescript-eslint": "^8.39.1",
+          "vite": "^7.1.2",
+          "wrangler": "^4.42.0"
+        }
+      },
+      "testing": {
+        "hasTests": false,
+        "framework": null,
+        "testFiles": []
+      },
+      "ci": {
+        "hasGitHubActions": false,
+        "workflows": []
+      },
+      "cloudflare": {
+        "products": [
+          "Workers",
+          "Static Assets"
+        ],
+        "bindings": {}
+      },
+      "replicate": {
+        "usesReplicate": false,
+        "models": [],
+        "apiIntegration": null
+      },
+      "tags": []
+    },
+    {
+      "name": "Webhookflare",
+      "slug": "webhookflare",
+      "description": "Webhook testing and debugging tool built with Cloudflare Durable Objects, demonstrating the power of edge computing with persistent SQLite storage and real-time WebSocket updates.",
+      "url": "https://webhookflare.fayaz.workers.dev/",
+      "github": "https://github.com/fayazara/webhookflare",
+      "author": {
+        "name": "fayazara",
+        "github": "fayazara",
+        "avatar": "https://avatars.githubusercontent.com/fayazara"
+      },
+      "shippedDate": "2025-11-18",
+      "stack": {
+        "framework": "Unknown",
+        "language": "TypeScript",
+        "buildTool": "Unknown",
+        "packageManager": "pnpm",
+        "uiLibrary": null
+      },
+      "dependencies": {
+        "runtime": {},
+        "dev": {
+          "typescript": "^5.5.2",
+          "wrangler": "^4.47.0"
+        }
+      },
+      "testing": {
+        "hasTests": false,
+        "framework": null,
+        "testFiles": []
+      },
+      "ci": {
+        "hasGitHubActions": false,
+        "workflows": []
+      },
+      "cloudflare": {
+        "products": [
+          "Workers",
+          "Durable Objects",
+          "Workers AI",
+          "Static Assets"
+        ],
+        "bindings": {}
+      },
+      "replicate": {
+        "usesReplicate": false,
+        "models": [],
+        "apiIntegration": null
+      },
+      "tags": []
+    },
+    {
+      "name": "Youtube Thumbnail Generator",
+      "slug": "youtube-thumbnail-generator",
+      "description": "Upload your picture and get a youtube thumnail in different styles",
+      "url": "https://youtube-thumbnail-generator.fayaz.workers.dev/",
+      "github": "https://github.com/fayazara/youtube-thumbnail-generator",
+      "author": {
+        "name": "fayazara",
+        "github": "fayazara",
+        "avatar": "https://avatars.githubusercontent.com/fayazara"
+      },
+      "shippedDate": "2025-11-18",
+      "stack": {
+        "framework": "Nuxt 4",
+        "language": "TypeScript",
+        "buildTool": "Vite (via Nuxt)",
+        "packageManager": "pnpm",
+        "uiLibrary": "@nuxt/ui"
+      },
+      "dependencies": {
+        "runtime": {
+          "@iconify-json/lucide": "^1.2.74",
+          "@iconify-json/simple-icons": "^1.2.59",
+          "@nuxt/ui": "^4.2.1",
+          "nuxt": "^4.2.1",
+          "replicate": "^1.4.0",
+          "vue": "^3.5.23"
+        },
+        "dev": {
+          "@nuxt/eslint": "^1.10.0",
+          "@types/node": "^24.10.1",
+          "eslint": "^9.39.1",
+          "prettier": "^3.6.2",
+          "prettier-plugin-tailwindcss": "^0.7.1",
+          "typescript": "^5.9.3",
+          "vue-tsc": "^3.1.5"
+        }
+      },
+      "testing": {
+        "hasTests": false,
+        "framework": null,
+        "testFiles": []
+      },
+      "ci": {
+        "hasGitHubActions": false,
+        "workflows": []
+      },
+      "cloudflare": {
+        "products": [
+          "Workers",
+          "KV",
+          "Workers AI"
+        ],
+        "bindings": {}
+      },
+      "replicate": {
+        "usesReplicate": true,
+        "models": [
+          "google/nano-banana-pro"
+        ],
+        "apiIntegration": "replicate npm package"
+      },
+      "tags": []
+    }
+  ],
+  "summary": {
+    "byFramework": {
+      "React 19": 2,
+      "React + Hono": 2,
+      "Next.js 15": 1,
+      "Hono": 2,
+      "Unknown": 3,
+      "TanStack Start": 1,
+      "Nuxt 4": 1
+    },
+    "byLanguage": {
+      "TypeScript": 10,
+      "Python": 1,
+      "Unknown": 1
+    },
+    "byPackageManager": {
+      "npm": 7,
+      "pnpm": 5
+    },
+    "byBuildTool": {
+      "Vite": 6,
+      "Turbopack": 1,
+      "Unknown": 3,
+      "wrangler": 1,
+      "Vite (via Nuxt)": 1
+    },
+    "cloudflareProducts": {
+      "Workers": 12,
+      "Static Assets": 8,
+      "R2": 4,
+      "Durable Objects": 3,
+      "Workflows": 1,
+      "Images": 1,
+      "Workers AI": 8,
+      "Hyperdrive": 1,
+      "D1": 2,
+      "Cron Triggers": 1,
+      "KV": 1
+    },
+    "testing": {
+      "withTests": 4,
+      "withoutTests": 8,
+      "testFrameworks": {
+        "vitest": 2,
+        "pytest": 1
+      }
+    },
+    "ci": {
+      "withGitHubActions": 2,
+      "withoutGitHubActions": 10
+    },
+    "replicate": {
+      "appsUsingReplicate": 3,
+      "totalModels": 3,
+      "uniqueModels": [
+        "bytedance/seedream-4.5",
+        "google/nano-banana-pro",
+        "openai/gpt-image-1.5"
+      ]
+    }
+  }
+}
