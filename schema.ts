@@ -47,6 +47,19 @@ export interface ReplicateIntegration {
   apiIntegration: string | null;
 }
 
+export interface RepoHygiene {
+  hasDescription: boolean;
+  description: string | null;
+  hasWebsite: boolean;
+  websiteUrl: string | null;
+  hasReadme: boolean;
+  readmeHasImage: boolean;
+  readmeHasVideo: boolean;
+  license: string | null;
+  stars: number;
+  forks: number;
+}
+
 export interface App {
   name: string;
   slug: string;
@@ -64,6 +77,7 @@ export interface App {
   ci: CI;
   cloudflare: CloudflareIntegration;
   replicate: ReplicateIntegration;
+  hygiene: RepoHygiene;
   tags: string[];
 }
 
@@ -86,6 +100,13 @@ export interface Summary {
     appsUsingReplicate: number;
     totalModels: number;
     uniqueModels: string[];
+  };
+  hygiene: {
+    withDescription: number;
+    withWebsite: number;
+    withReadme: number;
+    withImage: number;
+    withVideo: number;
   };
 }
 
@@ -218,6 +239,35 @@ function validateApp(app: unknown, index: number): void {
   }
   if (!Array.isArray(replicate.models)) {
     throw new Error(`${prefix}.replicate.models must be an array`);
+  }
+
+  // Hygiene (optional for backwards compatibility, but validated if present)
+  if (a.hygiene !== undefined) {
+    if (typeof a.hygiene !== "object" || a.hygiene === null) {
+      throw new Error(`${prefix}.hygiene must be an object`);
+    }
+    const hygiene = a.hygiene as Record<string, unknown>;
+    if (typeof hygiene.hasDescription !== "boolean") {
+      throw new Error(`${prefix}.hygiene.hasDescription must be a boolean`);
+    }
+    if (typeof hygiene.hasWebsite !== "boolean") {
+      throw new Error(`${prefix}.hygiene.hasWebsite must be a boolean`);
+    }
+    if (typeof hygiene.hasReadme !== "boolean") {
+      throw new Error(`${prefix}.hygiene.hasReadme must be a boolean`);
+    }
+    if (typeof hygiene.readmeHasImage !== "boolean") {
+      throw new Error(`${prefix}.hygiene.readmeHasImage must be a boolean`);
+    }
+    if (typeof hygiene.readmeHasVideo !== "boolean") {
+      throw new Error(`${prefix}.hygiene.readmeHasVideo must be a boolean`);
+    }
+    if (typeof hygiene.stars !== "number") {
+      throw new Error(`${prefix}.hygiene.stars must be a number`);
+    }
+    if (typeof hygiene.forks !== "number") {
+      throw new Error(`${prefix}.hygiene.forks must be a number`);
+    }
   }
 
   // Tags

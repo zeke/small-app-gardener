@@ -4,10 +4,9 @@
   "description": "Data collection and analysis for Cloudflare's Small App Garden",
   "type": "module",
   "scripts": {
-    "collect": "npx tsx collect-data.ts",
-    "report": "npx tsx generate-report.ts",
-    "update": "npm run collect && npm run report",
-    "test": "npx tsx test.ts"
+    "collect": "npx tsx collect-data.ts && cp apps.json website/src/data.json",
+    "test": "npx tsx test.ts",
+    "build": "cd website && npm run build"
   },
   "keywords": [
     "cloudflare",

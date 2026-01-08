@@ -1,0 +1,410 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CloudflareProduct from '../components/CloudflareProduct.astro';
+import { Icon } from 'astro-icon/components';
+import data from '../data.json';
+
+const { apps, summary, lastUpdated, totalApps } = data;
+
+// Sort apps by shipped date (newest first)
+const sortedApps = [...apps].sort(
+  (a, b) => new Date(b.shippedDate).getTime() - new Date(a.shippedDate).getTime()
+);
+
+// Get sorted products by frequency
+const sortedProducts = Object.entries(summary.cloudflareProducts)
+  .sort((a, b) => b[1] - a[1]);
+
+// Get sorted frameworks
+const sortedFrameworks = Object.entries(summary.byFramework)
+  .sort((a, b) => b[1] - a[1]);
+
+// Get sorted build tools and package managers
+const sortedBuildTools = Object.entries(summary.byBuildTool).sort((a, b) => b[1] - a[1]);
+const sortedPackageManagers = Object.entries(summary.byPackageManager).sort((a, b) => b[1] - a[1]);
+
+// Get contributor counts
+const authorCounts = new Map();
+for (const app of apps) {
+  const existing = authorCounts.get(app.author.github);
+  if (existing) {
+    existing.count++;
+  } else {
+    authorCounts.set(app.author.github, {
+      name: app.author.name,
+      github: app.author.github,
+      avatar: app.author.avatar,
+      count: 1,
+    });
+  }
+}
+const sortedAuthors = [...authorCounts.values()].sort((a, b) => b.count - a.count);
+
+// Apps using Replicate
+const replicateApps = apps.filter((app) => app.replicate.usesReplicate);
+
+// Products missing from Garden
+const productsInGarden = new Set(Object.keys(summary.cloudflareProducts));
+const allCloudflareProducts = [
+  { name: "Queues", description: "Message queues without egress fees", ideas: "Background job processor, webhook relay" },
+  { name: "Vectorize", description: "Vector database for AI/ML", ideas: "Semantic search, RAG chatbot" },
+  { name: "Stream", description: "Video storage/encoding/delivery", ideas: "Video hosting, live streaming" },
+  { name: "Pipelines", description: "Real-time data ingestion to R2", ideas: "Analytics collector, log aggregator" },
+  { name: "Email Routing", description: "Create/manage email addresses", ideas: "Contact form handler" },
+  { name: "Turnstile", description: "CAPTCHA alternative", ideas: "Bot protection demo" },
+  { name: "Browser Rendering", description: "Headless browser control", ideas: "Screenshot service, PDF generator" },
+  { name: "Containers", description: "Serverless containers", ideas: "Long-running jobs, legacy app migration" },
+  { name: "Agents", description: "AI agents with persistence", ideas: "AI assistant with memory" },
+  { name: "AI Search", description: "Managed RAG pipelines", ideas: "Documentation Q&A" },
+  { name: "Waiting Room", description: "Traffic queue management", ideas: "Event ticket sales, product launch" },
+  { name: "Web Analytics", description: "Privacy-first analytics", ideas: "Analytics dashboard" },
+  { name: "Zaraz", description: "Third-party tool manager", ideas: "Tag management demo" },
+  { name: "Load Balancing", description: "Traffic distribution", ideas: "Multi-region app demo" },
+  { name: "Pub/Sub", description: "Real-time messaging", ideas: "Chat app, notifications" },
+];
+const missingProducts = allCloudflareProducts.filter(p => !productsInGarden.has(p.name));
+---
+
+<Layout title="Small App Garden">
+  <header class="mb-12">
+    <h1 class="text-4xl font-bold text-gray-900 mb-2">Small App Garden</h1>
+    <p class="text-xl text-gray-600 mb-6">
+      A curated collection of <strong class="text-orange-600">{totalApps} apps</strong> built on Cloudflare's developer platform.
+    </p>
+    
+    <!-- Quick Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+        <div class="text-2xl font-bold text-gray-900">{totalApps}</div>
+        <div class="text-sm text-gray-500">Apps</div>
+      </div>
+      <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+        <div class="text-2xl font-bold text-gray-900">{summary.testing.withTests}</div>
+        <div class="text-sm text-gray-500">With Tests ({Math.round((summary.testing.withTests / totalApps) * 100)}%)</div>
+      </div>
+      <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+        <div class="text-2xl font-bold text-gray-900">{summary.ci.withGitHubActions}</div>
+        <div class="text-sm text-gray-500">With CI ({Math.round((summary.ci.withGitHubActions / totalApps) * 100)}%)</div>
+      </div>
+      <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+        <div class="text-2xl font-bold text-gray-900">{summary.replicate.appsUsingReplicate}</div>
+        <div class="text-sm text-gray-500">Use Replicate ({Math.round((summary.replicate.appsUsingReplicate / totalApps) * 100)}%)</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Apps Table -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-bold text-gray-900 mb-4">Apps</h2>
+    <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <thead class="bg-gray-50 border-b border-gray-200">
+            <tr>
+              <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">App</th>
+              <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">Framework</th>
+              <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">Tests</th>
+              <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">CI</th>
+              <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">Cloudflare Products</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            {sortedApps.map((app) => (
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3">
+                  <a href={app.github} class="text-orange-600 hover:underline font-medium" target="_blank" rel="noopener">
+                    {app.name}
+                  </a>
+                </td>
+                <td class="px-4 py-3 text-sm text-gray-600">
+                  {typeof app.stack.framework === 'string' ? app.stack.framework.replace(/\s+\d+$/, '') : 'Multiple'}
+                </td>
+                <td class="px-4 py-3 text-center">
+                  {app.testing.hasTests && <Icon name="lucide:check" class="w-5 h-5 text-green-500 inline" />}
+                </td>
+                <td class="px-4 py-3 text-center">
+                  {app.ci.hasGitHubActions && <Icon name="lucide:check" class="w-5 h-5 text-green-500 inline" />}
+                </td>
+                <td class="px-4 py-3">
+                  <div class="flex gap-1 flex-wrap">
+                    {app.cloudflare.products.map((product) => (
+                      <CloudflareProduct product={product} />
+                    ))}
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cloudflare Products & Opportunities (grouped together) -->
+  <div class="grid md:grid-cols-2 gap-8 mb-12">
+    <!-- Cloudflare Products -->
+    <section>
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">Cloudflare Products</h2>
+      <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+        <table class="w-full">
+          <thead class="bg-gray-50 border-b border-gray-200">
+            <tr>
+              <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">Product</th>
+              <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">Count</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            {sortedProducts.map(([product, count]) => (
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3">
+                  <div class="flex items-center gap-2">
+                    <CloudflareProduct product={product} />
+                    <span class="text-sm text-gray-700">{product}</span>
+                  </div>
+                </td>
+                <td class="px-4 py-3 text-center text-sm text-gray-600">{count}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Opportunities -->
+    <section>
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">Opportunities</h2>
+      <p class="text-sm text-gray-600 mb-4">Cloudflare products not yet represented in the Garden:</p>
+      <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+        <div class="divide-y divide-gray-100 max-h-96 overflow-y-auto">
+          {missingProducts.map((product) => (
+            <div class="px-4 py-3 hover:bg-gray-50">
+              <a 
+                href={`https://developers.cloudflare.com/${product.name.toLowerCase().replace(/\s+/g, "-")}`}
+                class="font-medium text-orange-600 hover:underline"
+                target="_blank"
+                rel="noopener"
+              >
+                {product.name}
+              </a>
+              <p class="text-sm text-gray-600">{product.description}</p>
+              <p class="text-xs text-gray-400 mt-1">Ideas: {product.ideas}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Replicate Models -->
+  {replicateApps.length > 0 && (
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">Replicate Models</h2>
+      <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+        <table class="w-full">
+          <thead class="bg-gray-50 border-b border-gray-200">
+            <tr>
+              <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">App</th>
+              <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">Models</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            {replicateApps.map((app) => (
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3">
+                  <a href={app.github} class="text-orange-600 hover:underline font-medium" target="_blank" rel="noopener">
+                    {app.name}
+                  </a>
+                </td>
+                <td class="px-4 py-3">
+                  <div class="flex gap-2 flex-wrap">
+                    {app.replicate.models.length > 0 ? (
+                      app.replicate.models.map((model) => (
+                        <a 
+                          href={`https://replicate.com/${model}`}
+                          class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded hover:bg-gray-200"
+                          target="_blank"
+                          rel="noopener"
+                        >
+                          {model}
+                        </a>
+                      ))
+                    ) : (
+                      <span class="text-gray-400 text-sm">-</span>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  )}
+
+  <!-- Frameworks & Build Tools -->
+  <div class="grid md:grid-cols-2 gap-8 mb-12">
+    <section>
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">Frameworks</h2>
+      <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+        <table class="w-full">
+          <thead class="bg-gray-50 border-b border-gray-200">
+            <tr>
+              <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">Framework</th>
+              <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">Count</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            {sortedFrameworks.map(([framework, count]) => (
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3 text-sm text-gray-700">{framework}</td>
+                <td class="px-4 py-3 text-center text-sm text-gray-600">{count}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">Build Tools & Package Managers</h2>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+          <div class="bg-gray-50 border-b border-gray-200 px-4 py-2">
+            <span class="text-sm font-semibold text-gray-700">Build Tools</span>
+          </div>
+          <div class="divide-y divide-gray-100">
+            {sortedBuildTools.map(([tool, count]) => (
+              <div class="flex justify-between px-4 py-2 hover:bg-gray-50">
+                <span class="text-sm text-gray-700">{tool}</span>
+                <span class="text-sm text-gray-500">{count}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+          <div class="bg-gray-50 border-b border-gray-200 px-4 py-2">
+            <span class="text-sm font-semibold text-gray-700">Package Managers</span>
+          </div>
+          <div class="divide-y divide-gray-100">
+            {sortedPackageManagers.map(([pm, count]) => (
+              <div class="flex justify-between px-4 py-2 hover:bg-gray-50">
+                <span class="text-sm text-gray-700">{pm}</span>
+                <span class="text-sm text-gray-500">{count}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Repository Hygiene -->
+  {summary.hygiene && (
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">Repository Hygiene</h2>
+      
+      <!-- Summary Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
+        <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-100 text-center">
+          <div class="text-2xl font-bold text-gray-900">{summary.hygiene.withDescription}</div>
+          <div class="text-xs text-gray-500">Has Description</div>
+          <div class="text-xs text-gray-400">{Math.round((summary.hygiene.withDescription / totalApps) * 100)}%</div>
+        </div>
+        <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-100 text-center">
+          <div class="text-2xl font-bold text-gray-900">{summary.hygiene.withWebsite}</div>
+          <div class="text-xs text-gray-500">Has Website</div>
+          <div class="text-xs text-gray-400">{Math.round((summary.hygiene.withWebsite / totalApps) * 100)}%</div>
+        </div>
+        <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-100 text-center">
+          <div class="text-2xl font-bold text-gray-900">{summary.hygiene.withReadme}</div>
+          <div class="text-xs text-gray-500">Has README</div>
+          <div class="text-xs text-gray-400">{Math.round((summary.hygiene.withReadme / totalApps) * 100)}%</div>
+        </div>
+        <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-100 text-center">
+          <div class="text-2xl font-bold text-gray-900">{summary.hygiene.withImage}</div>
+          <div class="text-xs text-gray-500">README Image</div>
+          <div class="text-xs text-gray-400">{Math.round((summary.hygiene.withImage / totalApps) * 100)}%</div>
+        </div>
+        <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-100 text-center">
+          <div class="text-2xl font-bold text-gray-900">{summary.hygiene.withVideo}</div>
+          <div class="text-xs text-gray-500">README Video</div>
+          <div class="text-xs text-gray-400">{Math.round((summary.hygiene.withVideo / totalApps) * 100)}%</div>
+        </div>
+      </div>
+
+      <!-- Per-App Hygiene Table -->
+      <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead class="bg-gray-50 border-b border-gray-200">
+              <tr>
+                <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">App</th>
+                <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">Desc</th>
+                <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">Web</th>
+                <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">README</th>
+                <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">Image</th>
+                <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">Video</th>
+                <th class="text-right px-4 py-3 text-sm font-semibold text-gray-700">Stars</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              {sortedApps.map((app) => app.hygiene && (
+                <tr class="hover:bg-gray-50">
+                  <td class="px-4 py-3">
+                    <a href={app.github} class="text-orange-600 hover:underline font-medium" target="_blank" rel="noopener">
+                      {app.name}
+                    </a>
+                  </td>
+                  <td class="px-4 py-3 text-center">
+                    {app.hygiene.hasDescription && <Icon name="lucide:check" class="w-4 h-4 text-green-500 inline" />}
+                  </td>
+                  <td class="px-4 py-3 text-center">
+                    {app.hygiene.hasWebsite && <Icon name="lucide:check" class="w-4 h-4 text-green-500 inline" />}
+                  </td>
+                  <td class="px-4 py-3 text-center">
+                    {app.hygiene.hasReadme && <Icon name="lucide:check" class="w-4 h-4 text-green-500 inline" />}
+                  </td>
+                  <td class="px-4 py-3 text-center">
+                    {app.hygiene.readmeHasImage && <Icon name="lucide:check" class="w-4 h-4 text-green-500 inline" />}
+                  </td>
+                  <td class="px-4 py-3 text-center">
+                    {app.hygiene.readmeHasVideo && <Icon name="lucide:check" class="w-4 h-4 text-green-500 inline" />}
+                  </td>
+                  <td class="px-4 py-3 text-right text-sm text-gray-600">{app.hygiene.stars}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Contributors -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-bold text-gray-900 mb-4">Contributors</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+      {sortedAuthors.map((author) => (
+        <a 
+          href={`https://github.com/${author.github}`}
+          class="bg-white rounded-lg p-4 shadow-sm border border-gray-100 hover:border-orange-200 hover:shadow transition-all text-center"
+          target="_blank"
+          rel="noopener"
+        >
+          <img 
+            src={author.avatar} 
+            alt={author.github}
+            class="w-12 h-12 rounded-full mx-auto mb-2"
+            loading="lazy"
+          />
+          <div class="text-sm font-medium text-gray-900 truncate">{author.github}</div>
+          <div class="text-xs text-gray-500">{author.count} app{author.count > 1 ? 's' : ''}</div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <p class="text-center text-gray-400 text-sm">
+    Last updated: {lastUpdated}
+  </p>
+</Layout>

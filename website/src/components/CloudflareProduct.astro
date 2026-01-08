@@ -1,0 +1,40 @@
+---
+import { Icon } from 'astro-icon/components'
+
+interface Props {
+  product: string;
+}
+
+const { product } = Astro.props;
+
+// Map Cloudflare products to Lucide icons
+const productConfig: Record<string, { icon: string; color: string }> = {
+  "Workers": { icon: "lucide:cpu", color: "text-orange-500" },
+  "D1": { icon: "lucide:database", color: "text-blue-500" },
+  "R2": { icon: "lucide:archive", color: "text-purple-500" },
+  "KV": { icon: "lucide:key", color: "text-yellow-600" },
+  "Durable Objects": { icon: "lucide:lock", color: "text-green-600" },
+  "Hyperdrive": { icon: "lucide:zap", color: "text-cyan-500" },
+  "Pages": { icon: "lucide:file-text", color: "text-blue-400" },
+  "Workflows": { icon: "lucide:git-branch", color: "text-indigo-500" },
+  "Images": { icon: "lucide:image", color: "text-pink-500" },
+  "Browser Rendering": { icon: "lucide:globe", color: "text-teal-500" },
+  "Rate Limiting": { icon: "lucide:gauge", color: "text-red-500" },
+  "Workers AI": { icon: "lucide:brain", color: "text-violet-500" },
+  "AutoRAG (AI Search)": { icon: "lucide:search", color: "text-emerald-500" },
+  "Static Assets": { icon: "lucide:folder", color: "text-gray-500" },
+  "Cron Triggers": { icon: "lucide:clock", color: "text-amber-500" },
+  "Turnstile": { icon: "lucide:shield-check", color: "text-green-500" },
+  "RealtimeKit": { icon: "lucide:radio", color: "text-rose-500" },
+  "AI Gateway": { icon: "lucide:network", color: "text-fuchsia-500" },
+};
+
+const config = productConfig[product] || { icon: "lucide:box", color: "text-gray-400" };
+---
+
+<span class={`inline-flex items-center ${config.color} relative group cursor-help`} title={product}>
+  <Icon name={config.icon} class="w-5 h-5" />
+  <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs font-medium text-white bg-gray-900 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10">
+    {product}
+  </span>
+</span>

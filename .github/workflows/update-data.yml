@@ -44,16 +44,19 @@ jobs:
       - name: Generate report
         run: npx tsx generate-report.ts
 
+      - name: Copy data to website
+        run: cp apps.json website/src/data.json
+
       - name: Check for changes
         id: changes
         run: |
-          git diff --quiet apps.json README.md || echo "changed=true" >> $GITHUB_OUTPUT
+          git diff --quiet apps.json README.md website/src/data.json || echo "changed=true" >> $GITHUB_OUTPUT
 
       - name: Commit and push changes
         if: steps.changes.outputs.changed == 'true'
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add apps.json README.md
+          git add apps.json README.md website/src/data.json
           git commit -m "chore: update garden data $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push

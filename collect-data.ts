@@ -34,6 +34,19 @@ interface AppBasicInfo {
   tags: string[];
 }
 
+interface RepoHygiene {
+  hasDescription: boolean;
+  description: string | null;
+  hasWebsite: boolean;
+  websiteUrl: string | null;
+  hasReadme: boolean;
+  readmeHasImage: boolean;
+  readmeHasVideo: boolean;
+  license: string | null;
+  stars: number;
+  forks: number;
+}
+
 interface RepoAnalysis {
   framework: string;
   language: string | string[];
@@ -65,6 +78,7 @@ interface RepoAnalysis {
     models: string[];
     apiIntegration: string | null;
   };
+  hygiene: RepoHygiene;
 }
 
 // Helper to fetch text content
@@ -236,6 +250,56 @@ async function fetchAppDetails(slug: string): Promise<AppBasicInfo | null> {
   };
 }
 
+// Fetch GitHub repo metadata via API
+async function fetchRepoMetadata(owner: string, repo: string): Promise<RepoHygiene> {
+  const hygiene: RepoHygiene = {
+    hasDescription: false,
+    description: null,
+    hasWebsite: false,
+    websiteUrl: null,
+    hasReadme: false,
+    readmeHasImage: false,
+    readmeHasVideo: false,
+    license: null,
+    stars: 0,
+    forks: 0,
+  };
+
+  try {
+    const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`, {
+      headers: {
+        Accept: "application/vnd.github.v3+json",
+        "User-Agent": "small-app-gardener",
+        ...(process.env.GITHUB_TOKEN && {
+          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+        }),
+      },
+    });
+
+    if (response.ok) {
+      const data = await response.json() as {
+        description: string | null;
+        homepage: string | null;
+        license: { spdx_id: string } | null;
+        stargazers_count: number;
+        forks_count: number;
+      };
+
+      hygiene.description = data.description;
+      hygiene.hasDescription = !!data.description && data.description.length > 0;
+      hygiene.websiteUrl = data.homepage;
+      hygiene.hasWebsite = !!data.homepage && data.homepage.length > 0;
+      hygiene.license = data.license?.spdx_id || null;
+      hygiene.stars = data.stargazers_count || 0;
+      hygiene.forks = data.forks_count || 0;
+    }
+  } catch {
+    // API call failed, continue with defaults
+  }
+
+  return hygiene;
+}
+
 // Clone a repo and analyze it
 async function analyzeRepo(githubUrl: string): Promise<RepoAnalysis> {
   const match = githubUrl.match(/github\.com\/([^\/]+)\/([^\/]+)/);
@@ -249,6 +313,9 @@ async function analyzeRepo(githubUrl: string): Promise<RepoAnalysis> {
 
   console.log(`    Analyzing ${repoPath}...`);
 
+  // Fetch repo metadata from GitHub API
+  const hygiene = await fetchRepoMetadata(owner, repo);
+
   const analysis: RepoAnalysis = {
     framework: "Unknown",
     language: "Unknown",
@@ -260,6 +327,7 @@ async function analyzeRepo(githubUrl: string): Promise<RepoAnalysis> {
     ci: { hasGitHubActions: false, workflows: [] },
     cloudflare: { products: ["Workers"], bindings: {} },
     replicate: { usesReplicate: false, models: [], apiIntegration: null },
+    hygiene,
   };
 
   try {
@@ -331,6 +399,26 @@ async function analyzeRepo(githubUrl: string): Promise<RepoAnalysis> {
     if (analysis.replicate.usesReplicate) {
       const models = findReplicateModels(cloneDir);
       analysis.replicate.models = models;
+    }
+
+    // Analyze README for images/videos
+    const readmeFiles = ["README.md", "readme.md", "Readme.md", "README.MD"];
+    for (const readmeFile of readmeFiles) {
+      const readmePath = join(cloneDir, readmeFile);
+      if (existsSync(readmePath)) {
+        analysis.hygiene.hasReadme = true;
+        const readmeContent = fsReadFileSync(readmePath, "utf-8");
+        
+        // Check for images (markdown or HTML)
+        const hasImage = /!\[.*?\]\(.*?\)|<img\s+[^>]*src=/i.test(readmeContent);
+        analysis.hygiene.readmeHasImage = hasImage;
+        
+        // Check for videos (YouTube embeds, video tags, gif links)
+        const hasVideo = /youtube\.com|youtu\.be|<video|\.gif\)|\.mp4\)/i.test(readmeContent);
+        analysis.hygiene.readmeHasVideo = hasVideo;
+        
+        break;
+      }
     }
 
   } catch (error) {
@@ -712,6 +800,22 @@ function generateSummary(apps: Array<{ analysis: RepoAnalysis }>) {
     }
   }
 
+  // Hygiene stats
+  let withDescription = 0;
+  let withWebsite = 0;
+  let withReadme = 0;
+  let withImage = 0;
+  let withVideo = 0;
+
+  for (const app of apps) {
+    const { analysis } = app;
+    if (analysis.hygiene.hasDescription) withDescription++;
+    if (analysis.hygiene.hasWebsite) withWebsite++;
+    if (analysis.hygiene.hasReadme) withReadme++;
+    if (analysis.hygiene.readmeHasImage) withImage++;
+    if (analysis.hygiene.readmeHasVideo) withVideo++;
+  }
+
   return {
     byFramework,
     byLanguage,
@@ -731,6 +835,13 @@ function generateSummary(apps: Array<{ analysis: RepoAnalysis }>) {
       appsUsingReplicate,
       totalModels: uniqueModels.size,
       uniqueModels: Array.from(uniqueModels).sort(),
+    },
+    hygiene: {
+      withDescription,
+      withWebsite,
+      withReadme,
+      withImage,
+      withVideo,
     },
   };
 }
@@ -787,6 +898,7 @@ async function main() {
         ci: analysis.ci,
         cloudflare: analysis.cloudflare,
         replicate: analysis.replicate,
+        hygiene: analysis.hygiene,
         tags: app.tags,
       });
 
@@ -808,6 +920,7 @@ async function main() {
       ci: a.ci,
       cloudflare: a.cloudflare,
       replicate: a.replicate,
+      hygiene: a.hygiene,
     } as RepoAnalysis,
   })));
 

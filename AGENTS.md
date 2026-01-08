@@ -8,6 +8,8 @@ This document describes the AI agents and automation used in this project.
 
 **small-app-gardener** is a data collection and analysis project that catalogs applications from Cloudflare's [Small App Garden](https://developers.cloudflare.com/garden/). It extracts detailed metadata about each app's technology stack, dependencies, testing practices, CI/CD setup, and integration with Cloudflare and Replicate services.
 
+**Website:** https://zeke.github.io/small-app-gardener/
+
 ## Data Collection Process
 
 The data was collected using AI agents that performed the following tasks:
@@ -59,17 +61,24 @@ The data was collected using AI agents that performed the following tasks:
   - Model identifiers used (e.g., `google/nano-banana-pro`)
   - API integration method (direct API, npm package, AI Gateway)
 
+- **Repository Hygiene**
+  - GitHub description and website
+  - README presence and media (images, videos)
+  - License, stars, forks
+
 ## Files
 
 | File | Description |
 |------|-------------|
 | `apps.json` | Complete structured data for all apps |
-| `README.md` | Human-readable report generated from apps.json |
+| `README.md` | Project overview with link to website |
 | `collect-data.ts` | TypeScript script that scrapes the garden and analyzes repos |
-| `generate-report.ts` | TypeScript script that generates README.md |
 | `schema.ts` | TypeScript schema definitions and validation for apps.json |
+| `test.ts` | Test suite for data validation |
 | `package.json` | Node.js package configuration with npm scripts |
-| `.github/workflows/update-data.yml` | GitHub Actions workflow for automated updates |
+| `website/` | Astro static site (Tailwind CSS, astro-icon) |
+| `.github/workflows/update-data.yml` | GitHub Actions workflow for data collection |
+| `.github/workflows/deploy.yml` | GitHub Actions workflow for website deployment |
 | `AGENTS.md` | This file - documents the AI agents and automation |
 
 ## Data Schema
@@ -80,7 +89,7 @@ The schema for `apps.json` is defined in [`schema.ts`](./schema.ts). This file e
 - `AppsData` - Interface for the complete data file structure
 - `validateAppsData()` - Runtime validation function
 
-The schema is used by `generate-report.ts` to validate data before generating the README. Key interfaces include `Author`, `Stack`, `Dependencies`, `Testing`, `CI`, `CloudflareIntegration`, `ReplicateIntegration`, and `Summary`.
+Key interfaces include `Author`, `Stack`, `Dependencies`, `Testing`, `CI`, `CloudflareIntegration`, `ReplicateIntegration`, `RepoHygiene`, and `Summary`.
 
 See [`schema.ts`](./schema.ts) for the complete type definitions.
 
@@ -90,57 +99,65 @@ See [`schema.ts`](./schema.ts) for the complete type definitions.
 
 ```bash
 npm run collect
-# or
-npx tsx collect-data.ts
 ```
 
-This scrapes the garden and analyzes each GitHub repository.
+This scrapes the garden, analyzes each GitHub repository, and copies data to the website.
 
-### Generate Report
+### Run Tests
 
 ```bash
-npm run report
-# or
-npx tsx generate-report.ts
+npm test
 ```
 
-This reads `apps.json` and generates a formatted `README.md` with:
-- Quick stats overview
-- Individual app listings sorted by ship date
-- Cloudflare products usage chart
-- Framework distribution
-- Replicate integration details
-- Testing and CI/CD statistics
-- Build tools and package managers
-- Contributor list
-
-### Full Update
+### Build Website Locally
 
 ```bash
-npm run update
+cd website && npm install && npm run dev
 ```
-
-Runs both collect and report in sequence.
 
 ## Automated Updates (GitHub Actions)
 
-The project includes a GitHub Actions workflow (`.github/workflows/update-data.yml`) that:
+### Data Collection (`update-data.yml`)
 
 1. **Runs hourly** via cron schedule (`0 * * * *`)
 2. **Can be triggered manually** via workflow_dispatch
 3. **Runs on push** to main when scripts or workflow change
 
-### What the workflow does:
-
+What it does:
 1. Checks out the repository
 2. Sets up Node.js 20
 3. Runs `collect-data.ts` to fetch fresh data
-4. Runs `generate-report.ts` to update the README
+4. Copies data to website
 5. If changes are detected, commits and pushes them
+
+### Website Deployment (`deploy.yml`)
+
+1. **Runs on push** to main branch
+2. **Can be triggered manually** via workflow_dispatch
+
+What it does:
+1. Builds the Astro website
+2. Deploys to GitHub Pages
 
 ### Environment Variables
 
 - `GITHUB_TOKEN` - Automatically provided by GitHub Actions, used for API rate limiting
+
+## Website
+
+The website is built with:
+- **Astro** - Static site generator
+- **Tailwind CSS** - Styling
+- **astro-icon** - Icon components (Lucide icons)
+
+Features:
+- Apps table with sortable columns
+- Cloudflare product icons with hover tooltips
+- Cloudflare Products and Opportunities sections side-by-side
+- Replicate models with links
+- Framework and build tool statistics
+- Repository hygiene metrics
+- Contributor grid with avatars
 
 ## Future Improvements
 
@@ -152,17 +169,6 @@ Potential enhancements for this project:
 4. **Health Checks** - Verify app URLs are still live
 5. **Code Quality Metrics** - Analyze test coverage percentages, lint configurations
 6. **Performance Metrics** - If available, track Lighthouse scores or Core Web Vitals
-
-## Agent Configuration
-
-The agents used for this project were configured with:
-
-- **subagent_type:** `research` - Optimized for codebase exploration and data extraction
-- **Parallel execution:** All 12 repository analyses ran concurrently
-- **Data sources:** 
-  - Cloudflare Garden website (WebFetch)
-  - GitHub repositories (via gh CLI and web fetching)
-  - package.json, wrangler.toml, pyproject.toml files
 
 ## License
 

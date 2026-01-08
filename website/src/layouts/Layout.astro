@@ -1,0 +1,33 @@
+---
+import '../styles/global.css'
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "A curated collection of apps built on Cloudflare's developer platform" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/small-app-gardener/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body class="bg-gray-50 text-gray-900 min-h-screen">
+    <main class="max-w-6xl mx-auto px-4 py-8">
+      <slot />
+    </main>
+    <footer class="max-w-6xl mx-auto px-4 py-8 text-center text-gray-500 text-sm border-t border-gray-200">
+      <p>
+        Source: <a href="https://developers.cloudflare.com/garden/" class="text-orange-600 hover:underline">developers.cloudflare.com/garden</a>
+        &middot;
+        <a href="https://github.com/zeke/small-app-gardener" class="text-orange-600 hover:underline">GitHub</a>
+      </p>
+    </footer>
+  </body>
+</html>
