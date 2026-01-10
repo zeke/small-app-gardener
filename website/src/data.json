@@ -150,7 +150,7 @@
         "readmeHasImage": false,
         "readmeHasVideo": false,
         "license": null,
-        "stars": 222,
+        "stars": 223,
         "forks": 13
       },
       "tags": []
@@ -702,8 +702,8 @@
         "readmeHasImage": true,
         "readmeHasVideo": false,
         "license": "Apache-2.0",
-        "stars": 268,
-        "forks": 33
+        "stars": 271,
+        "forks": 34
       },
       "tags": []
     },
