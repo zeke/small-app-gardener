@@ -235,16 +235,16 @@
         "apiIntegration": "replicate npm package"
       },
       "hygiene": {
-        "hasDescription": false,
-        "description": null,
+        "hasDescription": true,
+        "description": "A fake photo booth. Didn't really happen. But it could have.",
         "hasWebsite": false,
         "websiteUrl": null,
         "hasReadme": true,
         "readmeHasImage": true,
         "readmeHasVideo": true,
-        "license": null,
-        "stars": 0,
-        "forks": 0
+        "license": "MIT",
+        "stars": 17,
+        "forks": 2
       },
       "tags": []
     },
@@ -1310,7 +1310,7 @@
       ]
     },
     "hygiene": {
-      "withDescription": 10,
+      "withDescription": 11,
       "withWebsite": 2,
       "withReadme": 15,
       "withImage": 7,
