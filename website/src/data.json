@@ -51,7 +51,11 @@
           "Workers",
           "Static Assets"
         ],
-        "bindings": {}
+        "bindings": {},
+        "hasWranglerConfig": true,
+        "compatibilityDate": "2024-01-01",
+        "firstCommitDate": "2025-11-25",
+        "compatibilityDateGteFirstCommit": false
       },
       "replicate": {
         "usesReplicate": false,
@@ -134,7 +138,11 @@
         "products": [
           "Workers"
         ],
-        "bindings": {}
+        "bindings": {},
+        "hasWranglerConfig": false,
+        "compatibilityDate": null,
+        "firstCommitDate": "2026-01-05",
+        "compatibilityDateGteFirstCommit": null
       },
       "replicate": {
         "usesReplicate": false,
@@ -225,7 +233,11 @@
           "Workers AI",
           "Static Assets"
         ],
-        "bindings": {}
+        "bindings": {},
+        "hasWranglerConfig": true,
+        "compatibilityDate": "2025-12-02",
+        "firstCommitDate": "2025-12-05",
+        "compatibilityDateGteFirstCommit": false
       },
       "replicate": {
         "usesReplicate": true,
@@ -324,7 +336,11 @@
           "Workers AI",
           "Static Assets"
         ],
-        "bindings": {}
+        "bindings": {},
+        "hasWranglerConfig": true,
+        "compatibilityDate": "2025-03-01",
+        "firstCommitDate": "2025-11-24",
+        "compatibilityDateGteFirstCommit": false
       },
       "replicate": {
         "usesReplicate": false,
@@ -403,7 +419,11 @@
           "Workers AI",
           "Static Assets"
         ],
-        "bindings": {}
+        "bindings": {},
+        "hasWranglerConfig": true,
+        "compatibilityDate": "2025-12-17",
+        "firstCommitDate": null,
+        "compatibilityDateGteFirstCommit": null
       },
       "replicate": {
         "usesReplicate": true,
@@ -483,7 +503,11 @@
           "Workers AI",
           "Static Assets"
         ],
-        "bindings": {}
+        "bindings": {},
+        "hasWranglerConfig": true,
+        "compatibilityDate": "2025-12-30",
+        "firstCommitDate": null,
+        "compatibilityDateGteFirstCommit": null
       },
       "replicate": {
         "usesReplicate": false,
@@ -491,16 +515,16 @@
         "apiIntegration": null
       },
       "hygiene": {
-        "hasDescription": true,
-        "description": "AI Scheduling Assistant ",
+        "hasDescription": false,
+        "description": null,
         "hasWebsite": false,
         "websiteUrl": null,
         "hasReadme": true,
         "readmeHasImage": true,
         "readmeHasVideo": false,
         "license": null,
-        "stars": 23,
-        "forks": 2
+        "stars": 0,
+        "forks": 0
       },
       "tags": []
     },
@@ -595,7 +619,11 @@
           "Static Assets",
           "Cron Triggers"
         ],
-        "bindings": {}
+        "bindings": {},
+        "hasWranglerConfig": true,
+        "compatibilityDate": "2024-01-15",
+        "firstCommitDate": null,
+        "compatibilityDateGteFirstCommit": null
       },
       "replicate": {
         "usesReplicate": false,
@@ -603,15 +631,15 @@
         "apiIntegration": null
       },
       "hygiene": {
-        "hasDescription": true,
-        "description": "Modern invoicing for freelancers and independent creators.",
+        "hasDescription": false,
+        "description": null,
         "hasWebsite": false,
         "websiteUrl": null,
         "hasReadme": true,
         "readmeHasImage": true,
         "readmeHasVideo": true,
         "license": null,
-        "stars": 8,
+        "stars": 0,
         "forks": 0
       },
       "tags": []
@@ -686,7 +714,11 @@
           "Workers AI",
           "Static Assets"
         ],
-        "bindings": {}
+        "bindings": {},
+        "hasWranglerConfig": true,
+        "compatibilityDate": "2025-12-10",
+        "firstCommitDate": null,
+        "compatibilityDateGteFirstCommit": null
       },
       "replicate": {
         "usesReplicate": false,
@@ -694,16 +726,16 @@
         "apiIntegration": null
       },
       "hygiene": {
-        "hasDescription": true,
-        "description": "Task management, but AI agents do your tasks. Self-host on Cloudflare.",
+        "hasDescription": false,
+        "description": null,
         "hasWebsite": false,
         "websiteUrl": null,
         "hasReadme": true,
         "readmeHasImage": true,
         "readmeHasVideo": false,
-        "license": "Apache-2.0",
-        "stars": 361,
-        "forks": 42
+        "license": null,
+        "stars": 0,
+        "forks": 0
       },
       "tags": []
     },
@@ -756,7 +788,11 @@
         "products": [
           "Workers"
         ],
-        "bindings": {}
+        "bindings": {},
+        "hasWranglerConfig": false,
+        "compatibilityDate": null,
+        "firstCommitDate": null,
+        "compatibilityDateGteFirstCommit": null
       },
       "replicate": {
         "usesReplicate": false,
@@ -764,16 +800,16 @@
         "apiIntegration": null
       },
       "hygiene": {
-        "hasDescription": true,
-        "description": "Python CLI tool to explore, search and visualise your Claude Code conversation history",
+        "hasDescription": false,
+        "description": null,
         "hasWebsite": false,
         "websiteUrl": null,
         "hasReadme": true,
         "readmeHasImage": false,
         "readmeHasVideo": false,
         "license": null,
-        "stars": 16,
-        "forks": 1
+        "stars": 0,
+        "forks": 0
       },
       "tags": []
     },
@@ -867,7 +903,11 @@
           "Workers AI",
           "Static Assets"
         ],
-        "bindings": {}
+        "bindings": {},
+        "hasWranglerConfig": true,
+        "compatibilityDate": "2025-09-02",
+        "firstCommitDate": null,
+        "compatibilityDateGteFirstCommit": null
       },
       "replicate": {
         "usesReplicate": false,
@@ -875,10 +915,10 @@
         "apiIntegration": null
       },
       "hygiene": {
-        "hasDescription": true,
-        "description": "The Full Stack TanStack App Built for Cloudflare Workers",
-        "hasWebsite": true,
-        "websiteUrl": "https://linkflare.app",
+        "hasDescription": false,
+        "description": null,
+        "hasWebsite": false,
+        "websiteUrl": null,
         "hasReadme": true,
         "readmeHasImage": true,
         "readmeHasVideo": false,
@@ -937,7 +977,11 @@
         "products": [
           "Workers"
         ],
-        "bindings": {}
+        "bindings": {},
+        "hasWranglerConfig": false,
+        "compatibilityDate": null,
+        "firstCommitDate": null,
+        "compatibilityDateGteFirstCommit": null
       },
       "replicate": {
         "usesReplicate": false,
@@ -945,15 +989,15 @@
         "apiIntegration": null
       },
       "hygiene": {
-        "hasDescription": true,
-        "description": "Multiplayer step sequencer in the browser",
+        "hasDescription": false,
+        "description": null,
         "hasWebsite": false,
         "websiteUrl": null,
         "hasReadme": true,
         "readmeHasImage": false,
         "readmeHasVideo": false,
         "license": null,
-        "stars": 1,
+        "stars": 0,
         "forks": 0
       },
       "tags": []
@@ -1005,7 +1049,11 @@
           "Workers",
           "Workers AI"
         ],
-        "bindings": {}
+        "bindings": {},
+        "hasWranglerConfig": true,
+        "compatibilityDate": "2025-03-10",
+        "firstCommitDate": null,
+        "compatibilityDateGteFirstCommit": null
       },
       "replicate": {
         "usesReplicate": false,
@@ -1021,7 +1069,7 @@
         "readmeHasImage": false,
         "readmeHasVideo": false,
         "license": null,
-        "stars": 10,
+        "stars": 0,
         "forks": 0
       },
       "tags": []
@@ -1088,7 +1136,11 @@
           "Workers",
           "Static Assets"
         ],
-        "bindings": {}
+        "bindings": {},
+        "hasWranglerConfig": true,
+        "compatibilityDate": "2025-10-01",
+        "firstCommitDate": null,
+        "compatibilityDateGteFirstCommit": null
       },
       "replicate": {
         "usesReplicate": false,
@@ -1096,15 +1148,15 @@
         "apiIntegration": null
       },
       "hygiene": {
-        "hasDescription": true,
-        "description": "Realtime Classroom app with video and audio capabilities",
+        "hasDescription": false,
+        "description": null,
         "hasWebsite": false,
         "websiteUrl": null,
         "hasReadme": true,
         "readmeHasImage": false,
         "readmeHasVideo": false,
         "license": null,
-        "stars": 4,
+        "stars": 0,
         "forks": 0
       },
       "tags": []
@@ -1151,7 +1203,11 @@
           "Workers AI",
           "Static Assets"
         ],
-        "bindings": {}
+        "bindings": {},
+        "hasWranglerConfig": true,
+        "compatibilityDate": "2025-11-11",
+        "firstCommitDate": null,
+        "compatibilityDateGteFirstCommit": null
       },
       "replicate": {
         "usesReplicate": false,
@@ -1167,8 +1223,8 @@
         "readmeHasImage": false,
         "readmeHasVideo": false,
         "license": null,
-        "stars": 3,
-        "forks": 2
+        "stars": 0,
+        "forks": 0
       },
       "tags": []
     },
@@ -1225,7 +1281,11 @@
           "KV",
           "Workers AI"
         ],
-        "bindings": {}
+        "bindings": {},
+        "hasWranglerConfig": true,
+        "compatibilityDate": "2025-01-15",
+        "firstCommitDate": null,
+        "compatibilityDateGteFirstCommit": null
       },
       "replicate": {
         "usesReplicate": true,
@@ -1243,8 +1303,8 @@
         "readmeHasImage": false,
         "readmeHasVideo": false,
         "license": null,
-        "stars": 16,
-        "forks": 1
+        "stars": 0,
+        "forks": 0
       },
       "tags": []
     }
@@ -1288,6 +1348,12 @@
       "KV": 2,
       "Cron Triggers": 1
     },
+    "wrangler": {
+      "withWranglerConfig": 12,
+      "withCompatibilityDate": 12,
+      "compatibilityDateGteFirstCommit": 0,
+      "missingCompatibilityDate": 0
+    },
     "testing": {
       "withTests": 7,
       "withoutTests": 8,
@@ -1310,8 +1376,8 @@
       ]
     },
     "hygiene": {
-      "withDescription": 11,
-      "withWebsite": 2,
+      "withDescription": 4,
+      "withWebsite": 1,
       "withReadme": 15,
       "withImage": 7,
       "withVideo": 3

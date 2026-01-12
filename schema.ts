@@ -39,6 +39,10 @@ export interface CI {
 export interface CloudflareIntegration {
   products: string[];
   bindings: Record<string, unknown>;
+  hasWranglerConfig?: boolean;
+  compatibilityDate?: string | null;
+  firstCommitDate?: string | null;
+  compatibilityDateGteFirstCommit?: boolean | null;
 }
 
 export interface ReplicateIntegration {
@@ -87,6 +91,12 @@ export interface Summary {
   byPackageManager: Record<string, number>;
   byBuildTool: Record<string, number>;
   cloudflareProducts: Record<string, number>;
+  wrangler: {
+    withWranglerConfig: number;
+    withCompatibilityDate: number;
+    compatibilityDateGteFirstCommit: number;
+    missingCompatibilityDate: number;
+  };
   testing: {
     withTests: number;
     withoutTests: number;
@@ -228,6 +238,22 @@ function validateApp(app: unknown, index: number): void {
   if (!Array.isArray(cloudflare.products)) {
     throw new Error(`${prefix}.cloudflare.products must be an array`);
   }
+  if (cloudflare.hasWranglerConfig !== undefined && typeof cloudflare.hasWranglerConfig !== "boolean") {
+    throw new Error(`${prefix}.cloudflare.hasWranglerConfig must be a boolean`);
+  }
+  if (cloudflare.compatibilityDate !== undefined && cloudflare.compatibilityDate !== null && typeof cloudflare.compatibilityDate !== "string") {
+    throw new Error(`${prefix}.cloudflare.compatibilityDate must be a string or null`);
+  }
+  if (cloudflare.firstCommitDate !== undefined && cloudflare.firstCommitDate !== null && typeof cloudflare.firstCommitDate !== "string") {
+    throw new Error(`${prefix}.cloudflare.firstCommitDate must be a string or null`);
+  }
+  if (
+    cloudflare.compatibilityDateGteFirstCommit !== undefined &&
+    cloudflare.compatibilityDateGteFirstCommit !== null &&
+    typeof cloudflare.compatibilityDateGteFirstCommit !== "boolean"
+  ) {
+    throw new Error(`${prefix}.cloudflare.compatibilityDateGteFirstCommit must be a boolean or null`);
+  }
 
   // Replicate
   if (typeof a.replicate !== "object" || a.replicate === null) {
@@ -281,6 +307,22 @@ function validateSummary(summary: Record<string, unknown>): void {
   for (const field of requiredRecords) {
     if (typeof summary[field] !== "object" || summary[field] === null) {
       throw new Error(`summary.${field} must be an object`);
+    }
+  }
+
+  if (typeof summary.wrangler !== "object" || summary.wrangler === null) {
+    throw new Error("summary.wrangler must be an object");
+  }
+  const wrangler = summary.wrangler as Record<string, unknown>;
+  const requiredWranglerNumbers = [
+    "withWranglerConfig",
+    "withCompatibilityDate",
+    "compatibilityDateGteFirstCommit",
+    "missingCompatibilityDate",
+  ];
+  for (const field of requiredWranglerNumbers) {
+    if (typeof wrangler[field] !== "number") {
+      throw new Error(`summary.wrangler.${field} must be a number`);
     }
   }
 

@@ -73,7 +73,7 @@ const missingProducts = allCloudflareProducts.filter(p => !productsInGarden.has(
     </p>
     
     <!-- Quick Stats -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
       <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
         <div class="text-2xl font-bold text-gray-900">{totalApps}</div>
         <div class="text-sm text-gray-500">Apps</div>
@@ -90,22 +90,69 @@ const missingProducts = allCloudflareProducts.filter(p => !productsInGarden.has(
         <div class="text-2xl font-bold text-gray-900">{summary.replicate.appsUsingReplicate}</div>
         <div class="text-sm text-gray-500">Use Replicate ({Math.round((summary.replicate.appsUsingReplicate / totalApps) * 100)}%)</div>
       </div>
+      <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+        <div class="text-2xl font-bold text-gray-900">{summary.wrangler.compatibilityDateGteFirstCommit}</div>
+        <div class="text-sm text-gray-500">Compat Date OK ({Math.round((summary.wrangler.compatibilityDateGteFirstCommit / Math.max(summary.wrangler.withWranglerConfig, 1)) * 100)}%)</div>
+      </div>
     </div>
   </header>
 
   <!-- Apps Table -->
   <section class="mb-12">
     <h2 class="text-2xl font-bold text-gray-900 mb-4">Apps</h2>
-    <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+    <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-visible">
       <div class="overflow-x-auto">
         <table class="w-full">
           <thead class="bg-gray-50 border-b border-gray-200">
             <tr>
-              <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">App</th>
-              <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">Framework</th>
-              <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">Tests</th>
-              <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">CI</th>
-              <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">Cloudflare Products</th>
+              <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">
+                <span class="relative inline-flex items-center group">
+                  App
+                  <span class="pointer-events-none absolute left-0 bottom-full z-20 mb-2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                    GitHub repository
+                  </span>
+                </span>
+              </th>
+              <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">
+                <span class="relative inline-flex items-center group">
+                  Framework
+                  <span class="pointer-events-none absolute left-0 bottom-full z-20 mb-2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                    Detected framework
+                  </span>
+                </span>
+              </th>
+              <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">
+                <span class="relative inline-flex items-center justify-center group">
+                  Tests
+                  <span class="pointer-events-none absolute left-1/2 bottom-full z-20 mb-2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                    Repo contains test files
+                  </span>
+                </span>
+              </th>
+              <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">
+                <span class="relative inline-flex items-center justify-center group">
+                  CI
+                  <span class="pointer-events-none absolute left-1/2 bottom-full z-20 mb-2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                    Uses GitHub Actions
+                  </span>
+                </span>
+              </th>
+              <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">
+                <span class="relative inline-flex items-center justify-center group">
+                  Compat
+                  <span class="pointer-events-none absolute left-1/2 bottom-full z-20 mb-2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                    Current Workers compatibility_date (>= first commit date)
+                  </span>
+                </span>
+              </th>
+              <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">
+                <span class="relative inline-flex items-center group">
+                  Cloudflare Products
+                  <span class="pointer-events-none absolute left-0 bottom-full z-20 mb-2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                    Detected from wrangler config and Garden tags
+                  </span>
+                </span>
+              </th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-100">
@@ -120,10 +167,50 @@ const missingProducts = allCloudflareProducts.filter(p => !productsInGarden.has(
                   {typeof app.stack.framework === 'string' ? app.stack.framework.replace(/\s+\d+$/, '') : 'Multiple'}
                 </td>
                 <td class="px-4 py-3 text-center">
-                  {app.testing.hasTests && <Icon name="lucide:check" class="w-5 h-5 text-green-500 inline" />}
+                  {app.testing.hasTests && (
+                    <span class="relative inline-flex items-center justify-center group" aria-label="Has tests">
+                      <Icon name="lucide:check" class="w-5 h-5 text-green-500 inline" />
+                      <span class="pointer-events-none absolute left-1/2 bottom-full z-20 mb-2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                        Tests detected
+                      </span>
+                    </span>
+                  )}
                 </td>
                 <td class="px-4 py-3 text-center">
-                  {app.ci.hasGitHubActions && <Icon name="lucide:check" class="w-5 h-5 text-green-500 inline" />}
+                  {app.ci.hasGitHubActions && (
+                    <span class="relative inline-flex items-center justify-center group" aria-label="Has CI">
+                      <Icon name="lucide:check" class="w-5 h-5 text-green-500 inline" />
+                      <span class="pointer-events-none absolute left-1/2 bottom-full z-20 mb-2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                        GitHub Actions detected
+                      </span>
+                    </span>
+                  )}
+                </td>
+                <td class="px-4 py-3 text-center">
+                  {app.cloudflare.hasWranglerConfig ? (
+                    app.cloudflare.compatibilityDateGteFirstCommit ? (
+                      <span class="relative inline-flex items-center justify-center group" aria-label="Compatibility date OK">
+                        <Icon name="lucide:check" class="w-5 h-5 text-green-500 inline" />
+                        <span class="pointer-events-none absolute left-1/2 bottom-full z-20 mb-2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                          compatibility_date is recent enough
+                        </span>
+                      </span>
+                    ) : (
+                      <span class="relative inline-flex items-center justify-center group" aria-label="Compatibility date not OK">
+                        <Icon name="lucide:x" class="w-5 h-5 text-red-500 inline" />
+                        <span class="pointer-events-none absolute left-1/2 bottom-full z-20 mb-2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                          compatibility_date missing or older than first commit
+                        </span>
+                      </span>
+                    )
+                  ) : (
+                    <span class="relative inline-flex items-center justify-center group text-gray-300" aria-label="No wrangler config">
+                      -
+                      <span class="pointer-events-none absolute left-1/2 bottom-full z-20 mb-2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                        No wrangler config detected
+                      </span>
+                    </span>
+                  )}
                 </td>
                 <td class="px-4 py-3">
                   <div class="flex gap-1 flex-wrap">
@@ -145,12 +232,26 @@ const missingProducts = allCloudflareProducts.filter(p => !productsInGarden.has(
     <!-- Cloudflare Products -->
     <section>
       <h2 class="text-2xl font-bold text-gray-900 mb-4">Cloudflare Products</h2>
-      <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+      <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-visible">
         <table class="w-full">
           <thead class="bg-gray-50 border-b border-gray-200">
             <tr>
-              <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">Product</th>
-              <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">Count</th>
+              <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">
+                <span class="relative inline-flex items-center group">
+                  Product
+                  <span class="pointer-events-none absolute left-0 bottom-full z-20 mb-2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                    Cloudflare product
+                  </span>
+                </span>
+              </th>
+              <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">
+                <span class="relative inline-flex items-center justify-center group">
+                  Count
+                  <span class="pointer-events-none absolute left-1/2 bottom-full z-20 mb-2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                    Number of apps using it
+                  </span>
+                </span>
+              </th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-100">
@@ -199,12 +300,26 @@ const missingProducts = allCloudflareProducts.filter(p => !productsInGarden.has(
   {replicateApps.length > 0 && (
     <section class="mb-12">
       <h2 class="text-2xl font-bold text-gray-900 mb-4">Replicate Models</h2>
-      <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+      <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-visible">
         <table class="w-full">
           <thead class="bg-gray-50 border-b border-gray-200">
             <tr>
-              <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">App</th>
-              <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">Models</th>
+              <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">
+                <span class="relative inline-flex items-center group">
+                  App
+                  <span class="pointer-events-none absolute left-0 bottom-full z-20 mb-2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                    GitHub repository
+                  </span>
+                </span>
+              </th>
+              <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">
+                <span class="relative inline-flex items-center group">
+                  Models
+                  <span class="pointer-events-none absolute left-0 bottom-full z-20 mb-2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                    Replicate models referenced in code
+                  </span>
+                </span>
+              </th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-100">
@@ -245,12 +360,26 @@ const missingProducts = allCloudflareProducts.filter(p => !productsInGarden.has(
   <div class="grid md:grid-cols-2 gap-8 mb-12">
     <section>
       <h2 class="text-2xl font-bold text-gray-900 mb-4">Frameworks</h2>
-      <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+      <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-visible">
         <table class="w-full">
           <thead class="bg-gray-50 border-b border-gray-200">
             <tr>
-              <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">Framework</th>
-              <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">Count</th>
+              <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">
+                <span class="relative inline-flex items-center group">
+                  Framework
+                  <span class="pointer-events-none absolute left-0 bottom-full z-20 mb-2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                    Detected framework
+                  </span>
+                </span>
+              </th>
+              <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">
+                <span class="relative inline-flex items-center justify-center group">
+                  Count
+                  <span class="pointer-events-none absolute left-1/2 bottom-full z-20 mb-2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                    Number of apps
+                  </span>
+                </span>
+              </th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-100">
@@ -333,18 +462,67 @@ const missingProducts = allCloudflareProducts.filter(p => !productsInGarden.has(
       </div>
 
       <!-- Per-App Hygiene Table -->
-      <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+      <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-visible">
         <div class="overflow-x-auto">
           <table class="w-full">
             <thead class="bg-gray-50 border-b border-gray-200">
               <tr>
-                <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">App</th>
-                <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">Desc</th>
-                <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">Web</th>
-                <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">README</th>
-                <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">Image</th>
-                <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">Video</th>
-                <th class="text-right px-4 py-3 text-sm font-semibold text-gray-700">Stars</th>
+                <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">
+                  <span class="relative inline-flex items-center group">
+                    App
+                    <span class="pointer-events-none absolute left-0 bottom-full z-20 mb-2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                      GitHub repository
+                    </span>
+                  </span>
+                </th>
+                <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">
+                  <span class="relative inline-flex items-center justify-center group">
+                    Desc
+                    <span class="pointer-events-none absolute left-1/2 bottom-full z-20 mb-2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                      Has GitHub description
+                    </span>
+                  </span>
+                </th>
+                <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">
+                  <span class="relative inline-flex items-center justify-center group">
+                    Web
+                    <span class="pointer-events-none absolute left-1/2 bottom-full z-20 mb-2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                      Has website/homepage set
+                    </span>
+                  </span>
+                </th>
+                <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">
+                  <span class="relative inline-flex items-center justify-center group">
+                    README
+                    <span class="pointer-events-none absolute left-1/2 bottom-full z-20 mb-2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                      Has README file
+                    </span>
+                  </span>
+                </th>
+                <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">
+                  <span class="relative inline-flex items-center justify-center group">
+                    Image
+                    <span class="pointer-events-none absolute left-1/2 bottom-full z-20 mb-2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                      README includes an image
+                    </span>
+                  </span>
+                </th>
+                <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700">
+                  <span class="relative inline-flex items-center justify-center group">
+                    Video
+                    <span class="pointer-events-none absolute left-1/2 bottom-full z-20 mb-2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                      README includes a video/gif
+                    </span>
+                  </span>
+                </th>
+                <th class="text-right px-4 py-3 text-sm font-semibold text-gray-700">
+                  <span class="relative inline-flex items-center justify-end group">
+                    Stars
+                    <span class="pointer-events-none absolute right-0 bottom-full z-20 mb-2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                      GitHub stars
+                    </span>
+                  </span>
+                </th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-100">
@@ -356,19 +534,54 @@ const missingProducts = allCloudflareProducts.filter(p => !productsInGarden.has(
                     </a>
                   </td>
                   <td class="px-4 py-3 text-center">
-                    {app.hygiene.hasDescription && <Icon name="lucide:check" class="w-4 h-4 text-green-500 inline" />}
+                    {app.hygiene.hasDescription && (
+                      <span class="relative inline-flex items-center justify-center group" aria-label="Has description">
+                        <Icon name="lucide:check" class="w-4 h-4 text-green-500 inline" />
+                        <span class="pointer-events-none absolute left-1/2 bottom-full z-20 mb-2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                          Has GitHub description
+                        </span>
+                      </span>
+                    )}
                   </td>
                   <td class="px-4 py-3 text-center">
-                    {app.hygiene.hasWebsite && <Icon name="lucide:check" class="w-4 h-4 text-green-500 inline" />}
+                    {app.hygiene.hasWebsite && (
+                      <span class="relative inline-flex items-center justify-center group" aria-label="Has website">
+                        <Icon name="lucide:check" class="w-4 h-4 text-green-500 inline" />
+                        <span class="pointer-events-none absolute left-1/2 bottom-full z-20 mb-2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                          Has website/homepage
+                        </span>
+                      </span>
+                    )}
                   </td>
                   <td class="px-4 py-3 text-center">
-                    {app.hygiene.hasReadme && <Icon name="lucide:check" class="w-4 h-4 text-green-500 inline" />}
+                    {app.hygiene.hasReadme && (
+                      <span class="relative inline-flex items-center justify-center group" aria-label="Has README">
+                        <Icon name="lucide:check" class="w-4 h-4 text-green-500 inline" />
+                        <span class="pointer-events-none absolute left-1/2 bottom-full z-20 mb-2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                          README exists
+                        </span>
+                      </span>
+                    )}
                   </td>
                   <td class="px-4 py-3 text-center">
-                    {app.hygiene.readmeHasImage && <Icon name="lucide:check" class="w-4 h-4 text-green-500 inline" />}
+                    {app.hygiene.readmeHasImage && (
+                      <span class="relative inline-flex items-center justify-center group" aria-label="README has image">
+                        <Icon name="lucide:check" class="w-4 h-4 text-green-500 inline" />
+                        <span class="pointer-events-none absolute left-1/2 bottom-full z-20 mb-2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                          README includes an image
+                        </span>
+                      </span>
+                    )}
                   </td>
                   <td class="px-4 py-3 text-center">
-                    {app.hygiene.readmeHasVideo && <Icon name="lucide:check" class="w-4 h-4 text-green-500 inline" />}
+                    {app.hygiene.readmeHasVideo && (
+                      <span class="relative inline-flex items-center justify-center group" aria-label="README has video">
+                        <Icon name="lucide:check" class="w-4 h-4 text-green-500 inline" />
+                        <span class="pointer-events-none absolute left-1/2 bottom-full z-20 mb-2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
+                          README includes a video/gif
+                        </span>
+                      </span>
+                    )}
                   </td>
                   <td class="px-4 py-3 text-right text-sm text-gray-600">{app.hygiene.stars}</td>
                 </tr>

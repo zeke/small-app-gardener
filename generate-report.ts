@@ -49,9 +49,11 @@ function generateReport(data: AppsData): string {
 
 A curated collection of **${data.totalApps} apps** built on Cloudflare's developer platform.
 
-| Apps | Tests | CI | Replicate |
-|------|-------|-------|-----------|
-| ${data.totalApps} | ${summary.testing.withTests} (${Math.round((summary.testing.withTests / data.totalApps) * 100)}%) | ${summary.ci.withGitHubActions} (${Math.round((summary.ci.withGitHubActions / data.totalApps) * 100)}%) | ${summary.replicate.appsUsingReplicate} (${Math.round((summary.replicate.appsUsingReplicate / data.totalApps) * 100)}%) |
+Website: https://zeke.github.io/small-app-gardener/
+
+| Apps | Tests | CI | Replicate | Compat Date OK |
+|------|-------|-------|-----------|---------------|
+| ${data.totalApps} | ${summary.testing.withTests} (${Math.round((summary.testing.withTests / data.totalApps) * 100)}%) | ${summary.ci.withGitHubActions} (${Math.round((summary.ci.withGitHubActions / data.totalApps) * 100)}%) | ${summary.replicate.appsUsingReplicate} (${Math.round((summary.replicate.appsUsingReplicate / data.totalApps) * 100)}%) | ${summary.wrangler.compatibilityDateGteFirstCommit} (${Math.round((summary.wrangler.compatibilityDateGteFirstCommit / Math.max(summary.wrangler.withWranglerConfig, 1)) * 100)}%) |
 
 ## Apps
 
@@ -96,6 +98,34 @@ A curated collection of **${data.totalApps} apps** built on Cloudflare's develop
   for (const [product, count] of sortedProducts) {
     const icon = productIcons[product] || "";
     report += `| ${icon} ${product} | ${count} |\n`;
+  }
+
+  // Wrangler compatibility dates
+  if (summary.wrangler.withWranglerConfig > 0) {
+    report += `
+## Wrangler Compatibility Dates
+
+Check: \`compatibility_date\` >= repo first commit date.
+
+| App | First commit | compatibility_date | OK |
+|-----|-------------|-------------------|:--:|
+`;
+
+    for (const app of sortedApps) {
+      if (!app.cloudflare.hasWranglerConfig) continue;
+
+      const firstCommitDate = app.cloudflare.firstCommitDate ? `\`${app.cloudflare.firstCommitDate}\`` : "-";
+      const compatibilityDate = app.cloudflare.compatibilityDate ? `\`${app.cloudflare.compatibilityDate}\`` : "-";
+      const ok = app.cloudflare.compatibilityDateGteFirstCommit === true ? "✅" : "⚠️";
+      report += `| [${app.name}](${app.github}) | ${firstCommitDate} | ${compatibilityDate} | ${ok} |\n`;
+    }
+
+    report += `
+
+- With wrangler config: ${summary.wrangler.withWranglerConfig}
+- With compatibility_date: ${summary.wrangler.withCompatibilityDate}
+- Missing compatibility_date: ${summary.wrangler.missingCompatibilityDate}
+`;
   }
 
   // Replicate section

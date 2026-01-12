@@ -72,6 +72,10 @@ interface RepoAnalysis {
   cloudflare: {
     products: string[];
     bindings: Record<string, unknown>;
+    hasWranglerConfig: boolean;
+    compatibilityDate: string | null;
+    firstCommitDate: string | null;
+    compatibilityDateGteFirstCommit: boolean | null;
   };
   replicate: {
     usesReplicate: boolean;
@@ -300,6 +304,42 @@ async function fetchRepoMetadata(owner: string, repo: string): Promise<RepoHygie
   return hygiene;
 }
 
+async function fetchFirstCommitDate(owner: string, repo: string): Promise<string | null> {
+  try {
+    const headers: Record<string, string> = {
+      Accept: "application/vnd.github.v3+json",
+      "User-Agent": "small-app-gardener",
+      ...(process.env.GITHUB_TOKEN ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` } : {}),
+    };
+
+    const baseUrl = `https://api.github.com/repos/${owner}/${repo}/commits`;
+    const firstPageResponse = await fetch(`${baseUrl}?per_page=1`, { headers });
+    if (!firstPageResponse.ok) return null;
+
+    const linkHeader = firstPageResponse.headers.get("link");
+    let lastPage = 1;
+
+    if (linkHeader) {
+      const lastMatch = linkHeader.match(/<[^>]*[?&]page=(\d+)[^>]*>;\s*rel="last"/);
+      if (lastMatch) {
+        lastPage = Number.parseInt(lastMatch[1], 10);
+      }
+    }
+
+    const response = lastPage === 1
+      ? firstPageResponse
+      : await fetch(`${baseUrl}?per_page=1&page=${lastPage}`, { headers });
+
+    if (!response.ok) return null;
+
+    const commits = (await response.json()) as Array<{ commit?: { committer?: { date?: string }; author?: { date?: string } } }>;
+    const dateTime = commits?.[0]?.commit?.committer?.date ?? commits?.[0]?.commit?.author?.date;
+    return dateTime ? dateTime.split("T")[0] : null;
+  } catch {
+    return null;
+  }
+}
+
 // Clone a repo and analyze it
 async function analyzeRepo(githubUrl: string): Promise<RepoAnalysis> {
   const match = githubUrl.match(/github\.com\/([^\/]+)\/([^\/]+)/);
@@ -316,6 +356,9 @@ async function analyzeRepo(githubUrl: string): Promise<RepoAnalysis> {
   // Fetch repo metadata from GitHub API
   const hygiene = await fetchRepoMetadata(owner, repo);
 
+  // Find the first commit date (oldest commit)
+  const firstCommitDate = await fetchFirstCommitDate(owner, repo);
+
   const analysis: RepoAnalysis = {
     framework: "Unknown",
     language: "Unknown",
@@ -325,7 +368,14 @@ async function analyzeRepo(githubUrl: string): Promise<RepoAnalysis> {
     dependencies: { runtime: {}, dev: {} },
     testing: { hasTests: false, framework: null, testFiles: [] },
     ci: { hasGitHubActions: false, workflows: [] },
-    cloudflare: { products: ["Workers"], bindings: {} },
+    cloudflare: {
+      products: ["Workers"],
+      bindings: {},
+      hasWranglerConfig: false,
+      compatibilityDate: null,
+      firstCommitDate: firstCommitDate,
+      compatibilityDateGteFirstCommit: null,
+    },
     replicate: { usesReplicate: false, models: [], apiIntegration: null },
     hygiene,
   };
@@ -421,6 +471,15 @@ async function analyzeRepo(githubUrl: string): Promise<RepoAnalysis> {
       }
     }
 
+    if (analysis.cloudflare.hasWranglerConfig && analysis.cloudflare.firstCommitDate) {
+      if (analysis.cloudflare.compatibilityDate) {
+        analysis.cloudflare.compatibilityDateGteFirstCommit =
+          analysis.cloudflare.compatibilityDate >= analysis.cloudflare.firstCommitDate;
+      } else {
+        analysis.cloudflare.compatibilityDateGteFirstCommit = false;
+      }
+    }
+
   } catch (error) {
     console.error(`      Error: ${error}`);
   } finally {
@@ -438,9 +497,9 @@ function analyzeWranglerInDir(dir: string, analysis: RepoAnalysis): void {
   for (const file of wranglerFiles) {
     const filePath = join(dir, file);
     if (existsSync(filePath)) {
+      analysis.cloudflare.hasWranglerConfig = true;
       const content = fsReadFileSync(filePath, "utf-8");
       analyzeWranglerConfig(content, analysis);
-      break;
     }
   }
 }
@@ -679,6 +738,17 @@ function analyzePyproject(content: string, analysis: RepoAnalysis): void {
 }
 
 function analyzeWranglerConfig(content: string, analysis: RepoAnalysis): void {
+  const tomlDateMatch = content.match(/\bcompatibility_date\s*=\s*["'](\d{4}-\d{2}-\d{2})["']/);
+  const jsonDateMatch = content.match(/["']compatibility_date["']\s*:\s*["'](\d{4}-\d{2}-\d{2})["']/);
+  const compatibilityDate = tomlDateMatch?.[1] ?? jsonDateMatch?.[1] ?? null;
+
+  if (compatibilityDate) {
+    const existing = analysis.cloudflare.compatibilityDate;
+    if (!existing || compatibilityDate > existing) {
+      analysis.cloudflare.compatibilityDate = compatibilityDate;
+    }
+  }
+
   // Detect Cloudflare products from wrangler config
   const products = new Set(analysis.cloudflare.products);
 
@@ -745,6 +815,11 @@ function generateSummary(apps: Array<{ analysis: RepoAnalysis }>) {
   let withGitHubActions = 0;
   let appsUsingReplicate = 0;
 
+  let withWranglerConfig = 0;
+  let withCompatibilityDate = 0;
+  let compatibilityDateGteFirstCommit = 0;
+  let missingCompatibilityDate = 0;
+
   for (const app of apps) {
     const { analysis } = app;
 
@@ -773,6 +848,19 @@ function generateSummary(apps: Array<{ analysis: RepoAnalysis }>) {
     // Cloudflare products
     for (const product of analysis.cloudflare.products) {
       cloudflareProducts[product] = (cloudflareProducts[product] || 0) + 1;
+    }
+
+    // Wrangler compatibility date
+    if (analysis.cloudflare.hasWranglerConfig) {
+      withWranglerConfig++;
+      if (analysis.cloudflare.compatibilityDate) {
+        withCompatibilityDate++;
+      } else {
+        missingCompatibilityDate++;
+      }
+      if (analysis.cloudflare.compatibilityDateGteFirstCommit === true) {
+        compatibilityDateGteFirstCommit++;
+      }
     }
 
     // Testing
@@ -822,6 +910,12 @@ function generateSummary(apps: Array<{ analysis: RepoAnalysis }>) {
     byPackageManager,
     byBuildTool,
     cloudflareProducts,
+    wrangler: {
+      withWranglerConfig,
+      withCompatibilityDate,
+      compatibilityDateGteFirstCommit,
+      missingCompatibilityDate,
+    },
     testing: {
       withTests,
       withoutTests: apps.length - withTests,
