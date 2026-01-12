@@ -920,11 +920,11 @@
           "app/e2e/core.spec.ts",
           "app/e2e/drag-to-paint.spec.ts",
           "app/e2e/feature-flags.spec.ts",
-          "app/e2e/instrument-audio.spec.ts",
           "app/e2e/keyboard.spec.ts",
           "app/e2e/last-cell-flicker.spec.ts",
           "app/e2e/mobile-android.spec.ts",
-          "app/e2e/mobile-iphone.spec.ts"
+          "app/e2e/mobile-iphone.spec.ts",
+          "app/e2e/multiplayer.spec.ts"
         ]
       },
       "ci": {
