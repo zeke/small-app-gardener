@@ -68,7 +68,7 @@
         "readmeHasVideo": false,
         "license": null,
         "stars": 6,
-        "forks": 2
+        "forks": 3
       },
       "tags": []
     },
@@ -244,7 +244,7 @@
         "readmeHasVideo": true,
         "license": "MIT",
         "stars": 17,
-        "forks": 2
+        "forks": 3
       },
       "tags": []
     },
@@ -341,7 +341,7 @@
         "readmeHasVideo": true,
         "license": null,
         "stars": 2,
-        "forks": 1
+        "forks": 2
       },
       "tags": []
     },
@@ -702,7 +702,7 @@
         "readmeHasImage": true,
         "readmeHasVideo": false,
         "license": "Apache-2.0",
-        "stars": 361,
+        "stars": 362,
         "forks": 42
       },
       "tags": []
