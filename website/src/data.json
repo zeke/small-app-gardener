@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-12",
+  "lastUpdated": "2026-01-13",
   "source": "https://developers.cloudflare.com/garden/",
   "totalApps": 15,
   "apps": [
@@ -83,7 +83,7 @@
         "github": "ygwyg",
         "avatar": "https://avatars.githubusercontent.com/ygwyg"
       },
-      "shippedDate": "2026-01-11",
+      "shippedDate": "2026-01-12",
       "stack": {
         "framework": "Unknown",
         "language": "TypeScript",
@@ -166,7 +166,7 @@
         "github": "craigsdennis",
         "avatar": "https://avatars.githubusercontent.com/craigsdennis"
       },
-      "shippedDate": "2025-12-25",
+      "shippedDate": "2025-12-26",
       "youtubeVideo": "https://youtube.com/watch?v=JvoGnXEKzfc",
       "stack": {
         "framework": "React + Hono",
@@ -356,7 +356,7 @@
         "github": "harshil1712",
         "avatar": "https://avatars.githubusercontent.com/harshil1712"
       },
-      "shippedDate": "2025-12-26",
+      "shippedDate": "2025-12-27",
       "stack": {
         "framework": "React + Hono",
         "language": "TypeScript",
@@ -438,7 +438,7 @@
         "github": "whoiskatrin",
         "avatar": "https://avatars.githubusercontent.com/whoiskatrin"
       },
-      "shippedDate": "2026-01-11",
+      "shippedDate": "2026-01-12",
       "stack": {
         "framework": "Unknown",
         "language": "TypeScript",
@@ -515,7 +515,7 @@
         "github": "lauragift21",
         "avatar": "https://avatars.githubusercontent.com/lauragift21"
       },
-      "shippedDate": "2026-01-11",
+      "shippedDate": "2026-01-12",
       "stack": {
         "framework": "Hono",
         "language": "TypeScript",
@@ -627,7 +627,7 @@
         "github": "jonesphillip",
         "avatar": "https://avatars.githubusercontent.com/jonesphillip"
       },
-      "shippedDate": "2026-01-11",
+      "shippedDate": "2026-01-12",
       "stack": {
         "framework": "React 19",
         "language": "TypeScript",
@@ -718,7 +718,7 @@
         "github": "adewale",
         "avatar": "https://avatars.githubusercontent.com/adewale"
       },
-      "shippedDate": "2025-12-26",
+      "shippedDate": "2025-12-27",
       "stack": {
         "framework": "Unknown",
         "language": [
@@ -788,7 +788,7 @@
         "github": "jillesme",
         "avatar": "https://avatars.githubusercontent.com/jillesme"
       },
-      "shippedDate": "2025-12-22",
+      "shippedDate": "2025-12-23",
       "stack": {
         "framework": "TanStack Start",
         "language": "TypeScript",
@@ -899,7 +899,7 @@
         "github": "adewale",
         "avatar": "https://avatars.githubusercontent.com/adewale"
       },
-      "shippedDate": "2025-12-20",
+      "shippedDate": "2025-12-21",
       "stack": {
         "framework": "Unknown",
         "language": "Unknown",
