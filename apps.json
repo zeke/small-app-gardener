@@ -1097,9 +1097,9 @@
       },
       "hygiene": {
         "hasDescription": true,
-        "description": "Realtime Classroom app with video and audio capabilities",
-        "hasWebsite": false,
-        "websiteUrl": null,
+        "description": "Real-time virtual classroom for live teaching and learning",
+        "hasWebsite": true,
+        "websiteUrl": "https://learnly.lauragift.workers.dev",
         "hasReadme": true,
         "readmeHasImage": false,
         "readmeHasVideo": false,
@@ -1311,7 +1311,7 @@
     },
     "hygiene": {
       "withDescription": 11,
-      "withWebsite": 2,
+      "withWebsite": 3,
       "withReadme": 15,
       "withImage": 7,
       "withVideo": 3
