@@ -946,9 +946,9 @@
       },
       "hygiene": {
         "hasDescription": true,
-        "description": "Multiplayer step sequencer in the browser",
-        "hasWebsite": false,
-        "websiteUrl": null,
+        "description": "Multiplayer step sequencer with polyrhythmic patterns for real-time collaboration",
+        "hasWebsite": true,
+        "websiteUrl": "https://your-site.com",
         "hasReadme": true,
         "readmeHasImage": false,
         "readmeHasVideo": false,
@@ -1311,7 +1311,7 @@
     },
     "hygiene": {
       "withDescription": 11,
-      "withWebsite": 4,
+      "withWebsite": 5,
       "withReadme": 15,
       "withImage": 7,
       "withVideo": 3
