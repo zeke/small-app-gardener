@@ -1,7 +1,7 @@
 {
   "lastUpdated": "2026-01-13",
   "source": "https://developers.cloudflare.com/garden/",
-  "totalApps": 15,
+  "totalApps": 16,
   "apps": [
     {
       "name": "Image Editing Arena",
@@ -83,7 +83,7 @@
         "github": "ygwyg",
         "avatar": "https://avatars.githubusercontent.com/ygwyg"
       },
-      "shippedDate": "2026-01-12",
+      "shippedDate": "2026-01-08",
       "stack": {
         "framework": "Unknown",
         "language": "TypeScript",
@@ -166,7 +166,7 @@
         "github": "craigsdennis",
         "avatar": "https://avatars.githubusercontent.com/craigsdennis"
       },
-      "shippedDate": "2025-12-26",
+      "shippedDate": "2025-12-22",
       "youtubeVideo": "https://youtube.com/watch?v=JvoGnXEKzfc",
       "stack": {
         "framework": "React + Hono",
@@ -356,7 +356,7 @@
         "github": "harshil1712",
         "avatar": "https://avatars.githubusercontent.com/harshil1712"
       },
-      "shippedDate": "2025-12-27",
+      "shippedDate": "2025-12-23",
       "stack": {
         "framework": "React + Hono",
         "language": "TypeScript",
@@ -438,7 +438,7 @@
         "github": "whoiskatrin",
         "avatar": "https://avatars.githubusercontent.com/whoiskatrin"
       },
-      "shippedDate": "2026-01-12",
+      "shippedDate": "2026-01-08",
       "stack": {
         "framework": "Unknown",
         "language": "TypeScript",
@@ -515,7 +515,7 @@
         "github": "lauragift21",
         "avatar": "https://avatars.githubusercontent.com/lauragift21"
       },
-      "shippedDate": "2026-01-12",
+      "shippedDate": "2026-01-08",
       "stack": {
         "framework": "Hono",
         "language": "TypeScript",
@@ -627,7 +627,7 @@
         "github": "jonesphillip",
         "avatar": "https://avatars.githubusercontent.com/jonesphillip"
       },
-      "shippedDate": "2026-01-12",
+      "shippedDate": "2026-01-08",
       "stack": {
         "framework": "React 19",
         "language": "TypeScript",
@@ -702,7 +702,7 @@
         "readmeHasImage": true,
         "readmeHasVideo": false,
         "license": "Apache-2.0",
-        "stars": 375,
+        "stars": 376,
         "forks": 44
       },
       "tags": []
@@ -718,7 +718,7 @@
         "github": "adewale",
         "avatar": "https://avatars.githubusercontent.com/adewale"
       },
-      "shippedDate": "2025-12-27",
+      "shippedDate": "2025-12-23",
       "stack": {
         "framework": "Unknown",
         "language": [
@@ -788,7 +788,7 @@
         "github": "jillesme",
         "avatar": "https://avatars.githubusercontent.com/jillesme"
       },
-      "shippedDate": "2025-12-23",
+      "shippedDate": "2025-12-19",
       "stack": {
         "framework": "TanStack Start",
         "language": "TypeScript",
@@ -899,7 +899,7 @@
         "github": "adewale",
         "avatar": "https://avatars.githubusercontent.com/adewale"
       },
-      "shippedDate": "2025-12-21",
+      "shippedDate": "2025-12-17",
       "stack": {
         "framework": "Unknown",
         "language": "Unknown",
@@ -1247,6 +1247,84 @@
         "forks": 2
       },
       "tags": []
+    },
+    {
+      "name": "Kontext Realtime",
+      "slug": "kontext-realtime",
+      "description": "Create and edit images using your voice.",
+      "url": "https://replicate.com/",
+      "github": "https://github.com/replicate/kontext-realtime",
+      "author": {
+        "name": "replicate",
+        "github": "replicate",
+        "avatar": "https://avatars.githubusercontent.com/replicate"
+      },
+      "shippedDate": "2025-07-03",
+      "youtubeVideo": "https://youtube.com/watch?v=72mD_vkG9FU",
+      "stack": {
+        "framework": "Hono",
+        "language": "TypeScript",
+        "buildTool": "wrangler",
+        "packageManager": "npm",
+        "uiLibrary": null
+      },
+      "dependencies": {
+        "runtime": {
+          "hono": "^4.6.13",
+          "replicate": "^2.0.0-alpha.16"
+        },
+        "dev": {
+          "@cloudflare/vitest-pool-workers": "^0.5.2",
+          "typescript": "^5.5.2",
+          "vitest": "2.1.8",
+          "wrangler": "^4.6.0"
+        }
+      },
+      "testing": {
+        "hasTests": true,
+        "framework": "vitest",
+        "testFiles": [
+          "test/index.spec.ts",
+          "test/tsconfig.json"
+        ]
+      },
+      "ci": {
+        "hasGitHubActions": true,
+        "workflows": [
+          "ci.yml",
+          "claude.yml"
+        ]
+      },
+      "cloudflare": {
+        "products": [
+          "Workers",
+          "Static Assets",
+          "RealtimeKit"
+        ],
+        "bindings": {}
+      },
+      "replicate": {
+        "usesReplicate": true,
+        "models": [
+          "black-forest-labs/flux-kontext-pro",
+          "black-forest-labs/flux-schnell",
+          "topazlabs/image-upscale"
+        ],
+        "apiIntegration": "replicate npm package"
+      },
+      "hygiene": {
+        "hasDescription": true,
+        "description": "Create and edit images using your voice",
+        "hasWebsite": true,
+        "websiteUrl": "https://replicate.com/docs/guides/openai-realtime",
+        "hasReadme": true,
+        "readmeHasImage": true,
+        "readmeHasVideo": true,
+        "license": null,
+        "stars": 104,
+        "forks": 26
+      },
+      "tags": []
     }
   ],
   "summary": {
@@ -1255,29 +1333,29 @@
       "Unknown": 5,
       "React + Hono": 2,
       "Next.js 15": 1,
-      "Hono": 2,
+      "Hono": 3,
       "TanStack Start": 1,
       "Nuxt 4": 1
     },
     "byLanguage": {
-      "TypeScript": 13,
+      "TypeScript": 14,
       "Python": 1,
       "Unknown": 1
     },
     "byPackageManager": {
-      "npm": 10,
+      "npm": 11,
       "pnpm": 5
     },
     "byBuildTool": {
       "Vite": 7,
       "Unknown": 5,
       "Turbopack": 1,
-      "wrangler": 1,
+      "wrangler": 2,
       "Vite (via Nuxt)": 1
     },
     "cloudflareProducts": {
-      "Workers": 15,
-      "Static Assets": 10,
+      "Workers": 16,
+      "Static Assets": 11,
       "R2": 4,
       "Durable Objects": 5,
       "Workflows": 2,
@@ -1286,35 +1364,39 @@
       "Hyperdrive": 1,
       "D1": 3,
       "KV": 2,
-      "Cron Triggers": 1
+      "Cron Triggers": 1,
+      "RealtimeKit": 1
     },
     "testing": {
-      "withTests": 7,
+      "withTests": 8,
       "withoutTests": 8,
       "testFrameworks": {
-        "vitest": 5,
+        "vitest": 6,
         "pytest": 1
       }
     },
     "ci": {
-      "withGitHubActions": 2,
+      "withGitHubActions": 3,
       "withoutGitHubActions": 13
     },
     "replicate": {
-      "appsUsingReplicate": 3,
-      "totalModels": 3,
+      "appsUsingReplicate": 4,
+      "totalModels": 6,
       "uniqueModels": [
+        "black-forest-labs/flux-kontext-pro",
+        "black-forest-labs/flux-schnell",
         "bytedance/seedream-4.5",
         "google/nano-banana-pro",
-        "openai/gpt-image-1.5"
+        "openai/gpt-image-1.5",
+        "topazlabs/image-upscale"
       ]
     },
     "hygiene": {
-      "withDescription": 11,
-      "withWebsite": 5,
-      "withReadme": 15,
-      "withImage": 7,
-      "withVideo": 3
+      "withDescription": 12,
+      "withWebsite": 6,
+      "withReadme": 16,
+      "withImage": 8,
+      "withVideo": 4
     }
   }
 }
