@@ -414,10 +414,10 @@
         "apiIntegration": "replicate npm package"
       },
       "hygiene": {
-        "hasDescription": false,
-        "description": null,
-        "hasWebsite": false,
-        "websiteUrl": null,
+        "hasDescription": true,
+        "description": "Virtual try-on app for ugly winter jumpers, built with Workers and Replicate",
+        "hasWebsite": true,
+        "websiteUrl": "https://virtual-try-on.h-demo.workers.dev/",
         "hasReadme": true,
         "readmeHasImage": false,
         "readmeHasVideo": false,
@@ -1392,8 +1392,8 @@
       ]
     },
     "hygiene": {
-      "withDescription": 12,
-      "withWebsite": 6,
+      "withDescription": 13,
+      "withWebsite": 7,
       "withReadme": 16,
       "withImage": 8,
       "withVideo": 4
