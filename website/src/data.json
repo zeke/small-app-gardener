@@ -1262,44 +1262,64 @@
       "shippedDate": "2025-07-03",
       "youtubeVideo": "https://youtube.com/watch?v=72mD_vkG9FU",
       "stack": {
-        "framework": "Unknown",
-        "language": "Unknown",
-        "buildTool": "Unknown",
+        "framework": "Hono",
+        "language": "TypeScript",
+        "buildTool": "wrangler",
         "packageManager": "npm",
         "uiLibrary": null
       },
       "dependencies": {
-        "runtime": {},
-        "dev": {}
+        "runtime": {
+          "hono": "^4.6.13",
+          "replicate": "^2.0.0-alpha.16"
+        },
+        "dev": {
+          "@cloudflare/vitest-pool-workers": "^0.5.2",
+          "typescript": "^5.5.2",
+          "vitest": "2.1.8",
+          "wrangler": "^4.6.0"
+        }
       },
       "testing": {
-        "hasTests": false,
-        "framework": null,
-        "testFiles": []
+        "hasTests": true,
+        "framework": "vitest",
+        "testFiles": [
+          "test/index.spec.ts",
+          "test/tsconfig.json"
+        ]
       },
       "ci": {
-        "hasGitHubActions": false,
-        "workflows": []
+        "hasGitHubActions": true,
+        "workflows": [
+          "ci.yml",
+          "claude.yml"
+        ]
       },
       "cloudflare": {
         "products": [
-          "Workers"
+          "Workers",
+          "Static Assets",
+          "RealtimeKit"
         ],
         "bindings": {}
       },
       "replicate": {
-        "usesReplicate": false,
-        "models": [],
-        "apiIntegration": null
+        "usesReplicate": true,
+        "models": [
+          "black-forest-labs/flux-kontext-pro",
+          "black-forest-labs/flux-schnell",
+          "topazlabs/image-upscale"
+        ],
+        "apiIntegration": "replicate npm package"
       },
       "hygiene": {
         "hasDescription": true,
         "description": "Create and edit images using your voice",
         "hasWebsite": true,
         "websiteUrl": "https://replicate.com/docs/guides/openai-realtime",
-        "hasReadme": false,
-        "readmeHasImage": false,
-        "readmeHasVideo": false,
+        "hasReadme": true,
+        "readmeHasImage": true,
+        "readmeHasVideo": true,
         "license": null,
         "stars": 104,
         "forks": 26
@@ -1310,17 +1330,17 @@
   "summary": {
     "byFramework": {
       "React 19": 3,
-      "Unknown": 6,
+      "Unknown": 5,
       "React + Hono": 2,
       "Next.js 15": 1,
-      "Hono": 2,
+      "Hono": 3,
       "TanStack Start": 1,
       "Nuxt 4": 1
     },
     "byLanguage": {
-      "TypeScript": 13,
+      "TypeScript": 14,
       "Python": 1,
-      "Unknown": 2
+      "Unknown": 1
     },
     "byPackageManager": {
       "npm": 11,
@@ -1328,14 +1348,14 @@
     },
     "byBuildTool": {
       "Vite": 7,
-      "Unknown": 6,
+      "Unknown": 5,
       "Turbopack": 1,
-      "wrangler": 1,
+      "wrangler": 2,
       "Vite (via Nuxt)": 1
     },
     "cloudflareProducts": {
       "Workers": 16,
-      "Static Assets": 10,
+      "Static Assets": 11,
       "R2": 4,
       "Durable Objects": 5,
       "Workflows": 2,
@@ -1344,35 +1364,39 @@
       "Hyperdrive": 1,
       "D1": 3,
       "KV": 2,
-      "Cron Triggers": 1
+      "Cron Triggers": 1,
+      "RealtimeKit": 1
     },
     "testing": {
-      "withTests": 7,
-      "withoutTests": 9,
+      "withTests": 8,
+      "withoutTests": 8,
       "testFrameworks": {
-        "vitest": 5,
+        "vitest": 6,
         "pytest": 1
       }
     },
     "ci": {
-      "withGitHubActions": 2,
-      "withoutGitHubActions": 14
+      "withGitHubActions": 3,
+      "withoutGitHubActions": 13
     },
     "replicate": {
-      "appsUsingReplicate": 3,
-      "totalModels": 3,
+      "appsUsingReplicate": 4,
+      "totalModels": 6,
       "uniqueModels": [
+        "black-forest-labs/flux-kontext-pro",
+        "black-forest-labs/flux-schnell",
         "bytedance/seedream-4.5",
         "google/nano-banana-pro",
-        "openai/gpt-image-1.5"
+        "openai/gpt-image-1.5",
+        "topazlabs/image-upscale"
       ]
     },
     "hygiene": {
       "withDescription": 12,
       "withWebsite": 6,
-      "withReadme": 15,
-      "withImage": 7,
-      "withVideo": 3
+      "withReadme": 16,
+      "withImage": 8,
+      "withVideo": 4
     }
   }
 }
