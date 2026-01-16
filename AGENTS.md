@@ -103,6 +103,12 @@ npm run collect
 
 This scrapes the garden, analyzes each GitHub repository, and copies data to the website.
 
+### Check for App Additions/Removals
+
+```bash
+npx tsx collect-data.ts --check-apps
+```
+
 ### Run Tests
 
 ```bash
@@ -126,9 +132,10 @@ cd website && npm install && npm run dev
 What it does:
 1. Checks out the repository
 2. Sets up Node.js 20
-3. Runs `collect-data.ts` to fetch fresh data
-4. Copies data to website
-5. If changes are detected, commits and pushes them
+3. Checks for new or removed apps
+4. Runs `collect-data.ts` to fetch fresh data
+5. Copies data to website
+6. If changes are detected, commits and pushes them
 
 ### Website Deployment (`deploy.yml`)
 

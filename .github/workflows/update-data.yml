@@ -34,6 +34,9 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Check for new or removed apps
+        run: npx tsx collect-data.ts --check-apps
+
       - name: Collect fresh data
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

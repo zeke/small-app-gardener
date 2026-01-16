@@ -7,6 +7,7 @@
  * GitHub repository by cloning it temporarily to extract metadata.
  *
  * Usage: npx tsx collect-data.ts
+ *        npx tsx collect-data.ts --check-apps
  */
 
 import { writeFileSync, existsSync, rmSync, readdirSync, statSync, readFileSync as fsReadFileSync } from "fs";
@@ -97,11 +98,9 @@ async function fetchText(url: string): Promise<string> {
 }
 
 // Fetch the garden page and extract app slugs
-async function fetchGardenApps(): Promise<AppBasicInfo[]> {
+async function fetchGardenSlugs(): Promise<string[]> {
   console.log("Fetching garden page...");
   const html = await fetchText(GARDEN_URL);
-
-  const apps: AppBasicInfo[] = [];
 
   // Extract app cards from the HTML
   // Look for links to /garden/{slug} pages
@@ -117,6 +116,12 @@ async function fetchGardenApps(): Promise<AppBasicInfo[]> {
   }
 
   console.log(`Found ${slugs.size} app slugs`);
+  return [...slugs];
+}
+
+async function fetchGardenApps(): Promise<AppBasicInfo[]> {
+  const slugs = await fetchGardenSlugs();
+  const apps: AppBasicInfo[] = [];
 
   // Fetch each app's detail page
   for (const slug of slugs) {
@@ -131,6 +136,50 @@ async function fetchGardenApps(): Promise<AppBasicInfo[]> {
   }
 
   return apps;
+}
+
+function loadExistingAppSlugs(): string[] {
+  if (!existsSync("apps.json")) {
+    console.log("apps.json not found; skipping comparison.");
+    return [];
+  }
+
+  const content = fsReadFileSync("apps.json", "utf-8");
+  const data = JSON.parse(content) as { apps?: Array<{ slug?: string }> };
+  return (data.apps || []).map((app) => app.slug).filter((slug): slug is string => !!slug);
+}
+
+async function checkForAppChanges(): Promise<void> {
+  console.log("=== App Change Check ===\n");
+  const currentSlugs = await fetchGardenSlugs();
+  const existingSlugs = loadExistingAppSlugs();
+
+  if (existingSlugs.length === 0) {
+    console.log("No existing apps to compare against.");
+    return;
+  }
+
+  const currentSet = new Set(currentSlugs);
+  const existingSet = new Set(existingSlugs);
+
+  const added = currentSlugs.filter((slug) => !existingSet.has(slug));
+  const removed = existingSlugs.filter((slug) => !currentSet.has(slug));
+
+  console.log(`Garden apps: ${currentSlugs.length}`);
+  console.log(`Existing apps: ${existingSlugs.length}`);
+
+  if (added.length === 0 && removed.length === 0) {
+    console.log("No new or removed apps found.");
+    return;
+  }
+
+  if (added.length > 0) {
+    console.log(`New apps: ${added.join(", ")}`);
+  }
+
+  if (removed.length > 0) {
+    console.log(`Removed apps: ${removed.join(", ")}`);
+  }
 }
 
 async function fetchAppDetails(slug: string): Promise<AppBasicInfo | null> {
@@ -849,6 +898,12 @@ function generateSummary(apps: Array<{ analysis: RepoAnalysis }>) {
 // Main function
 async function main() {
   console.log("=== Small App Garden Data Collector ===\n");
+
+  const args = process.argv.slice(2);
+  if (args.includes("--check-apps")) {
+    await checkForAppChanges();
+    return;
+  }
 
   // Fetch basic app info from the garden
   const basicApps = await fetchGardenApps();
