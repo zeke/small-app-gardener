@@ -6,7 +6,8 @@
   "scripts": {
     "collect": "npx tsx collect-data.ts && cp apps.json website/src/data.json",
     "test": "npx tsx test.ts",
-    "build": "cd website && npm run build"
+    "build": "cd website && npm run build",
+    "dev": "cd website && npm install && npm run dev"
   },
   "keywords": [
     "cloudflare",

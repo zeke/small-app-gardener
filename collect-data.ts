@@ -14,8 +14,33 @@ import { writeFileSync, existsSync, rmSync, readdirSync, statSync, readFileSync 
 import { execSync } from "child_process";
 import { join } from "path";
 import { tmpdir } from "os";
+import { CLOUDFLARE_PRODUCT_CATALOG } from "./schema";
 
 const GARDEN_URL = "https://developers.cloudflare.com/garden/";
+
+type CloudflarePackageRule = {
+  match?: string;
+  prefix?: string;
+  products: string[];
+};
+
+const CLOUDFLARE_PACKAGE_PRODUCT_RULES: CloudflarePackageRule[] = [
+  { match: "agents", products: ["Agents"] },
+  { match: "hono-agents", products: ["Agents"] },
+  { match: "@cloudflare/agents", products: ["Agents"] },
+  { match: "@cloudflare/ai", products: ["Workers AI"] },
+  { match: "@cloudflare/ai-gateway", products: ["AI Gateway"] },
+  { match: "@cloudflare/ai-search", products: ["AI Search"] },
+  { match: "@cloudflare/d1", products: ["D1"] },
+  { match: "@cloudflare/kv-asset-handler", products: ["KV"] },
+  { match: "@cloudflare/queues", products: ["Queues"] },
+  { match: "@cloudflare/r2", products: ["R2"] },
+  { match: "@cloudflare/stream", products: ["Stream"] },
+  { match: "@cloudflare/turnstile", products: ["Turnstile"] },
+  { match: "@cloudflare/workers-types", products: ["Workers"] },
+  { match: "wrangler", products: ["Workers"] },
+  { prefix: "@cloudflare/pages", products: ["Pages"] },
+];
 
 interface Author {
   name: string;
@@ -609,6 +634,30 @@ function findReplicateModels(dir: string, basePath = ""): string[] {
   return [...new Set(models)]; // Dedupe
 }
 
+function detectCloudflareProductsFromDependencies(
+  deps: Record<string, string>,
+  analysis: RepoAnalysis
+): void {
+  if (!deps || Object.keys(deps).length === 0) {
+    return;
+  }
+
+  const products = new Set(analysis.cloudflare.products);
+
+  for (const depName of Object.keys(deps)) {
+    for (const rule of CLOUDFLARE_PACKAGE_PRODUCT_RULES) {
+      if (rule.match && depName === rule.match) {
+        rule.products.forEach((product) => products.add(product));
+      }
+      if (rule.prefix && depName.startsWith(rule.prefix)) {
+        rule.products.forEach((product) => products.add(product));
+      }
+    }
+  }
+
+  analysis.cloudflare.products = Array.from(products);
+}
+
 function analyzePackageJson(pkg: Record<string, unknown>, analysis: RepoAnalysis): void {
   const deps = (pkg.dependencies || {}) as Record<string, string>;
   const devDeps = (pkg.devDependencies || {}) as Record<string, string>;
@@ -625,6 +674,24 @@ function analyzePackageJson(pkg: Record<string, unknown>, analysis: RepoAnalysis
   if ("next" in deps) {
     analysis.framework = `Next.js ${deps.next?.replace("^", "").split(".")[0]}`;
     analysis.buildTool = "Turbopack";
+  } else if ("@remix-run/react" in deps) {
+    analysis.framework = "Remix";
+    analysis.buildTool = "Vite";
+  } else if ("astro" in deps) {
+    analysis.framework = "Astro";
+    analysis.buildTool = "Vite";
+  } else if ("@sveltejs/kit" in deps) {
+    analysis.framework = "SvelteKit";
+    analysis.buildTool = "Vite";
+  } else if ("svelte" in deps) {
+    analysis.framework = "Svelte";
+    analysis.buildTool = "Vite";
+  } else if ("solid-js" in deps) {
+    analysis.framework = "SolidJS";
+    analysis.buildTool = "Vite";
+  } else if ("preact" in deps) {
+    analysis.framework = "Preact";
+    analysis.buildTool = "Vite";
   } else if ("nuxt" in deps) {
     analysis.framework = `Nuxt ${deps.nuxt?.replace("^", "").split(".")[0]}`;
     analysis.buildTool = "Vite (via Nuxt)";
@@ -644,6 +711,12 @@ function analyzePackageJson(pkg: Record<string, unknown>, analysis: RepoAnalysis
   } else if ("vue" in deps && analysis.framework === "Unknown") {
     analysis.framework = "Vue";
     analysis.buildTool = "Vite";
+  } else if ("express" in deps && analysis.framework === "Unknown") {
+    analysis.framework = "Express";
+  } else if ("fastify" in deps && analysis.framework === "Unknown") {
+    analysis.framework = "Fastify";
+  } else if ("koa" in deps && analysis.framework === "Unknown") {
+    analysis.framework = "Koa";
   }
 
   // Detect build tool more specifically
@@ -651,6 +724,11 @@ function analyzePackageJson(pkg: Record<string, unknown>, analysis: RepoAnalysis
     analysis.buildTool = "Vite";
   } else if ("esbuild" in devDeps) {
     analysis.buildTool = "esbuild";
+  } else if ("wrangler" in devDeps || "wrangler" in deps) {
+    analysis.buildTool = "wrangler";
+    if (analysis.framework === "Unknown") {
+      analysis.framework = "Workers";
+    }
   }
 
   // Detect UI library
@@ -693,6 +771,9 @@ function analyzePackageJson(pkg: Record<string, unknown>, analysis: RepoAnalysis
     analysis.replicate.usesReplicate = true;
     analysis.replicate.apiIntegration = "replicate npm package";
   }
+
+  detectCloudflareProductsFromDependencies(deps, analysis);
+  detectCloudflareProductsFromDependencies(devDeps, analysis);
 
   // Detect monorepo
   if (pkg.workspaces) {
@@ -753,7 +834,7 @@ function analyzeWranglerConfig(content: string, analysis: RepoAnalysis): void {
     products.add("Workflows");
   }
   if (content.includes("images") || content.includes("Images") || content.includes("IMAGE")) {
-    products.add("Images");
+    products.add("Cloudflare Images");
   }
   if (content.includes("rate_limit") || content.includes("rateLimiting") || content.includes("RateLimit")) {
     products.add("Rate Limiting");
@@ -762,7 +843,7 @@ function analyzeWranglerConfig(content: string, analysis: RepoAnalysis): void {
     products.add("Workers AI");
   }
   if (content.includes("autorag") || content.includes("ai_search") || content.includes("AutoRAG")) {
-    products.add("AutoRAG (AI Search)");
+    products.add("AI Search");
   }
   if (content.includes("assets") || content.includes("Assets")) {
     products.add("Static Assets");
@@ -774,7 +855,7 @@ function analyzeWranglerConfig(content: string, analysis: RepoAnalysis): void {
     products.add("Turnstile");
   }
   if (content.includes("realtime") || content.includes("Realtime") || content.includes("calls")) {
-    products.add("RealtimeKit");
+    products.add("Realtime");
   }
 
   analysis.cloudflare.products = Array.from(products);
@@ -918,13 +999,20 @@ async function main() {
 
       // Merge tags from garden page with detected Cloudflare products
       const allProducts = new Set([...analysis.cloudflare.products]);
+      const catalogNames = new Set(CLOUDFLARE_PRODUCT_CATALOG.map((product) => product.name));
+      const tagAliases: Record<string, string> = {
+        Images: "Cloudflare Images",
+      };
+
       for (const tag of app.tags) {
-        if (["Workers", "D1", "R2", "KV", "Durable Objects", "Hyperdrive", "Pages", "Replicate"].includes(tag)) {
-          if (tag === "Replicate") {
-            analysis.replicate.usesReplicate = true;
-          } else {
-            allProducts.add(tag);
-          }
+        if (tag === "Replicate") {
+          analysis.replicate.usesReplicate = true;
+          continue;
+        }
+
+        const normalizedTag = tagAliases[tag] ?? tag;
+        if (catalogNames.has(normalizedTag)) {
+          allProducts.add(normalizedTag);
         }
       }
       analysis.cloudflare.products = Array.from(allProducts);
@@ -986,6 +1074,7 @@ async function main() {
     totalApps: apps.length,
     apps,
     summary,
+    cloudflareCatalog: CLOUDFLARE_PRODUCT_CATALOG,
   };
 
   // Write to file

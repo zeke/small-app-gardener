@@ -52,6 +52,13 @@ test("apps.json has apps", () => {
   assert(data.apps.length > 0, "No apps found in apps.json");
 });
 
+// Test: apps.json has Cloudflare catalog
+test("apps.json has Cloudflare catalog", () => {
+  const data = JSON.parse(readFileSync("apps.json", "utf-8"));
+  assert(Array.isArray(data.cloudflareCatalog), "cloudflareCatalog is missing");
+  assert(data.cloudflareCatalog.length > 0, "cloudflareCatalog is empty");
+});
+
 // Test: all apps have required fields
 test("all apps have required fields", () => {
   const data = JSON.parse(readFileSync("apps.json", "utf-8"));

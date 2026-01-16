@@ -11,15 +11,15 @@ const productIcons: Record<string, string> = {
   "Hyperdrive": "⚡",
   "Pages": "📄",
   "Workflows": "🔄",
-  "Images": "🖼️",
+  "Cloudflare Images": "🖼️",
   "Browser Rendering": "🌐",
   "Rate Limiting": "🚦",
   "Workers AI": "🤖",
-  "AutoRAG (AI Search)": "🔍",
+  "AI Search": "🔍",
   "Static Assets": "📁",
   "Cron Triggers": "⏰",
   "Turnstile": "🔐",
-  "RealtimeKit": "📡",
+  "Realtime": "📡",
   "AI Gateway": "🌉",
 };
 
@@ -49,14 +49,16 @@ function generateReport(data: AppsData): string {
 
 A curated collection of **${data.totalApps} apps** built on Cloudflare's developer platform.
 
+Website: https://zeke.github.io/small-app-gardener/
+
 | Apps | Tests | CI | Replicate |
 |------|-------|-------|-----------|
 | ${data.totalApps} | ${summary.testing.withTests} (${Math.round((summary.testing.withTests / data.totalApps) * 100)}%) | ${summary.ci.withGitHubActions} (${Math.round((summary.ci.withGitHubActions / data.totalApps) * 100)}%) | ${summary.replicate.appsUsingReplicate} (${Math.round((summary.replicate.appsUsingReplicate / data.totalApps) * 100)}%) |
 
 ## Apps
 
-| App | Framework | Tests | CI | Cloudflare Products |
-|-----|-----------|:-----:|:--:|---------------------|
+| App | Stack | Tests | CI | Cloudflare Products |
+|-----|-------|:-----:|:--:|---------------------|
 `;
 
   for (const app of sortedApps) {
@@ -211,44 +213,6 @@ A curated collection of **${data.totalApps} apps** built on Cloudflare's develop
         
         report += `| ${appLink} | ${desc} | ${web} | ${readme} | ${image} | ${video} | ${stars} |\n`;
       }
-    }
-  }
-
-  // Products missing from Garden - opportunities section
-  const productsInGarden = new Set(Object.keys(summary.cloudflareProducts));
-  
-  const allCloudflareProducts: Array<{ name: string; description: string; ideas: string }> = [
-    { name: "Queues", description: "Message queues without egress fees", ideas: "Background job processor, webhook relay" },
-    { name: "Vectorize", description: "Vector database for AI/ML", ideas: "Semantic search, RAG chatbot" },
-    { name: "Stream", description: "Video storage/encoding/delivery", ideas: "Video hosting, live streaming" },
-    { name: "Pipelines", description: "Real-time data ingestion to R2", ideas: "Analytics collector, log aggregator" },
-    { name: "Email Routing", description: "Create/manage email addresses", ideas: "Contact form handler" },
-    { name: "Turnstile", description: "CAPTCHA alternative", ideas: "Bot protection demo" },
-    { name: "Browser Rendering", description: "Headless browser control", ideas: "Screenshot service, PDF generator" },
-    { name: "Containers", description: "Serverless containers", ideas: "Long-running jobs, legacy app migration" },
-    { name: "Agents", description: "AI agents with persistence", ideas: "AI assistant with memory" },
-    { name: "AI Search", description: "Managed RAG pipelines", ideas: "Documentation Q&A" },
-    { name: "Waiting Room", description: "Traffic queue management", ideas: "Event ticket sales, product launch" },
-    { name: "Web Analytics", description: "Privacy-first analytics", ideas: "Analytics dashboard" },
-    { name: "Zaraz", description: "Third-party tool manager", ideas: "Tag management demo" },
-    { name: "Load Balancing", description: "Traffic distribution", ideas: "Multi-region app demo" },
-    { name: "Pub/Sub", description: "Real-time messaging", ideas: "Chat app, notifications" },
-  ];
-
-  const missingProducts = allCloudflareProducts.filter(p => !productsInGarden.has(p.name));
-
-  if (missingProducts.length > 0) {
-    report += `
-## Opportunities
-
-Cloudflare products not yet represented in the Garden:
-
-| Product | Description | App Ideas |
-|---------|-------------|-----------|
-`;
-
-    for (const product of missingProducts) {
-      report += `| [${product.name}](https://developers.cloudflare.com/${product.name.toLowerCase().replace(/\s+/g, "-")}) | ${product.description} | ${product.ideas} |\n`;
     }
   }
 

@@ -168,6 +168,10 @@ Features:
 
 ## Future Improvements
 
+## Notes
+
+- Keep the README focused on summary tables. Large catalog-style content (like full Cloudflare product lists and opportunities) should live on the website instead.
+
 Potential enhancements for this project:
 
 1. **Model Popularity** - Track which Replicate models are most commonly used
