@@ -334,8 +334,8 @@
       "hygiene": {
         "hasDescription": true,
         "description": "Cloudflare Worker <-> PlanetScale <-> Hyperdrive",
-        "hasWebsite": false,
-        "websiteUrl": null,
+        "hasWebsite": true,
+        "websiteUrl": "https://thecoffeecluster.com/",
         "hasReadme": true,
         "readmeHasImage": true,
         "readmeHasVideo": true,
@@ -980,7 +980,7 @@
     },
     "hygiene": {
       "withDescription": 10,
-      "withWebsite": 5,
+      "withWebsite": 6,
       "withReadme": 11,
       "withImage": 7,
       "withVideo": 4
