@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-18",
+  "lastUpdated": "2026-01-19",
   "source": "https://developers.cloudflare.com/garden/",
   "totalApps": 11,
   "apps": [
@@ -83,7 +83,7 @@
         "github": "ygwyg",
         "avatar": "https://avatars.githubusercontent.com/ygwyg"
       },
-      "shippedDate": "2026-01-10",
+      "shippedDate": "2026-01-11",
       "stack": {
         "framework": "Express",
         "language": "TypeScript",
@@ -166,7 +166,7 @@
         "github": "craigsdennis",
         "avatar": "https://avatars.githubusercontent.com/craigsdennis"
       },
-      "shippedDate": "2025-12-24",
+      "shippedDate": "2025-12-25",
       "youtubeVideo": "https://youtube.com/watch?v=JvoGnXEKzfc",
       "stack": {
         "framework": "React + Hono",
@@ -372,7 +372,7 @@
         "github": "harshil1712",
         "avatar": "https://avatars.githubusercontent.com/harshil1712"
       },
-      "shippedDate": "2025-12-25",
+      "shippedDate": "2025-12-26",
       "stack": {
         "framework": "React + Hono",
         "language": "TypeScript",
@@ -454,7 +454,7 @@
         "github": "whoiskatrin",
         "avatar": "https://avatars.githubusercontent.com/whoiskatrin"
       },
-      "shippedDate": "2026-01-10",
+      "shippedDate": "2026-01-11",
       "stack": {
         "framework": "Workers",
         "language": "TypeScript",
@@ -532,7 +532,7 @@
         "github": "lauragift21",
         "avatar": "https://avatars.githubusercontent.com/lauragift21"
       },
-      "shippedDate": "2026-01-10",
+      "shippedDate": "2026-01-11",
       "stack": {
         "framework": "Workers",
         "language": "TypeScript",
@@ -644,7 +644,7 @@
         "github": "jonesphillip",
         "avatar": "https://avatars.githubusercontent.com/jonesphillip"
       },
-      "shippedDate": "2026-01-10",
+      "shippedDate": "2026-01-11",
       "stack": {
         "framework": "React 19",
         "language": "TypeScript",
@@ -752,6 +752,7 @@
         "framework": null,
         "testFiles": [
           "app/e2e/accessibility.spec.ts",
+          "app/e2e/chromatic-grid.spec.ts",
           "app/e2e/connection-storm.spec.ts",
           "app/e2e/core.spec.ts",
           "app/e2e/drag-to-paint.spec.ts",
@@ -759,8 +760,7 @@
           "app/e2e/keyboard.spec.ts",
           "app/e2e/last-cell-flicker.spec.ts",
           "app/e2e/mobile-android.spec.ts",
-          "app/e2e/mobile-iphone.spec.ts",
-          "app/e2e/multiplayer.spec.ts"
+          "app/e2e/mobile-iphone.spec.ts"
         ]
       },
       "ci": {
