@@ -1,7 +1,7 @@
 {
   "lastUpdated": "2026-01-21",
   "source": "https://developers.cloudflare.com/garden/",
-  "totalApps": 10,
+  "totalApps": 11,
   "apps": [
     {
       "name": "Image Editing Arena",
@@ -69,6 +69,89 @@
         "license": null,
         "stars": 6,
         "forks": 3
+      },
+      "tags": []
+    },
+    {
+      "name": "SYSTEM",
+      "slug": "system",
+      "description": "Control your Mac from anywhere with AI. Play music, send messages, run commands, and automate with Raycast extensions.",
+      "url": "https://developers.cloudflare.com/garden/system",
+      "github": "https://github.com/ygwyg/system",
+      "author": {
+        "name": "ygwyg",
+        "github": "ygwyg",
+        "avatar": "https://avatars.githubusercontent.com/ygwyg"
+      },
+      "shippedDate": "2026-01-13",
+      "stack": {
+        "framework": "Express",
+        "language": "TypeScript",
+        "buildTool": "Unknown",
+        "packageManager": "npm",
+        "uiLibrary": null
+      },
+      "dependencies": {
+        "runtime": {
+          "@modelcontextprotocol/sdk": "^1.0.4",
+          "chalk": "^5.6.2",
+          "enquirer": "^2.4.1",
+          "express": "^4.18.2",
+          "open": "^10.0.3",
+          "zod": "^3.22.4"
+        },
+        "dev": {
+          "@eslint/js": "^9.39.2",
+          "@types/express": "^4.17.21",
+          "@types/node": "^20.10.0",
+          "@vitest/coverage-v8": "^4.0.16",
+          "eslint": "^9.39.2",
+          "eslint-config-prettier": "^10.1.8",
+          "husky": "^9.1.7",
+          "lint-staged": "^16.2.7",
+          "prettier": "^3.7.4",
+          "tsx": "^4.7.0",
+          "typescript": "^5.3.3",
+          "typescript-eslint": "^8.52.0",
+          "vitest": "^4.0.16"
+        }
+      },
+      "testing": {
+        "hasTests": true,
+        "framework": "vitest",
+        "testFiles": [
+          "src/bridge/tools/__tests__/command.test.ts",
+          "src/bridge/tools/__tests__/tools.test.ts",
+          "src/bridge/tools/__tests__/validation.test.ts",
+          "src/bridge/tools/__tests__/volume.test.ts"
+        ]
+      },
+      "ci": {
+        "hasGitHubActions": false,
+        "workflows": []
+      },
+      "cloudflare": {
+        "products": [
+          "Workers"
+        ],
+        "bindings": {}
+      },
+      "replicate": {
+        "usesReplicate": false,
+        "models": [],
+        "apiIntegration": null
+      },
+      "hygiene": {
+        "hasDescription": true,
+        "description": "Control your mac from anywhere with AI",
+        "hasWebsite": true,
+        "websiteUrl": "https://system.surf",
+        "hasReadme": true,
+        "readmeHasImage": false,
+        "readmeHasVideo": false,
+        "license": null,
+        "stars": 286,
+        "forks": 14
       },
       "tags": []
     },
@@ -856,6 +939,7 @@
   "summary": {
     "byFramework": {
       "React 19": 2,
+      "Express": 1,
       "React + Hono": 2,
       "Next.js 15": 1,
       "Workers": 3,
@@ -863,20 +947,20 @@
       "Hono": 1
     },
     "byLanguage": {
-      "TypeScript": 9,
+      "TypeScript": 10,
       "Unknown": 1
     },
     "byPackageManager": {
-      "npm": 8,
+      "npm": 9,
       "pnpm": 2
     },
     "byBuildTool": {
       "Vite": 5,
-      "wrangler": 4,
-      "Unknown": 1
+      "Unknown": 2,
+      "wrangler": 4
     },
     "cloudflareProducts": {
-      "Workers": 10,
+      "Workers": 11,
       "Static Assets": 9,
       "Agents": 2,
       "R2": 4,
@@ -891,15 +975,15 @@
       "Realtime": 1
     },
     "testing": {
-      "withTests": 6,
+      "withTests": 7,
       "withoutTests": 4,
       "testFrameworks": {
-        "vitest": 5
+        "vitest": 6
       }
     },
     "ci": {
       "withGitHubActions": 4,
-      "withoutGitHubActions": 6
+      "withoutGitHubActions": 7
     },
     "replicate": {
       "appsUsingReplicate": 3,
@@ -914,9 +998,9 @@
       ]
     },
     "hygiene": {
-      "withDescription": 9,
-      "withWebsite": 5,
-      "withReadme": 10,
+      "withDescription": 10,
+      "withWebsite": 6,
+      "withReadme": 11,
       "withImage": 7,
       "withVideo": 4
     }
