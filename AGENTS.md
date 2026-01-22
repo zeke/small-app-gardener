@@ -16,6 +16,8 @@ Website: https://gardener.ziki.boo
 - `website/`: Astro site
 - `website/src/data.json`: data file used by the site (produced by `npm run collect`)
 - `website/astro.config.mjs`: sets the production `site` for canonical URLs
+- `website/src/pages/apps/[slug].astro`: per-app page includes an edit-focused "Improve your score" agent prompt
+- `website/src/lib/improvement-prompt.ts`: prompt content; keep it aligned with scoring rules in `website/src/lib/scores.ts`
 
 ## Automation
 

@@ -1,4 +1,4 @@
-# 👩‍🌾 Gardener
+# Gardener
 
 A leaderboard for Cloudflare's [small app garden](https://developers.cloudflare.com/garden/).
 

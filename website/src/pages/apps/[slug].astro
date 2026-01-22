@@ -4,6 +4,7 @@ import CloudflareProduct from '../../components/CloudflareProduct.astro';
 import { Icon } from 'astro-icon/components';
 import data from '../../data.json';
 import { getAppScores, getPopularityMax, type ScoreBreakdownItem } from '../../lib/scores';
+import { buildImprovementPrompt } from '../../lib/improvement-prompt';
 import type { AppsData } from '../../../../schema';
 
 const { apps } = data as unknown as AppsData;
@@ -22,10 +23,14 @@ if (!app) {
 
 const scores = getAppScores(app, popularityMax);
 const qualityBreakdown: ScoreBreakdownItem[] = scores.qualityBreakdown;
-const missingItems = qualityBreakdown.filter((item) => !item.earned);
 const qualityMaxPoints = qualityBreakdown.reduce((total, item) => total + item.points, 0);
 
-const prompt = `You are an expert engineer. Review this app's metadata and suggest concrete improvements to raise its quality score and overall appeal.\n\nApp: ${app.name}\nRepository: ${app.github}\nDescription: ${app.description}\n\nCurrent quality score: ${scores.quality}/${qualityMaxPoints}\nMissing quality points:\n${missingItems.length ? missingItems.map((item) => `- ${item.label} (+${item.points})`).join("\n") : "- None"}\n\nPlease provide a prioritized checklist with quick wins first, then bigger improvements. Include specific file changes or tooling suggestions when possible.`;
+const prompt = buildImprovementPrompt({
+  app,
+  qualityScore: scores.quality,
+  qualityMaxPoints,
+  qualityBreakdown,
+});
 ---
 
 <Layout title={`${app.name} · Small App Garden`} description={`Score breakdown for ${app.name}`}> 
