@@ -33,20 +33,33 @@ type QualityRule = {
   isEarned: (app: AppLike) => boolean;
 };
 
+const QUALITY_MAX_POINTS = 100;
+
 const QUALITY_RULES: QualityRule[] = [
-  { id: "tests", label: "Automated tests", points: 20, isEarned: (app) => !!app.testing?.hasTests },
-  { id: "ci", label: "Continuous integration", points: 15, isEarned: (app) => !!app.ci?.hasGitHubActions },
+  { id: "tests", label: "Automated tests", points: 10, isEarned: (app) => !!app.testing?.hasTests },
+  { id: "ci", label: "Continuous integration", points: 10, isEarned: (app) => !!app.ci?.hasGitHubActions },
   { id: "readme", label: "README documentation", points: 10, isEarned: (app) => !!app.hygiene?.hasReadme },
-  { id: "agentsmd", label: "AGENTS.md instructions", points: 5, isEarned: (app) => !!app.hygiene?.hasAgentsMd },
-  { id: "readme-image", label: "README images", points: 5, isEarned: (app) => !!app.hygiene?.readmeHasImage },
-  { id: "readme-video", label: "README videos or GIFs", points: 5, isEarned: (app) => !!app.hygiene?.readmeHasVideo },
+  { id: "agentsmd", label: "AGENTS.md instructions", points: 20, isEarned: (app) => !!app.hygiene?.hasAgentsMd },
+  {
+    id: "readme-media",
+    label: "README images or videos",
+    points: 10,
+    isEarned: (app) => !!app.hygiene?.readmeHasImage || !!app.hygiene?.readmeHasVideo,
+  },
   { id: "description", label: "Repository description", points: 15, isEarned: (app) => !!app.hygiene?.hasDescription },
   { id: "website", label: "Project website", points: 15, isEarned: (app) => !!app.hygiene?.hasWebsite },
-  { id: "license", label: "License file", points: 15, isEarned: (app) => !!app.hygiene?.license },
+  { id: "license", label: "License file", points: 10, isEarned: (app) => !!app.hygiene?.license },
 ];
 
+const qualityTotal = QUALITY_RULES.reduce((total, rule) => total + rule.points, 0);
+if (qualityTotal !== QUALITY_MAX_POINTS) {
+  throw new Error(
+    `Quality rule points must sum to ${QUALITY_MAX_POINTS} (currently ${qualityTotal}).`
+  );
+}
+
 export function getQualityMaxPoints(): number {
-  return QUALITY_RULES.reduce((total, rule) => total + rule.points, 0);
+  return QUALITY_MAX_POINTS;
 }
 
 export function buildQualityBreakdown(app: AppLike): ScoreBreakdownItem[] {
@@ -86,9 +99,11 @@ export function calculatePopularityScore(app: AppLike, maxScore: number): number
 }
 
 export function getAppScores(app: AppLike, maxPopularityScore: number) {
-  const qualityBreakdown = app.scores?.qualityBreakdown ?? buildQualityBreakdown(app);
-  const quality = app.scores?.quality ?? calculateQualityScore(qualityBreakdown);
-  const popularity = app.scores?.popularity ?? calculatePopularityScore(app, maxPopularityScore);
+  // Always compute from the current scoring rules so tweaks take effect
+  // without needing to regenerate `apps.json` / `website/src/data.json`.
+  const qualityBreakdown = buildQualityBreakdown(app);
+  const quality = calculateQualityScore(qualityBreakdown);
+  const popularity = calculatePopularityScore(app, maxPopularityScore);
 
   return {
     popularity,
