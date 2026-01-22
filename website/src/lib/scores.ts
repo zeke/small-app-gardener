@@ -10,6 +10,7 @@ type AppLike = {
   ci?: { hasGitHubActions?: boolean };
   hygiene?: {
     hasReadme?: boolean;
+    hasAgentsMd?: boolean;
     readmeHasImage?: boolean;
     readmeHasVideo?: boolean;
     hasDescription?: boolean;
@@ -36,6 +37,7 @@ const QUALITY_RULES: QualityRule[] = [
   { id: "tests", label: "Automated tests", points: 20, isEarned: (app) => !!app.testing?.hasTests },
   { id: "ci", label: "Continuous integration", points: 15, isEarned: (app) => !!app.ci?.hasGitHubActions },
   { id: "readme", label: "README documentation", points: 10, isEarned: (app) => !!app.hygiene?.hasReadme },
+  { id: "agentsmd", label: "AGENTS.md instructions", points: 5, isEarned: (app) => !!app.hygiene?.hasAgentsMd },
   { id: "readme-image", label: "README images", points: 5, isEarned: (app) => !!app.hygiene?.readmeHasImage },
   { id: "readme-video", label: "README videos or GIFs", points: 5, isEarned: (app) => !!app.hygiene?.readmeHasVideo },
   { id: "description", label: "Repository description", points: 15, isEarned: (app) => !!app.hygiene?.hasDescription },

@@ -150,6 +150,7 @@ export interface RepoHygiene {
   hasWebsite: boolean;
   websiteUrl: string | null;
   hasReadme: boolean;
+  hasAgentsMd: boolean;
   readmeHasImage: boolean;
   readmeHasVideo: boolean;
   license: string | null;
@@ -226,6 +227,7 @@ export interface Summary {
     withDescription: number;
     withWebsite: number;
     withReadme: number;
+    withAgentsMd: number;
     withImage: number;
     withVideo: number;
   };
@@ -406,6 +408,9 @@ function validateApp(app: unknown, index: number): void {
     }
     if (typeof hygiene.hasReadme !== "boolean") {
       throw new Error(`${prefix}.hygiene.hasReadme must be a boolean`);
+    }
+    if (typeof hygiene.hasAgentsMd !== "boolean") {
+      throw new Error(`${prefix}.hygiene.hasAgentsMd must be a boolean`);
     }
     if (typeof hygiene.readmeHasImage !== "boolean") {
       throw new Error(`${prefix}.hygiene.readmeHasImage must be a boolean`);

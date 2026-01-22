@@ -14,7 +14,7 @@ import { writeFileSync, existsSync, rmSync, readdirSync, statSync, readFileSync 
 import { execSync } from "child_process";
 import { join } from "path";
 import { tmpdir } from "os";
-import { CLOUDFLARE_PRODUCT_CATALOG } from "./schema";
+import { CLOUDFLARE_PRODUCT_CATALOG, type App } from "./schema";
 import {
   buildQualityBreakdown,
   calculatePopularityScore,
@@ -73,6 +73,7 @@ interface RepoHygiene {
   hasWebsite: boolean;
   websiteUrl: string | null;
   hasReadme: boolean;
+  hasAgentsMd: boolean;
   readmeHasImage: boolean;
   readmeHasVideo: boolean;
   license: string | null;
@@ -344,6 +345,7 @@ async function fetchRepoMetadata(owner: string, repo: string): Promise<RepoHygie
     hasWebsite: false,
     websiteUrl: null,
     hasReadme: false,
+    hasAgentsMd: false,
     readmeHasImage: false,
     readmeHasVideo: false,
     license: null,
@@ -503,6 +505,20 @@ async function analyzeRepo(githubUrl: string): Promise<RepoAnalysis> {
         const hasVideo = /youtube\.com|youtu\.be|<video|\.gif\)|\.mp4\)/i.test(readmeContent);
         analysis.hygiene.readmeHasVideo = hasVideo;
         
+        break;
+      }
+    }
+
+    // Check for agent instructions
+    const agentsFiles = [
+      "AGENTS.md",
+      "agents.md",
+      join(".github", "AGENTS.md"),
+      join(".github", "agents.md"),
+    ];
+    for (const agentsFile of agentsFiles) {
+      if (existsSync(join(cloneDir, agentsFile))) {
+        analysis.hygiene.hasAgentsMd = true;
         break;
       }
     }
@@ -946,6 +962,7 @@ function generateSummary(apps: Array<{ analysis: RepoAnalysis }>) {
   let withDescription = 0;
   let withWebsite = 0;
   let withReadme = 0;
+  let withAgentsMd = 0;
   let withImage = 0;
   let withVideo = 0;
 
@@ -954,6 +971,7 @@ function generateSummary(apps: Array<{ analysis: RepoAnalysis }>) {
     if (analysis.hygiene.hasDescription) withDescription++;
     if (analysis.hygiene.hasWebsite) withWebsite++;
     if (analysis.hygiene.hasReadme) withReadme++;
+    if (analysis.hygiene.hasAgentsMd) withAgentsMd++;
     if (analysis.hygiene.readmeHasImage) withImage++;
     if (analysis.hygiene.readmeHasVideo) withVideo++;
   }
@@ -982,6 +1000,7 @@ function generateSummary(apps: Array<{ analysis: RepoAnalysis }>) {
       withDescription,
       withWebsite,
       withReadme,
+      withAgentsMd,
       withImage,
       withVideo,
     },
@@ -1012,7 +1031,7 @@ async function main() {
   console.log(`\nFound ${basicApps.length} apps\n`);
 
   // Analyze each repo
-  const apps = [];
+  const apps: App[] = [];
   for (const app of basicApps) {
     console.log(`\nProcessing ${app.name}...`);
     try {

@@ -4,8 +4,9 @@ import CloudflareProduct from '../components/CloudflareProduct.astro';
 import { Icon } from 'astro-icon/components';
 import data from '../data.json';
 import { getAppScores, getPopularityMax } from '../lib/scores';
+import type { AppsData } from '../../../schema';
 
-const { apps, summary, lastUpdated, totalApps, cloudflareCatalog } = data;
+const { apps, summary, lastUpdated, totalApps, cloudflareCatalog } = data as unknown as AppsData;
 const baseUrl = import.meta.env.BASE_URL;
 const popularityMax = getPopularityMax(apps);
 

@@ -4,8 +4,9 @@ import CloudflareProduct from '../../components/CloudflareProduct.astro';
 import { Icon } from 'astro-icon/components';
 import data from '../../data.json';
 import { getAppScores, getPopularityMax } from '../../lib/scores';
+import type { AppsData } from '../../../../schema';
 
-const { apps } = data;
+const { apps } = data as unknown as AppsData;
 const { slug } = Astro.params;
 const app = apps.find((entry) => entry.slug === slug);
 const baseUrl = import.meta.env.BASE_URL;
@@ -151,6 +152,10 @@ const prompt = `You are an expert engineer. Review this app's metadata and sugge
       <div class="flex items-center justify-between rounded-md border border-gray-100 p-3">
         <span class="text-sm text-gray-700">README</span>
         <span class="text-sm font-medium text-gray-600">{app.hygiene?.hasReadme ? 'Yes' : 'No'}</span>
+      </div>
+      <div class="flex items-center justify-between rounded-md border border-gray-100 p-3">
+        <span class="text-sm text-gray-700">AGENTS.md</span>
+        <span class="text-sm font-medium text-gray-600">{app.hygiene?.hasAgentsMd ? 'Yes' : 'No'}</span>
       </div>
       <div class="flex items-center justify-between rounded-md border border-gray-100 p-3">
         <span class="text-sm text-gray-700">README images</span>
