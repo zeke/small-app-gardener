@@ -23,6 +23,11 @@ function detectLanguageHints(app: App) {
   };
 }
 
+function githubRepoFullName(repoUrl: string): string {
+  const cleaned = repoUrl.replace(/\.git$/, '').replace(/\/+$/, '');
+  return cleaned.replace('https://github.com/', '');
+}
+
 function indentBlock(text: string, spaces = 2): string {
   const pad = ' '.repeat(spaces);
   return text
@@ -186,6 +191,9 @@ function descriptionGuidance(): string {
     'Do this: update the GitHub repository "About" description (not a file change).',
     '- 1 sentence describing the user-facing outcome',
     '- Mention Cloudflare products used (e.g. Workers, D1, R2)',
+    '',
+    'Using GitHub CLI:',
+    '- `gh repo edit <owner>/<repo> --description "<one-line description>"`',
   ].join('\n');
 }
 
@@ -193,6 +201,9 @@ function websiteGuidance(): string {
   return [
     'Do this: set the GitHub repository "Website" / homepage URL (not a file change).',
     '- Use your deployed app URL (or a landing page)',
+    '',
+    'Using GitHub CLI:',
+    '- `gh repo edit <owner>/<repo> --homepage "https://your-app.example"`',
   ].join('\n');
 }
 
@@ -241,9 +252,9 @@ function guidanceForRule(app: App, ruleId: string): string {
     case 'readme-media':
       return readmeMediaGuidance();
     case 'description':
-      return descriptionGuidance();
+      return descriptionGuidance().replaceAll('<owner>/<repo>', githubRepoFullName(app.github));
     case 'website':
-      return websiteGuidance();
+      return websiteGuidance().replaceAll('<owner>/<repo>', githubRepoFullName(app.github));
     case 'license':
       return licenseGuidance();
     default:
