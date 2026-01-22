@@ -129,18 +129,18 @@ const missingProducts = cloudflareCatalog
                     </span>
                     <div class="min-w-0">
                       <a
-                        href={`${baseUrl}apps/${app.slug}/`}
-                        class="text-orange-600 hover:underline font-medium"
-                      >
-                        {app.name}
-                      </a>
+                         href={`${baseUrl}apps/${app.slug}/`}
+                         class="text-lg leading-tight text-gray-900 hover:text-orange-600 hover:underline font-medium"
+                        >
+                          {app.name}
+                        </a>
                       <p class="text-xs text-gray-500 mt-1">{shortDescription(app.description)}</p>
                     </div>
                   </div>
                 </td>
                 <td class="px-4 py-3 text-left">
                   <div class="flex items-center justify-start gap-3">
-                    <span class="text-2xl font-semibold text-gray-900 tabular-nums">{app.scores.popularity}</span>
+                    <span class="text-xl font-semibold text-gray-900 tabular-nums">{app.scores.popularity}</span>
                     <span class="flex items-center gap-2 text-xs text-gray-400">
                       <span class="inline-flex items-center gap-1">
                         <Icon name="lucide:star" class="w-3.5 h-3.5" />
@@ -154,7 +154,7 @@ const missingProducts = cloudflareCatalog
                   </div>
                 </td>
                 <td class="px-4 py-3 text-left">
-                  <span class="text-2xl font-semibold text-gray-900 tabular-nums">{app.scores.quality}</span>
+                  <span class="text-xl font-semibold text-gray-900 tabular-nums">{app.scores.quality}</span>
                 </td>
                 <td class="px-4 py-3">
                   <div class="flex gap-1 flex-nowrap whitespace-nowrap">
