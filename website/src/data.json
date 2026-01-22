@@ -4,136 +4,6 @@
   "totalApps": 11,
   "apps": [
     {
-      "name": "Image Editing Arena",
-      "slug": "image-editing-arena",
-      "description": "AI-powered image editing arena. Upload images and apply transformations using cutting-edge models, then compare results side-by-side.",
-      "url": "https://replicate.com/",
-      "github": "https://github.com/replicate/image-editing-arena",
-      "author": {
-        "name": "replicate",
-        "github": "replicate",
-        "avatar": "https://avatars.githubusercontent.com/replicate"
-      },
-      "shippedDate": "2025-11-25",
-      "stack": {
-        "framework": "React 19",
-        "language": "TypeScript",
-        "buildTool": "Vite",
-        "packageManager": "npm",
-        "uiLibrary": null
-      },
-      "dependencies": {
-        "runtime": {
-          "lucide-react": "^0.554.0",
-          "react": "^19.2.0",
-          "react-dom": "^19.2.0",
-          "recharts": "^3.5.0"
-        },
-        "dev": {
-          "@types/node": "^22.14.0",
-          "@vitejs/plugin-react": "^5.0.0",
-          "typescript": "~5.8.2",
-          "vite": "^6.2.0",
-          "wrangler": "^3.0.0"
-        }
-      },
-      "testing": {
-        "hasTests": false,
-        "framework": null,
-        "testFiles": []
-      },
-      "ci": {
-        "hasGitHubActions": false,
-        "workflows": []
-      },
-      "cloudflare": {
-        "products": [
-          "Workers",
-          "Static Assets"
-        ],
-        "bindings": {}
-      },
-      "replicate": {
-        "usesReplicate": false,
-        "models": [],
-        "apiIntegration": null
-      },
-      "hygiene": {
-        "hasDescription": true,
-        "description": "Image Editing Arena using Replicate",
-        "hasWebsite": false,
-        "websiteUrl": null,
-        "hasReadme": true,
-        "readmePath": "README.md",
-        "hasAgentsMd": false,
-        "agentsMdPath": null,
-        "readmeHasImage": true,
-        "readmeHasVideo": false,
-        "license": null,
-        "licensePath": null,
-        "stars": 7,
-        "forks": 3
-      },
-      "tags": [],
-      "scores": {
-        "popularity": 35,
-        "quality": 35,
-        "qualityBreakdown": [
-          {
-            "id": "tests",
-            "label": "Automated tests",
-            "points": 10,
-            "earned": false
-          },
-          {
-            "id": "ci",
-            "label": "Continuous integration",
-            "points": 10,
-            "earned": false
-          },
-          {
-            "id": "readme",
-            "label": "README documentation",
-            "points": 10,
-            "earned": true,
-            "href": "https://github.com/replicate/image-editing-arena/blob/HEAD/README.md"
-          },
-          {
-            "id": "agentsmd",
-            "label": "AGENTS.md instructions",
-            "points": 20,
-            "earned": false
-          },
-          {
-            "id": "readme-media",
-            "label": "README images or videos",
-            "points": 10,
-            "earned": true,
-            "href": "https://github.com/replicate/image-editing-arena/blob/HEAD/README.md"
-          },
-          {
-            "id": "description",
-            "label": "Repository description",
-            "points": 15,
-            "earned": true,
-            "href": "https://github.com/replicate/image-editing-arena"
-          },
-          {
-            "id": "website",
-            "label": "Project website",
-            "points": 15,
-            "earned": false
-          },
-          {
-            "id": "license",
-            "label": "License file",
-            "points": 10,
-            "earned": false
-          }
-        ]
-      }
-    },
-    {
       "name": "SYSTEM",
       "slug": "system",
       "description": "Control your Mac from anywhere with AI. Play music, send messages, run commands, and automate with Raycast extensions.",
@@ -144,7 +14,7 @@
         "github": "ygwyg",
         "avatar": "https://avatars.githubusercontent.com/ygwyg"
       },
-      "shippedDate": "2026-01-09",
+      "shippedDate": "2026-01-08",
       "stack": {
         "framework": "Express",
         "language": "TypeScript",
@@ -268,6 +138,136 @@
             "points": 15,
             "earned": true,
             "href": "https://system.surf"
+          },
+          {
+            "id": "license",
+            "label": "License file",
+            "points": 10,
+            "earned": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "Image Editing Arena",
+      "slug": "image-editing-arena",
+      "description": "AI-powered image editing arena. Upload images and apply transformations using cutting-edge models, then compare results side-by-side.",
+      "url": "https://replicate.com/",
+      "github": "https://github.com/replicate/image-editing-arena",
+      "author": {
+        "name": "replicate",
+        "github": "replicate",
+        "avatar": "https://avatars.githubusercontent.com/replicate"
+      },
+      "shippedDate": "2025-11-25",
+      "stack": {
+        "framework": "React 19",
+        "language": "TypeScript",
+        "buildTool": "Vite",
+        "packageManager": "npm",
+        "uiLibrary": null
+      },
+      "dependencies": {
+        "runtime": {
+          "lucide-react": "^0.554.0",
+          "react": "^19.2.0",
+          "react-dom": "^19.2.0",
+          "recharts": "^3.5.0"
+        },
+        "dev": {
+          "@types/node": "^22.14.0",
+          "@vitejs/plugin-react": "^5.0.0",
+          "typescript": "~5.8.2",
+          "vite": "^6.2.0",
+          "wrangler": "^3.0.0"
+        }
+      },
+      "testing": {
+        "hasTests": false,
+        "framework": null,
+        "testFiles": []
+      },
+      "ci": {
+        "hasGitHubActions": false,
+        "workflows": []
+      },
+      "cloudflare": {
+        "products": [
+          "Workers",
+          "Static Assets"
+        ],
+        "bindings": {}
+      },
+      "replicate": {
+        "usesReplicate": false,
+        "models": [],
+        "apiIntegration": null
+      },
+      "hygiene": {
+        "hasDescription": true,
+        "description": "Image Editing Arena using Replicate",
+        "hasWebsite": false,
+        "websiteUrl": null,
+        "hasReadme": true,
+        "readmePath": "README.md",
+        "hasAgentsMd": false,
+        "agentsMdPath": null,
+        "readmeHasImage": true,
+        "readmeHasVideo": false,
+        "license": null,
+        "licensePath": null,
+        "stars": 7,
+        "forks": 3
+      },
+      "tags": [],
+      "scores": {
+        "popularity": 35,
+        "quality": 35,
+        "qualityBreakdown": [
+          {
+            "id": "tests",
+            "label": "Automated tests",
+            "points": 10,
+            "earned": false
+          },
+          {
+            "id": "ci",
+            "label": "Continuous integration",
+            "points": 10,
+            "earned": false
+          },
+          {
+            "id": "readme",
+            "label": "README documentation",
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/replicate/image-editing-arena/blob/HEAD/README.md"
+          },
+          {
+            "id": "agentsmd",
+            "label": "AGENTS.md instructions",
+            "points": 20,
+            "earned": false
+          },
+          {
+            "id": "readme-media",
+            "label": "README images or videos",
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/replicate/image-editing-arena/blob/HEAD/README.md"
+          },
+          {
+            "id": "description",
+            "label": "Repository description",
+            "points": 15,
+            "earned": true,
+            "href": "https://github.com/replicate/image-editing-arena"
+          },
+          {
+            "id": "website",
+            "label": "Project website",
+            "points": 15,
+            "earned": false
           },
           {
             "id": "license",
@@ -622,7 +622,7 @@
         "github": "harshil1712",
         "avatar": "https://avatars.githubusercontent.com/harshil1712"
       },
-      "shippedDate": "2025-12-24",
+      "shippedDate": "2025-12-23",
       "stack": {
         "framework": "React + Hono",
         "language": "TypeScript",
@@ -766,7 +766,7 @@
         "github": "whoiskatrin",
         "avatar": "https://avatars.githubusercontent.com/whoiskatrin"
       },
-      "shippedDate": "2026-01-09",
+      "shippedDate": "2026-01-08",
       "stack": {
         "framework": "Workers",
         "language": "TypeScript",
@@ -906,7 +906,7 @@
         "github": "lauragift21",
         "avatar": "https://avatars.githubusercontent.com/lauragift21"
       },
-      "shippedDate": "2026-01-09",
+      "shippedDate": "2026-01-08",
       "stack": {
         "framework": "Workers",
         "language": "TypeScript",
@@ -1083,7 +1083,7 @@
         "github": "jonesphillip",
         "avatar": "https://avatars.githubusercontent.com/jonesphillip"
       },
-      "shippedDate": "2026-01-09",
+      "shippedDate": "2026-01-08",
       "stack": {
         "framework": "React 19",
         "language": "TypeScript",
@@ -1626,8 +1626,8 @@
   ],
   "summary": {
     "byFramework": {
-      "React 19": 2,
       "Express": 1,
+      "React 19": 2,
       "React + Hono": 2,
       "Next.js 15": 1,
       "Workers": 3,
@@ -1643,8 +1643,8 @@
       "pnpm": 2
     },
     "byBuildTool": {
-      "Vite": 5,
       "Unknown": 2,
+      "Vite": 5,
       "wrangler": 4
     },
     "cloudflareProducts": {
