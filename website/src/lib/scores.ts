@@ -3,11 +3,16 @@ export type ScoreBreakdownItem = {
   label: string;
   points: number;
   earned: boolean;
+  href?: string;
 };
 
 type AppLike = {
-  testing?: { hasTests?: boolean };
-  ci?: { hasGitHubActions?: boolean };
+  github?: string;
+  testing?: {
+    hasTests?: boolean;
+    testFiles?: string[] | { python: string[]; typescript: string[] };
+  };
+  ci?: { hasGitHubActions?: boolean; workflows?: string[] };
   hygiene?: {
     hasReadme?: boolean;
     hasAgentsMd?: boolean;
@@ -15,6 +20,10 @@ type AppLike = {
     readmeHasVideo?: boolean;
     hasDescription?: boolean;
     hasWebsite?: boolean;
+    websiteUrl?: string | null;
+    readmePath?: string | null;
+    agentsMdPath?: string | null;
+    licensePath?: string | null;
     license?: string | null;
     stars?: number;
     forks?: number;
@@ -62,13 +71,129 @@ export function getQualityMaxPoints(): number {
   return QUALITY_MAX_POINTS;
 }
 
+function normalizeGithubRepoUrl(url: string | undefined): string | undefined {
+  if (!url) return undefined;
+  return url.replace(/\.git$/, "").replace(/\/+$/, "");
+}
+
+function githubBlobUrl(repoUrl: string | undefined, path: string): string | undefined {
+  const base = normalizeGithubRepoUrl(repoUrl);
+  if (!base) return undefined;
+  const cleaned = path.replace(/^\/+/, "");
+  return `${base}/blob/HEAD/${cleaned}`;
+}
+
+function githubTreeUrl(repoUrl: string | undefined, path: string): string | undefined {
+  const base = normalizeGithubRepoUrl(repoUrl);
+  if (!base) return undefined;
+  const cleaned = path.replace(/^\/+/, "");
+  return `${base}/tree/HEAD/${cleaned}`;
+}
+
+function githubSearchUrl(repoUrl: string | undefined, query: string): string | undefined {
+  const base = normalizeGithubRepoUrl(repoUrl);
+  if (!base) return undefined;
+  return `${base}/search?q=${encodeURIComponent(query)}`;
+}
+
+function getReadmeHref(app: AppLike): string | undefined {
+  if (!app.hygiene?.hasReadme) return undefined;
+  if (app.hygiene.readmePath) {
+    return githubBlobUrl(app.github, app.hygiene.readmePath) ?? undefined;
+  }
+  const base = normalizeGithubRepoUrl(app.github);
+  return base ? `${base}#readme` : undefined;
+}
+
+function getTestFileHref(app: AppLike): string | undefined {
+  if (!app.testing?.hasTests) return undefined;
+
+  const testFiles = app.testing.testFiles as
+    | string[]
+    | { python?: string[]; typescript?: string[] }
+    | undefined;
+
+  const firstTestFile =
+    Array.isArray(testFiles) ? testFiles[0]
+    : testFiles?.typescript?.[0] ?? testFiles?.python?.[0];
+
+  if (firstTestFile) {
+    return githubBlobUrl(app.github, firstTestFile);
+  }
+
+  return githubSearchUrl(app.github, "test");
+}
+
+function getCiHref(app: AppLike): string | undefined {
+  if (!app.ci?.hasGitHubActions) return undefined;
+  const workflows = app.ci.workflows ?? [];
+  if (workflows.length === 1) {
+    return githubBlobUrl(app.github, `.github/workflows/${workflows[0]}`);
+  }
+  if (workflows.length > 1) {
+    return githubTreeUrl(app.github, ".github/workflows");
+  }
+  const base = normalizeGithubRepoUrl(app.github);
+  return base ? `${base}/actions` : undefined;
+}
+
+function getAgentsHref(app: AppLike): string | undefined {
+  if (!app.hygiene?.hasAgentsMd) return undefined;
+  if (app.hygiene.agentsMdPath) {
+    return githubBlobUrl(app.github, app.hygiene.agentsMdPath);
+  }
+  return githubSearchUrl(app.github, "AGENTS.md");
+}
+
+function getLicenseHref(app: AppLike): string | undefined {
+  if (!app.hygiene?.license) return undefined;
+  if (app.hygiene.licensePath) {
+    return githubBlobUrl(app.github, app.hygiene.licensePath);
+  }
+  const base = normalizeGithubRepoUrl(app.github);
+  return base ? `${base}?tab=license-ov-file` : undefined;
+}
+
 export function buildQualityBreakdown(app: AppLike): ScoreBreakdownItem[] {
-  return QUALITY_RULES.map((rule) => ({
-    id: rule.id,
-    label: rule.label,
-    points: rule.points,
-    earned: rule.isEarned(app),
-  }));
+  return QUALITY_RULES.map((rule) => {
+    const earned = rule.isEarned(app);
+    let href: string | undefined;
+
+    switch (rule.id) {
+      case "tests":
+        href = getTestFileHref(app);
+        break;
+      case "ci":
+        href = getCiHref(app);
+        break;
+      case "readme":
+        href = getReadmeHref(app);
+        break;
+      case "agentsmd":
+        href = getAgentsHref(app);
+        break;
+      case "readme-media":
+        href = earned ? getReadmeHref(app) : undefined;
+        break;
+      case "description":
+        href = app.hygiene?.hasDescription ? normalizeGithubRepoUrl(app.github) : undefined;
+        break;
+      case "website":
+        href = app.hygiene?.hasWebsite ? app.hygiene.websiteUrl ?? undefined : undefined;
+        break;
+      case "license":
+        href = getLicenseHref(app);
+        break;
+    }
+
+    return {
+      id: rule.id,
+      label: rule.label,
+      points: rule.points,
+      earned,
+      ...(href ? { href } : {}),
+    };
+  });
 }
 
 export function calculateQualityScore(breakdown: ScoreBreakdownItem[]): number {

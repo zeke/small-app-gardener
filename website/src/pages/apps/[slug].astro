@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import CloudflareProduct from '../../components/CloudflareProduct.astro';
 import { Icon } from 'astro-icon/components';
 import data from '../../data.json';
-import { getAppScores, getPopularityMax } from '../../lib/scores';
+import { getAppScores, getPopularityMax, type ScoreBreakdownItem } from '../../lib/scores';
 import type { AppsData } from '../../../../schema';
 
 const { apps } = data as unknown as AppsData;
@@ -21,7 +21,7 @@ if (!app) {
 }
 
 const scores = getAppScores(app, popularityMax);
-const qualityBreakdown = scores.qualityBreakdown;
+const qualityBreakdown: ScoreBreakdownItem[] = scores.qualityBreakdown;
 const missingItems = qualityBreakdown.filter((item) => !item.earned);
 const qualityMaxPoints = qualityBreakdown.reduce((total, item) => total + item.points, 0);
 
@@ -81,7 +81,18 @@ const prompt = `You are an expert engineer. Review this app's metadata and sugge
               <Icon name={item.earned ? 'lucide:check' : 'lucide:x'} class="w-4 h-4" />
             </span>
             <div>
-              <p class="text-sm font-medium text-gray-800">{item.label}</p>
+              {(item as any).href ? (
+                <a
+                  class="text-sm font-medium text-gray-800 hover:underline decoration-current underline-offset-2"
+                  href={(item as any).href}
+                  target="_blank"
+                  rel="noopener"
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <p class="text-sm font-medium text-gray-800">{item.label}</p>
+              )}
               <p class="text-xs text-gray-500">{item.points} points</p>
             </div>
           </div>

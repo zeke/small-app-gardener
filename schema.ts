@@ -154,6 +154,9 @@ export interface RepoHygiene {
   readmeHasImage: boolean;
   readmeHasVideo: boolean;
   license: string | null;
+  readmePath?: string | null;
+  agentsMdPath?: string | null;
+  licensePath?: string | null;
   stars: number;
   forks: number;
 }
@@ -163,6 +166,7 @@ export interface ScoreBreakdownItem {
   label: string;
   points: number;
   earned: boolean;
+  href?: string;
 }
 
 export interface Scores {
@@ -418,6 +422,15 @@ function validateApp(app: unknown, index: number): void {
     if (typeof hygiene.readmeHasVideo !== "boolean") {
       throw new Error(`${prefix}.hygiene.readmeHasVideo must be a boolean`);
     }
+    if (hygiene.readmePath !== undefined && hygiene.readmePath !== null && typeof hygiene.readmePath !== "string") {
+      throw new Error(`${prefix}.hygiene.readmePath must be a string or null`);
+    }
+    if (hygiene.agentsMdPath !== undefined && hygiene.agentsMdPath !== null && typeof hygiene.agentsMdPath !== "string") {
+      throw new Error(`${prefix}.hygiene.agentsMdPath must be a string or null`);
+    }
+    if (hygiene.licensePath !== undefined && hygiene.licensePath !== null && typeof hygiene.licensePath !== "string") {
+      throw new Error(`${prefix}.hygiene.licensePath must be a string or null`);
+    }
     if (typeof hygiene.stars !== "number") {
       throw new Error(`${prefix}.hygiene.stars must be a number`);
     }
@@ -457,6 +470,9 @@ function validateApp(app: unknown, index: number): void {
       }
       if (typeof breakdown.earned !== "boolean") {
         throw new Error(`${prefix}.scores.qualityBreakdown[${scoreIndex}].earned must be a boolean`);
+      }
+      if (breakdown.href !== undefined && typeof breakdown.href !== "string") {
+        throw new Error(`${prefix}.scores.qualityBreakdown[${scoreIndex}].href must be a string`);
       }
     }
   }

@@ -73,10 +73,13 @@ interface RepoHygiene {
   hasWebsite: boolean;
   websiteUrl: string | null;
   hasReadme: boolean;
+  readmePath: string | null;
   hasAgentsMd: boolean;
+  agentsMdPath: string | null;
   readmeHasImage: boolean;
   readmeHasVideo: boolean;
   license: string | null;
+  licensePath: string | null;
   stars: number;
   forks: number;
 }
@@ -345,10 +348,13 @@ async function fetchRepoMetadata(owner: string, repo: string): Promise<RepoHygie
     hasWebsite: false,
     websiteUrl: null,
     hasReadme: false,
+    readmePath: null,
     hasAgentsMd: false,
+    agentsMdPath: null,
     readmeHasImage: false,
     readmeHasVideo: false,
     license: null,
+    licensePath: null,
     stars: 0,
     forks: 0,
   };
@@ -495,6 +501,7 @@ async function analyzeRepo(githubUrl: string): Promise<RepoAnalysis> {
       const readmePath = join(cloneDir, readmeFile);
       if (existsSync(readmePath)) {
         analysis.hygiene.hasReadme = true;
+        analysis.hygiene.readmePath = readmeFile;
         const readmeContent = fsReadFileSync(readmePath, "utf-8");
         
         // Check for images (markdown or HTML)
@@ -519,6 +526,29 @@ async function analyzeRepo(githubUrl: string): Promise<RepoAnalysis> {
     for (const agentsFile of agentsFiles) {
       if (existsSync(join(cloneDir, agentsFile))) {
         analysis.hygiene.hasAgentsMd = true;
+        analysis.hygiene.agentsMdPath = agentsFile;
+        break;
+      }
+    }
+
+    // Detect license file path
+    const licenseFiles = [
+      "LICENSE",
+      "LICENSE.md",
+      "LICENSE.txt",
+      "LICENCE",
+      "LICENCE.md",
+      "COPYING",
+      "COPYING.md",
+      "UNLICENSE",
+      "UNLICENSE.txt",
+      "license",
+      "license.md",
+      "license.txt",
+    ];
+    for (const licenseFile of licenseFiles) {
+      if (existsSync(join(cloneDir, licenseFile))) {
+        analysis.hygiene.licensePath = licenseFile;
         break;
       }
     }
