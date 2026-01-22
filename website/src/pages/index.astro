@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import CloudflareProduct from '../components/CloudflareProduct.astro';
 import { Icon } from 'astro-icon/components';
 import data from '../data.json';
-import { getAppScores, getPopularityMax, getQualityMaxPoints } from '../lib/scores';
+import { getAppScores, getPopularityMax } from '../lib/scores';
 
 const { apps, summary, lastUpdated, totalApps, cloudflareCatalog } = data;
 const baseUrl = import.meta.env.BASE_URL;
@@ -23,7 +23,6 @@ const leaderboardRows = sortedApps.map((app, index) => ({
   rank: index + 1,
 }));
 
-const qualityMaxPoints = getQualityMaxPoints();
 
 const shortDescription = (description) => {
   if (!description) {
@@ -82,42 +81,16 @@ const missingProducts = cloudflareCatalog
   });
 ---
 
-<Layout title="Small App Garden">
-  <header class="mb-12">
-    <h1 class="text-4xl font-bold text-gray-900 mb-2">Small App Garden</h1>
+<Layout title="Gardener">
+  <header class="mb-12 text-center">
+    <h1 class="text-4xl font-bold text-gray-900 mb-2">👩‍🌾 Gardener</h1>
     <p class="text-xl text-gray-600 mb-6">
-      A curated collection of <strong class="text-orange-600">{totalApps} apps</strong> built on Cloudflare's developer platform.
+      A leaderboard for Cloudflare's <a href="https://developers.cloudflare.com/garden/" class="text-orange-600 hover:underline" target="_blank" rel="noopener">small app garden</a>.
     </p>
   </header>
 
   <!-- Leaderboard -->
   <section class="mb-12">
-    <h2 class="text-2xl font-bold text-gray-900 mb-2">Leaderboard</h2>
-    <p class="text-sm text-gray-600 mb-4">Default ranking uses popularity score (forks weighted higher than stars, 80/20). Use the toggle to sort by quality.</p>
-
-    <div class="flex flex-wrap gap-3 mb-4">
-      <button
-        class="score-toggle flex items-center gap-2 px-4 py-2 rounded-full border border-orange-200 text-orange-600 bg-orange-50 text-sm font-medium"
-        data-sort="popularity"
-        type="button"
-        aria-pressed="true"
-      >
-        <span class="w-2 h-2 rounded-full bg-orange-500"></span>
-        Popularity
-      </button>
-      <button
-        class="score-toggle flex items-center gap-2 px-4 py-2 rounded-full border border-gray-200 text-gray-700 bg-white text-sm font-medium"
-        data-sort="quality"
-        type="button"
-        aria-pressed="false"
-      >
-        <span class="w-2 h-2 rounded-full bg-gray-300"></span>
-        Quality
-      </button>
-      <span class="text-xs text-gray-500 self-center">
-        Quality max: {qualityMaxPoints} points
-      </span>
-    </div>
 
     <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
       <div class="overflow-x-auto">
@@ -125,11 +98,18 @@ const missingProducts = cloudflareCatalog
           <thead class="bg-gray-50 border-b border-gray-200">
             <tr>
               <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">App</th>
-              <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700" title="Popularity score">Popularity</th>
-              <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700" title="Quality score">Quality</th>
-              <th class="text-right px-4 py-3 text-sm font-semibold text-gray-700" title="GitHub stars">Stars</th>
-              <th class="text-right px-4 py-3 text-sm font-semibold text-gray-700" title="GitHub forks">Forks</th>
-              <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">Stack</th>
+              <th class="text-left px-4 py-3 text-sm font-semibold" aria-sort="descending" title="Popularity score">
+                <button type="button" class="sort-header inline-flex items-center justify-start gap-1 cursor-pointer bg-transparent p-0 underline underline-offset-4 text-orange-700" data-sort="popularity">
+                  Popularity
+                  <span class="sort-indicator text-orange-400">↓</span>
+                </button>
+              </th>
+              <th class="text-left px-4 py-3 text-sm font-semibold" aria-sort="none" title="Quality score">
+                <button type="button" class="sort-header inline-flex items-center justify-start gap-1 cursor-pointer bg-transparent p-0 text-gray-700 hover:text-gray-900 hover:underline hover:underline-offset-4" data-sort="quality">
+                  Quality
+                  <span class="sort-indicator"></span>
+                </button>
+              </th>
               <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">Products</th>
             </tr>
           </thead>
@@ -146,17 +126,28 @@ const missingProducts = cloudflareCatalog
                     href={`${baseUrl}apps/${app.slug}/`}
                     class="text-orange-600 hover:underline font-medium"
                   >
-                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-orange-50 text-orange-600 text-xs font-semibold mr-2">{app.rank}</span>
+                    <span class="rank-badge inline-flex items-center justify-center w-6 h-6 rounded-full bg-orange-50 text-orange-600 text-xs font-semibold mr-2">{app.rank}</span>
                     {app.name}
                   </a>
                   <p class="text-xs text-gray-500 mt-1">{shortDescription(app.description)}</p>
                 </td>
-                <td class="px-4 py-3 text-center text-sm text-gray-800 font-semibold">{app.scores.popularity}</td>
-                <td class="px-4 py-3 text-center text-sm text-gray-800 font-semibold">{app.scores.quality}</td>
-                <td class="px-4 py-3 text-right text-sm text-gray-600">{app.hygiene?.stars ?? 0}</td>
-                <td class="px-4 py-3 text-right text-sm text-gray-600">{app.hygiene?.forks ?? 0}</td>
-                <td class="px-4 py-3 text-sm text-gray-600">
-                  {typeof app.stack.framework === 'string' ? app.stack.framework.replace(/\s+\d+$/, '') : 'Multiple'}
+                <td class="px-4 py-3 text-left">
+                  <div class="flex items-center justify-start gap-3">
+                    <span class="text-3xl font-semibold text-gray-900 tabular-nums">{app.scores.popularity}</span>
+                    <span class="flex items-center gap-2 text-xs text-gray-400">
+                      <span class="inline-flex items-center gap-1">
+                        <Icon name="lucide:star" class="w-3.5 h-3.5" />
+                        {app.hygiene?.stars ?? 0}
+                      </span>
+                      <span class="inline-flex items-center gap-1">
+                        <Icon name="lucide:git-fork" class="w-3.5 h-3.5" />
+                        {app.hygiene?.forks ?? 0}
+                      </span>
+                    </span>
+                  </div>
+                </td>
+                <td class="px-4 py-3 text-left">
+                  <span class="text-3xl font-semibold text-gray-900 tabular-nums">{app.scores.quality}</span>
                 </td>
                 <td class="px-4 py-3">
                   <div class="flex gap-1 flex-nowrap whitespace-nowrap">
@@ -174,7 +165,7 @@ const missingProducts = cloudflareCatalog
   </section>
 
   <script>
-    const buttons = Array.from(document.querySelectorAll('.score-toggle'));
+    const sortButtons = Array.from(document.querySelectorAll('.sort-header'));
     const tbody = document.getElementById('leaderboard-body');
 
     const applySort = (sortKey) => {
@@ -186,7 +177,7 @@ const missingProducts = cloudflareCatalog
         return bValue - aValue;
       });
       rows.forEach((row, index) => {
-        const badge = row.querySelector('span');
+        const badge = row.querySelector('.rank-badge');
         if (badge) {
           badge.textContent = `${index + 1}`;
         }
@@ -194,29 +185,41 @@ const missingProducts = cloudflareCatalog
       });
     };
 
-    const updateButtonStyles = (activeKey) => {
-      buttons.forEach((button) => {
-        const isActive = button.dataset.sort === activeKey;
-        button.className = `score-toggle flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-medium ${
-          isActive
-            ? 'border-orange-200 text-orange-600 bg-orange-50'
-            : 'border-gray-200 text-gray-700 bg-white'
-        }`;
-        button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-        const dot = button.querySelector('span');
-        if (dot) {
-          dot.className = `w-2 h-2 rounded-full ${isActive ? 'bg-orange-500' : 'bg-gray-300'}`;
+    const updateSortHeaders = (activeKey) => {
+      sortButtons.forEach((button) => {
+        const sortKey = button.dataset.sort;
+        const th = button.closest('th');
+        const indicator = button.querySelector('.sort-indicator');
+        const isActive = sortKey === activeKey;
+
+        if (isActive) {
+          button.className = 'sort-header inline-flex items-center justify-start gap-1 cursor-pointer bg-transparent p-0 underline underline-offset-4 text-orange-700';
+          if (th) th.setAttribute('aria-sort', 'descending');
+          if (indicator) {
+            indicator.textContent = '↓';
+            indicator.className = 'sort-indicator text-orange-400';
+          }
+        } else {
+          button.className = 'sort-header inline-flex items-center justify-start gap-1 cursor-pointer bg-transparent p-0 text-gray-700 hover:text-gray-900 hover:underline hover:underline-offset-4';
+          if (th) th.setAttribute('aria-sort', 'none');
+          if (indicator) {
+            indicator.textContent = '';
+            indicator.className = 'sort-indicator';
+          }
         }
       });
     };
 
-    buttons.forEach((button) => {
+    sortButtons.forEach((button) => {
       button.addEventListener('click', () => {
         const sortKey = button.dataset.sort || 'popularity';
         applySort(sortKey);
-        updateButtonStyles(sortKey);
+        updateSortHeaders(sortKey);
       });
     });
+
+    applySort('popularity');
+    updateSortHeaders('popularity');
   </script>
 
   <!-- Cloudflare Products & Opportunities (grouped together) -->
