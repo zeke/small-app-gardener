@@ -908,83 +908,28 @@
       },
       "shippedDate": "2026-01-09",
       "stack": {
-        "framework": "Workers",
-        "language": "TypeScript",
-        "buildTool": "Vite",
+        "framework": "Unknown",
+        "language": "Unknown",
+        "buildTool": "Unknown",
         "packageManager": "npm",
-        "uiLibrary": "Tailwind CSS + Radix UI",
-        "monorepo": true
+        "uiLibrary": null
       },
       "dependencies": {
-        "runtime": {
-          "@kivo/shared": "*",
-          "hono": "^4.0.0",
-          "stripe": "^14.10.0",
-          "@fontsource/geist-sans": "^5.2.5",
-          "@fontsource/instrument-serif": "^5.2.8",
-          "@hookform/resolvers": "^3.3.4",
-          "@radix-ui/react-alert-dialog": "^1.0.5",
-          "@radix-ui/react-dialog": "^1.0.5",
-          "@radix-ui/react-dropdown-menu": "^2.0.6",
-          "@radix-ui/react-label": "^2.0.2",
-          "@radix-ui/react-select": "^2.0.0",
-          "@radix-ui/react-slot": "^1.0.2",
-          "@radix-ui/react-tabs": "^1.0.4",
-          "@radix-ui/react-toast": "^1.1.5",
-          "@radix-ui/react-tooltip": "^1.0.7",
-          "@tanstack/react-query": "^5.17.0",
-          "@tanstack/react-router": "^1.15.0",
-          "class-variance-authority": "^0.7.0",
-          "clsx": "^2.1.0",
-          "date-fns": "^3.2.0",
-          "lucide-react": "^0.309.0",
-          "react": "^18.2.0",
-          "react-dom": "^18.2.0",
-          "react-hook-form": "^7.49.3",
-          "tailwind-merge": "^2.2.0",
-          "zod": "^3.22.4"
-        },
-        "dev": {
-          "@types/node": "^20.10.0",
-          "concurrently": "^8.2.2",
-          "eslint": "^8.55.0",
-          "typescript": "^5.3.3",
-          "wrangler": "^4.54.0",
-          "@cloudflare/workers-types": "^4.20240117.0",
-          "vitest": "^1.1.0",
-          "@types/react": "^18.2.47",
-          "@types/react-dom": "^18.2.18",
-          "@vitejs/plugin-react": "^4.2.1",
-          "autoprefixer": "^10.4.16",
-          "postcss": "^8.4.33",
-          "tailwindcss": "^3.4.1",
-          "vite": "^5.0.11"
-        }
+        "runtime": {},
+        "dev": {}
       },
       "testing": {
-        "hasTests": true,
-        "framework": "vitest",
-        "testFiles": [
-          "apps/api/src/durable-objects/reminder-scheduler.test.ts",
-          "packages/shared/src/utils.test.ts"
-        ]
+        "hasTests": false,
+        "framework": null,
+        "testFiles": []
       },
       "ci": {
-        "hasGitHubActions": true,
-        "workflows": [
-          "deploy.yml",
-          "opencode.yml"
-        ]
+        "hasGitHubActions": false,
+        "workflows": []
       },
       "cloudflare": {
         "products": [
-          "Workers",
-          "D1",
-          "R2",
-          "Durable Objects",
-          "Workers AI",
-          "Static Assets",
-          "Cron Triggers"
+          "Workers"
         ],
         "bindings": {}
       },
@@ -998,12 +943,12 @@
         "description": "Modern invoicing for freelancers and independent creators.",
         "hasWebsite": true,
         "websiteUrl": "https://kivo.lauragift.workers.dev",
-        "hasReadme": true,
-        "readmePath": "README.md",
-        "hasAgentsMd": true,
-        "agentsMdPath": "AGENTS.md",
-        "readmeHasImage": true,
-        "readmeHasVideo": true,
+        "hasReadme": false,
+        "readmePath": null,
+        "hasAgentsMd": false,
+        "agentsMdPath": null,
+        "readmeHasImage": false,
+        "readmeHasVideo": false,
         "license": null,
         "licensePath": null,
         "stars": 9,
@@ -1012,42 +957,37 @@
       "tags": [],
       "scores": {
         "popularity": 31,
-        "quality": 90,
+        "quality": 30,
         "qualityBreakdown": [
           {
             "id": "tests",
             "label": "Automated tests",
             "points": 10,
-            "earned": true,
-            "href": "https://github.com/lauragift21/kivo/blob/HEAD/apps/api/src/durable-objects/reminder-scheduler.test.ts"
+            "earned": false
           },
           {
             "id": "ci",
             "label": "Continuous integration",
             "points": 10,
-            "earned": true,
-            "href": "https://github.com/lauragift21/kivo/tree/HEAD/.github/workflows"
+            "earned": false
           },
           {
             "id": "readme",
             "label": "README documentation",
             "points": 10,
-            "earned": true,
-            "href": "https://github.com/lauragift21/kivo/blob/HEAD/README.md"
+            "earned": false
           },
           {
             "id": "agentsmd",
             "label": "AGENTS.md instructions",
             "points": 20,
-            "earned": true,
-            "href": "https://github.com/lauragift21/kivo/blob/HEAD/AGENTS.md"
+            "earned": false
           },
           {
             "id": "readme-media",
             "label": "README images or videos",
             "points": 10,
-            "earned": true,
-            "href": "https://github.com/lauragift21/kivo/blob/HEAD/README.md"
+            "earned": false
           },
           {
             "id": "description",
@@ -1630,48 +1570,47 @@
       "Express": 1,
       "React + Hono": 2,
       "Next.js 15": 1,
-      "Workers": 3,
-      "Unknown": 1,
+      "Workers": 2,
+      "Unknown": 2,
       "Hono": 1
     },
     "byLanguage": {
-      "TypeScript": 10,
-      "Unknown": 1
+      "TypeScript": 9,
+      "Unknown": 2
     },
     "byPackageManager": {
       "npm": 9,
       "pnpm": 2
     },
     "byBuildTool": {
-      "Vite": 5,
-      "Unknown": 2,
+      "Vite": 4,
+      "Unknown": 3,
       "wrangler": 4
     },
     "cloudflareProducts": {
       "Workers": 11,
-      "Static Assets": 9,
+      "Static Assets": 8,
       "Agents": 2,
-      "R2": 4,
-      "Durable Objects": 5,
+      "R2": 3,
+      "Durable Objects": 4,
       "Workflows": 2,
       "Cloudflare Images": 1,
-      "Workers AI": 7,
+      "Workers AI": 6,
       "Hyperdrive": 1,
-      "D1": 2,
+      "D1": 1,
       "KV": 1,
-      "Cron Triggers": 1,
       "Realtime": 1
     },
     "testing": {
-      "withTests": 7,
-      "withoutTests": 4,
+      "withTests": 6,
+      "withoutTests": 5,
       "testFrameworks": {
-        "vitest": 6
+        "vitest": 5
       }
     },
     "ci": {
-      "withGitHubActions": 4,
-      "withoutGitHubActions": 7
+      "withGitHubActions": 3,
+      "withoutGitHubActions": 8
     },
     "replicate": {
       "appsUsingReplicate": 3,
@@ -1688,10 +1627,10 @@
     "hygiene": {
       "withDescription": 10,
       "withWebsite": 6,
-      "withReadme": 11,
-      "withAgentsMd": 2,
-      "withImage": 7,
-      "withVideo": 4
+      "withReadme": 10,
+      "withAgentsMd": 1,
+      "withImage": 6,
+      "withVideo": 3
     },
     "scores": {
       "popularity": {
