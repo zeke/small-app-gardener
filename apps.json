@@ -70,7 +70,61 @@
         "stars": 7,
         "forks": 3
       },
-      "tags": []
+      "tags": [],
+      "scores": {
+        "popularity": 35,
+        "quality": 30,
+        "qualityBreakdown": [
+          {
+            "id": "tests",
+            "label": "Automated tests",
+            "points": 20,
+            "earned": false
+          },
+          {
+            "id": "ci",
+            "label": "Continuous integration",
+            "points": 15,
+            "earned": false
+          },
+          {
+            "id": "readme",
+            "label": "README documentation",
+            "points": 10,
+            "earned": true
+          },
+          {
+            "id": "readme-image",
+            "label": "README images",
+            "points": 5,
+            "earned": true
+          },
+          {
+            "id": "readme-video",
+            "label": "README videos or GIFs",
+            "points": 5,
+            "earned": false
+          },
+          {
+            "id": "description",
+            "label": "Repository description",
+            "points": 15,
+            "earned": true
+          },
+          {
+            "id": "website",
+            "label": "Project website",
+            "points": 15,
+            "earned": false
+          },
+          {
+            "id": "license",
+            "label": "License file",
+            "points": 15,
+            "earned": false
+          }
+        ]
+      }
     },
     {
       "name": "SYSTEM",
@@ -153,7 +207,61 @@
         "stars": 287,
         "forks": 14
       },
-      "tags": []
+      "tags": [],
+      "scores": {
+        "popularity": 76,
+        "quality": 60,
+        "qualityBreakdown": [
+          {
+            "id": "tests",
+            "label": "Automated tests",
+            "points": 20,
+            "earned": true
+          },
+          {
+            "id": "ci",
+            "label": "Continuous integration",
+            "points": 15,
+            "earned": false
+          },
+          {
+            "id": "readme",
+            "label": "README documentation",
+            "points": 10,
+            "earned": true
+          },
+          {
+            "id": "readme-image",
+            "label": "README images",
+            "points": 5,
+            "earned": false
+          },
+          {
+            "id": "readme-video",
+            "label": "README videos or GIFs",
+            "points": 5,
+            "earned": false
+          },
+          {
+            "id": "description",
+            "label": "Repository description",
+            "points": 15,
+            "earned": true
+          },
+          {
+            "id": "website",
+            "label": "Project website",
+            "points": 15,
+            "earned": true
+          },
+          {
+            "id": "license",
+            "label": "License file",
+            "points": 15,
+            "earned": false
+          }
+        ]
+      }
     },
     {
       "name": "Fauxto Booth",
@@ -247,7 +355,61 @@
         "stars": 18,
         "forks": 3
       },
-      "tags": []
+      "tags": [],
+      "scores": {
+        "popularity": 39,
+        "quality": 50,
+        "qualityBreakdown": [
+          {
+            "id": "tests",
+            "label": "Automated tests",
+            "points": 20,
+            "earned": false
+          },
+          {
+            "id": "ci",
+            "label": "Continuous integration",
+            "points": 15,
+            "earned": false
+          },
+          {
+            "id": "readme",
+            "label": "README documentation",
+            "points": 10,
+            "earned": true
+          },
+          {
+            "id": "readme-image",
+            "label": "README images",
+            "points": 5,
+            "earned": true
+          },
+          {
+            "id": "readme-video",
+            "label": "README videos or GIFs",
+            "points": 5,
+            "earned": true
+          },
+          {
+            "id": "description",
+            "label": "Repository description",
+            "points": 15,
+            "earned": true
+          },
+          {
+            "id": "website",
+            "label": "Project website",
+            "points": 15,
+            "earned": false
+          },
+          {
+            "id": "license",
+            "label": "License file",
+            "points": 15,
+            "earned": true
+          }
+        ]
+      }
     },
     {
       "name": "The Coffee Cluster",
@@ -359,7 +521,61 @@
         "stars": 4,
         "forks": 2
       },
-      "tags": []
+      "tags": [],
+      "scores": {
+        "popularity": 28,
+        "quality": 85,
+        "qualityBreakdown": [
+          {
+            "id": "tests",
+            "label": "Automated tests",
+            "points": 20,
+            "earned": true
+          },
+          {
+            "id": "ci",
+            "label": "Continuous integration",
+            "points": 15,
+            "earned": true
+          },
+          {
+            "id": "readme",
+            "label": "README documentation",
+            "points": 10,
+            "earned": true
+          },
+          {
+            "id": "readme-image",
+            "label": "README images",
+            "points": 5,
+            "earned": true
+          },
+          {
+            "id": "readme-video",
+            "label": "README videos or GIFs",
+            "points": 5,
+            "earned": true
+          },
+          {
+            "id": "description",
+            "label": "Repository description",
+            "points": 15,
+            "earned": true
+          },
+          {
+            "id": "website",
+            "label": "Project website",
+            "points": 15,
+            "earned": true
+          },
+          {
+            "id": "license",
+            "label": "License file",
+            "points": 15,
+            "earned": false
+          }
+        ]
+      }
     },
     {
       "name": "Virtual Try On",
@@ -441,7 +657,61 @@
         "stars": 9,
         "forks": 3
       },
-      "tags": []
+      "tags": [],
+      "scores": {
+        "popularity": 36,
+        "quality": 55,
+        "qualityBreakdown": [
+          {
+            "id": "tests",
+            "label": "Automated tests",
+            "points": 20,
+            "earned": false
+          },
+          {
+            "id": "ci",
+            "label": "Continuous integration",
+            "points": 15,
+            "earned": false
+          },
+          {
+            "id": "readme",
+            "label": "README documentation",
+            "points": 10,
+            "earned": true
+          },
+          {
+            "id": "readme-image",
+            "label": "README images",
+            "points": 5,
+            "earned": false
+          },
+          {
+            "id": "readme-video",
+            "label": "README videos or GIFs",
+            "points": 5,
+            "earned": false
+          },
+          {
+            "id": "description",
+            "label": "Repository description",
+            "points": 15,
+            "earned": true
+          },
+          {
+            "id": "website",
+            "label": "Project website",
+            "points": 15,
+            "earned": true
+          },
+          {
+            "id": "license",
+            "label": "License file",
+            "points": 15,
+            "earned": true
+          }
+        ]
+      }
     },
     {
       "name": "InboxBuddy",
@@ -519,7 +789,61 @@
         "stars": 24,
         "forks": 3
       },
-      "tags": []
+      "tags": [],
+      "scores": {
+        "popularity": 40,
+        "quality": 50,
+        "qualityBreakdown": [
+          {
+            "id": "tests",
+            "label": "Automated tests",
+            "points": 20,
+            "earned": true
+          },
+          {
+            "id": "ci",
+            "label": "Continuous integration",
+            "points": 15,
+            "earned": false
+          },
+          {
+            "id": "readme",
+            "label": "README documentation",
+            "points": 10,
+            "earned": true
+          },
+          {
+            "id": "readme-image",
+            "label": "README images",
+            "points": 5,
+            "earned": true
+          },
+          {
+            "id": "readme-video",
+            "label": "README videos or GIFs",
+            "points": 5,
+            "earned": false
+          },
+          {
+            "id": "description",
+            "label": "Repository description",
+            "points": 15,
+            "earned": true
+          },
+          {
+            "id": "website",
+            "label": "Project website",
+            "points": 15,
+            "earned": false
+          },
+          {
+            "id": "license",
+            "label": "License file",
+            "points": 15,
+            "earned": false
+          }
+        ]
+      }
     },
     {
       "name": "Kivo",
@@ -631,7 +955,61 @@
         "stars": 9,
         "forks": 2
       },
-      "tags": []
+      "tags": [],
+      "scores": {
+        "popularity": 31,
+        "quality": 85,
+        "qualityBreakdown": [
+          {
+            "id": "tests",
+            "label": "Automated tests",
+            "points": 20,
+            "earned": true
+          },
+          {
+            "id": "ci",
+            "label": "Continuous integration",
+            "points": 15,
+            "earned": true
+          },
+          {
+            "id": "readme",
+            "label": "README documentation",
+            "points": 10,
+            "earned": true
+          },
+          {
+            "id": "readme-image",
+            "label": "README images",
+            "points": 5,
+            "earned": true
+          },
+          {
+            "id": "readme-video",
+            "label": "README videos or GIFs",
+            "points": 5,
+            "earned": true
+          },
+          {
+            "id": "description",
+            "label": "Repository description",
+            "points": 15,
+            "earned": true
+          },
+          {
+            "id": "website",
+            "label": "Project website",
+            "points": 15,
+            "earned": true
+          },
+          {
+            "id": "license",
+            "label": "License file",
+            "points": 15,
+            "earned": false
+          }
+        ]
+      }
     },
     {
       "name": "Weft",
@@ -722,7 +1100,61 @@
         "stars": 440,
         "forks": 50
       },
-      "tags": []
+      "tags": [],
+      "scores": {
+        "popularity": 100,
+        "quality": 65,
+        "qualityBreakdown": [
+          {
+            "id": "tests",
+            "label": "Automated tests",
+            "points": 20,
+            "earned": true
+          },
+          {
+            "id": "ci",
+            "label": "Continuous integration",
+            "points": 15,
+            "earned": false
+          },
+          {
+            "id": "readme",
+            "label": "README documentation",
+            "points": 10,
+            "earned": true
+          },
+          {
+            "id": "readme-image",
+            "label": "README images",
+            "points": 5,
+            "earned": true
+          },
+          {
+            "id": "readme-video",
+            "label": "README videos or GIFs",
+            "points": 5,
+            "earned": false
+          },
+          {
+            "id": "description",
+            "label": "Repository description",
+            "points": 15,
+            "earned": true
+          },
+          {
+            "id": "website",
+            "label": "Project website",
+            "points": 15,
+            "earned": false
+          },
+          {
+            "id": "license",
+            "label": "License file",
+            "points": 15,
+            "earned": true
+          }
+        ]
+      }
     },
     {
       "name": "Keyboardia",
@@ -792,7 +1224,61 @@
         "stars": 1,
         "forks": 0
       },
-      "tags": []
+      "tags": [],
+      "scores": {
+        "popularity": 3,
+        "quality": 75,
+        "qualityBreakdown": [
+          {
+            "id": "tests",
+            "label": "Automated tests",
+            "points": 20,
+            "earned": true
+          },
+          {
+            "id": "ci",
+            "label": "Continuous integration",
+            "points": 15,
+            "earned": true
+          },
+          {
+            "id": "readme",
+            "label": "README documentation",
+            "points": 10,
+            "earned": true
+          },
+          {
+            "id": "readme-image",
+            "label": "README images",
+            "points": 5,
+            "earned": false
+          },
+          {
+            "id": "readme-video",
+            "label": "README videos or GIFs",
+            "points": 5,
+            "earned": false
+          },
+          {
+            "id": "description",
+            "label": "Repository description",
+            "points": 15,
+            "earned": true
+          },
+          {
+            "id": "website",
+            "label": "Project website",
+            "points": 15,
+            "earned": true
+          },
+          {
+            "id": "license",
+            "label": "License file",
+            "points": 15,
+            "earned": false
+          }
+        ]
+      }
     },
     {
       "name": "Webhookflare",
@@ -855,7 +1341,61 @@
         "stars": 4,
         "forks": 3
       },
-      "tags": []
+      "tags": [],
+      "scores": {
+        "popularity": 33,
+        "quality": 10,
+        "qualityBreakdown": [
+          {
+            "id": "tests",
+            "label": "Automated tests",
+            "points": 20,
+            "earned": false
+          },
+          {
+            "id": "ci",
+            "label": "Continuous integration",
+            "points": 15,
+            "earned": false
+          },
+          {
+            "id": "readme",
+            "label": "README documentation",
+            "points": 10,
+            "earned": true
+          },
+          {
+            "id": "readme-image",
+            "label": "README images",
+            "points": 5,
+            "earned": false
+          },
+          {
+            "id": "readme-video",
+            "label": "README videos or GIFs",
+            "points": 5,
+            "earned": false
+          },
+          {
+            "id": "description",
+            "label": "Repository description",
+            "points": 15,
+            "earned": false
+          },
+          {
+            "id": "website",
+            "label": "Project website",
+            "points": 15,
+            "earned": false
+          },
+          {
+            "id": "license",
+            "label": "License file",
+            "points": 15,
+            "earned": false
+          }
+        ]
+      }
     },
     {
       "name": "Kontext Realtime",
@@ -933,7 +1473,61 @@
         "stars": 104,
         "forks": 26
       },
-      "tags": []
+      "tags": [],
+      "scores": {
+        "popularity": 82,
+        "quality": 85,
+        "qualityBreakdown": [
+          {
+            "id": "tests",
+            "label": "Automated tests",
+            "points": 20,
+            "earned": true
+          },
+          {
+            "id": "ci",
+            "label": "Continuous integration",
+            "points": 15,
+            "earned": true
+          },
+          {
+            "id": "readme",
+            "label": "README documentation",
+            "points": 10,
+            "earned": true
+          },
+          {
+            "id": "readme-image",
+            "label": "README images",
+            "points": 5,
+            "earned": true
+          },
+          {
+            "id": "readme-video",
+            "label": "README videos or GIFs",
+            "points": 5,
+            "earned": true
+          },
+          {
+            "id": "description",
+            "label": "Repository description",
+            "points": 15,
+            "earned": true
+          },
+          {
+            "id": "website",
+            "label": "Project website",
+            "points": 15,
+            "earned": true
+          },
+          {
+            "id": "license",
+            "label": "License file",
+            "points": 15,
+            "earned": false
+          }
+        ]
+      }
     }
   ],
   "summary": {
@@ -1003,6 +1597,15 @@
       "withReadme": 11,
       "withImage": 7,
       "withVideo": 4
+    },
+    "scores": {
+      "popularity": {
+        "forkWeight": 0.8,
+        "starWeight": 0.2
+      },
+      "quality": {
+        "maxPoints": 100
+      }
     }
   },
   "cloudflareCatalog": [

@@ -1,0 +1,213 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CloudflareProduct from '../../components/CloudflareProduct.astro';
+import { Icon } from 'astro-icon/components';
+import data from '../../data.json';
+import { getAppScores, getPopularityMax } from '../../lib/scores';
+
+const { apps } = data;
+const { slug } = Astro.params;
+const app = apps.find((entry) => entry.slug === slug);
+const baseUrl = import.meta.env.BASE_URL;
+const popularityMax = getPopularityMax(apps);
+
+export function getStaticPaths() {
+  return data.apps.map((entry) => ({ params: { slug: entry.slug } }));
+}
+
+if (!app) {
+  throw new Error(`App not found: ${slug}`);
+}
+
+const scores = getAppScores(app, popularityMax);
+const qualityBreakdown = scores.qualityBreakdown;
+const missingItems = qualityBreakdown.filter((item) => !item.earned);
+const qualityMaxPoints = qualityBreakdown.reduce((total, item) => total + item.points, 0);
+
+const prompt = `You are an expert engineer. Review this app's metadata and suggest concrete improvements to raise its quality score and overall appeal.\n\nApp: ${app.name}\nRepository: ${app.github}\nDescription: ${app.description}\n\nCurrent quality score: ${scores.quality}/${qualityMaxPoints}\nMissing quality points:\n${missingItems.length ? missingItems.map((item) => `- ${item.label} (+${item.points})`).join("\n") : "- None"}\n\nPlease provide a prioritized checklist with quick wins first, then bigger improvements. Include specific file changes or tooling suggestions when possible.`;
+---
+
+<Layout title={`${app.name} · Small App Garden`} description={`Score breakdown for ${app.name}`}> 
+  <nav class="text-sm text-gray-500 mb-6">
+    <a href={baseUrl} class="text-orange-600 hover:underline">Leaderboard</a>
+    <span class="mx-2">/</span>
+    <span class="text-gray-700">{app.name}</span>
+  </nav>
+
+  <header class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">{app.name}</h1>
+    <p class="text-gray-600 max-w-3xl">{app.description}</p>
+    <div class="flex flex-wrap gap-3 mt-4">
+      <a href={app.github} class="px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 text-sm hover:bg-gray-200" target="_blank" rel="noopener">
+        GitHub
+      </a>
+      <a href={app.url} class="px-3 py-1.5 rounded-full bg-orange-50 text-orange-700 text-sm hover:bg-orange-100" target="_blank" rel="noopener">
+        Live App
+      </a>
+      {app.youtubeVideo && (
+        <a href={app.youtubeVideo} class="px-3 py-1.5 rounded-full bg-red-50 text-red-700 text-sm hover:bg-red-100" target="_blank" rel="noopener">
+          Demo Video
+        </a>
+      )}
+    </div>
+  </header>
+
+  <section class="grid gap-6 md:grid-cols-3 mb-10">
+    <div class="bg-white rounded-lg border border-gray-100 p-5 shadow-sm">
+      <p class="text-xs uppercase text-gray-500">Popularity score</p>
+      <p class="text-3xl font-bold text-gray-900 mt-2">{scores.popularity}</p>
+      <div class="text-sm text-gray-500 mt-2">Stars: {app.hygiene?.stars ?? 0} · Forks: {app.hygiene?.forks ?? 0} (forks weighted 80%)</div>
+    </div>
+    <div class="bg-white rounded-lg border border-gray-100 p-5 shadow-sm">
+      <p class="text-xs uppercase text-gray-500">Quality score</p>
+      <p class="text-3xl font-bold text-gray-900 mt-2">{scores.quality}</p>
+      <div class="text-sm text-gray-500 mt-2">Out of {qualityMaxPoints} possible points.</div>
+    </div>
+    <div class="bg-white rounded-lg border border-gray-100 p-5 shadow-sm">
+      <p class="text-xs uppercase text-gray-500">Cloudflare products</p>
+      <p class="text-3xl font-bold text-gray-900 mt-2">{app.cloudflare.products.length}</p>
+      <div class="text-sm text-gray-500 mt-2">{app.cloudflare.products.slice(0, 3).join(', ')}{app.cloudflare.products.length > 3 ? '…' : ''}</div>
+    </div>
+  </section>
+
+  <section class="bg-white rounded-lg border border-gray-100 p-6 shadow-sm mb-10">
+    <h2 class="text-xl font-semibold text-gray-900 mb-4">Quality breakdown</h2>
+    <div class="grid gap-3 sm:grid-cols-2">
+      {qualityBreakdown.map((item) => (
+        <div class="flex items-center justify-between rounded-md border border-gray-100 p-3">
+          <div class="flex items-center gap-3">
+            <span class={`inline-flex h-7 w-7 items-center justify-center rounded-full ${item.earned ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-500'}`}>
+              <Icon name={item.earned ? 'lucide:check' : 'lucide:x'} class="w-4 h-4" />
+            </span>
+            <div>
+              <p class="text-sm font-medium text-gray-800">{item.label}</p>
+              <p class="text-xs text-gray-500">{item.points} points</p>
+            </div>
+          </div>
+          <span class={`text-xs font-semibold ${item.earned ? 'text-green-600' : 'text-gray-400'}`}>
+            {item.earned ? `+${item.points}` : '0'}
+          </span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-white rounded-lg border border-gray-100 p-6 shadow-sm mb-10">
+    <div class="flex items-center justify-between flex-wrap gap-3 mb-4">
+      <div>
+        <h2 class="text-xl font-semibold text-gray-900">Improve your score</h2>
+        <p class="text-sm text-gray-600">Copy this prompt into your preferred coding agent.</p>
+      </div>
+      <button
+        class="copy-prompt inline-flex items-center gap-2 px-4 py-2 rounded-full border border-orange-200 text-orange-600 bg-orange-50 text-sm font-medium hover:bg-orange-100"
+        type="button"
+        aria-live="polite"
+      >
+        <Icon name="lucide:copy" class="w-4 h-4" />
+        <span>Copy prompt</span>
+      </button>
+    </div>
+    <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+      <pre class="text-xs text-gray-700 whitespace-pre-wrap" id="score-prompt">{prompt}</pre>
+    </div>
+  </section>
+
+  <section class="grid gap-6 md:grid-cols-2 mb-10">
+    <div class="bg-white rounded-lg border border-gray-100 p-6 shadow-sm">
+      <h2 class="text-lg font-semibold text-gray-900 mb-4">Stack</h2>
+      <ul class="text-sm text-gray-700 space-y-2">
+        <li><span class="font-medium">Framework:</span> {app.stack.framework}</li>
+        <li><span class="font-medium">Language:</span> {Array.isArray(app.stack.language) ? app.stack.language.join(', ') : app.stack.language}</li>
+        <li><span class="font-medium">Build tool:</span> {typeof app.stack.buildTool === 'string' ? app.stack.buildTool : 'Multiple'}</li>
+        <li><span class="font-medium">Package manager:</span> {typeof app.stack.packageManager === 'string' ? app.stack.packageManager : 'Multiple'}</li>
+        {app.stack.uiLibrary && <li><span class="font-medium">UI library:</span> {app.stack.uiLibrary}</li>}
+        {app.stack.orm && <li><span class="font-medium">ORM:</span> {app.stack.orm}</li>}
+        {app.stack.auth && <li><span class="font-medium">Auth:</span> {app.stack.auth}</li>}
+        {app.stack.monorepo && <li><span class="font-medium">Monorepo:</span> Yes</li>}
+      </ul>
+    </div>
+
+    <div class="bg-white rounded-lg border border-gray-100 p-6 shadow-sm">
+      <h2 class="text-lg font-semibold text-gray-900 mb-4">Cloudflare products</h2>
+      <div class="flex flex-wrap gap-2">
+        {app.cloudflare.products.map((product) => (
+          <CloudflareProduct product={product} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white rounded-lg border border-gray-100 p-6 shadow-sm mb-10">
+    <h2 class="text-lg font-semibold text-gray-900 mb-4">Repository hygiene</h2>
+    <div class="grid gap-3 sm:grid-cols-2">
+      <div class="flex items-center justify-between rounded-md border border-gray-100 p-3">
+        <span class="text-sm text-gray-700">Description</span>
+        <span class="text-sm font-medium text-gray-600">{app.hygiene?.hasDescription ? 'Yes' : 'No'}</span>
+      </div>
+      <div class="flex items-center justify-between rounded-md border border-gray-100 p-3">
+        <span class="text-sm text-gray-700">Website</span>
+        <span class="text-sm font-medium text-gray-600">{app.hygiene?.hasWebsite ? 'Yes' : 'No'}</span>
+      </div>
+      <div class="flex items-center justify-between rounded-md border border-gray-100 p-3">
+        <span class="text-sm text-gray-700">README</span>
+        <span class="text-sm font-medium text-gray-600">{app.hygiene?.hasReadme ? 'Yes' : 'No'}</span>
+      </div>
+      <div class="flex items-center justify-between rounded-md border border-gray-100 p-3">
+        <span class="text-sm text-gray-700">README images</span>
+        <span class="text-sm font-medium text-gray-600">{app.hygiene?.readmeHasImage ? 'Yes' : 'No'}</span>
+      </div>
+      <div class="flex items-center justify-between rounded-md border border-gray-100 p-3">
+        <span class="text-sm text-gray-700">README videos/GIFs</span>
+        <span class="text-sm font-medium text-gray-600">{app.hygiene?.readmeHasVideo ? 'Yes' : 'No'}</span>
+      </div>
+      <div class="flex items-center justify-between rounded-md border border-gray-100 p-3">
+        <span class="text-sm text-gray-700">License</span>
+        <span class="text-sm font-medium text-gray-600">{app.hygiene?.license ?? 'None'}</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white rounded-lg border border-gray-100 p-6 shadow-sm mb-10">
+    <h2 class="text-lg font-semibold text-gray-900 mb-4">Dependencies</h2>
+    <div class="grid gap-6 md:grid-cols-2">
+      <div>
+        <h3 class="text-sm font-semibold text-gray-700 mb-2">Runtime</h3>
+        <ul class="text-xs text-gray-600 space-y-1">
+          {Object.entries(app.dependencies.runtime).map(([name, version]) => (
+            <li>{name} <span class="text-gray-400">{version}</span></li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-sm font-semibold text-gray-700 mb-2">Dev</h3>
+        <ul class="text-xs text-gray-600 space-y-1">
+          {Object.entries(app.dependencies.dev).map(([name, version]) => (
+            <li>{name} <span class="text-gray-400">{version}</span></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const copyButton = document.querySelector('.copy-prompt');
+    const promptElement = document.getElementById('score-prompt');
+
+    copyButton?.addEventListener('click', async () => {
+      if (!promptElement || !copyButton) return;
+      const text = promptElement.textContent || '';
+      try {
+        await navigator.clipboard.writeText(text);
+        const label = copyButton.querySelector('span');
+        if (label) {
+          label.textContent = 'Copied!';
+          setTimeout(() => {
+            label.textContent = 'Copy prompt';
+          }, 1500);
+        }
+      } catch (error) {
+        console.error('Copy failed', error);
+      }
+    });
+  </script>
+</Layout>

@@ -157,6 +157,29 @@ export interface RepoHygiene {
   forks: number;
 }
 
+export interface ScoreBreakdownItem {
+  id: string;
+  label: string;
+  points: number;
+  earned: boolean;
+}
+
+export interface Scores {
+  popularity: number;
+  quality: number;
+  qualityBreakdown: ScoreBreakdownItem[];
+}
+
+export interface ScoreSummary {
+  popularity: {
+    forkWeight: number;
+    starWeight: number;
+  };
+  quality: {
+    maxPoints: number;
+  };
+}
+
 export interface App {
   name: string;
   slug: string;
@@ -175,6 +198,7 @@ export interface App {
   cloudflare: CloudflareIntegration;
   replicate: ReplicateIntegration;
   hygiene: RepoHygiene;
+  scores?: Scores;
   tags: string[];
 }
 
@@ -205,6 +229,7 @@ export interface Summary {
     withImage: number;
     withVideo: number;
   };
+  scores: ScoreSummary;
 }
 
 export interface AppsData {
@@ -396,6 +421,41 @@ function validateApp(app: unknown, index: number): void {
     }
   }
 
+  // Scores
+  if (a.scores !== undefined) {
+    if (typeof a.scores !== "object" || a.scores === null) {
+      throw new Error(`${prefix}.scores must be an object`);
+    }
+    const scores = a.scores as Record<string, unknown>;
+    if (typeof scores.popularity !== "number") {
+      throw new Error(`${prefix}.scores.popularity must be a number`);
+    }
+    if (typeof scores.quality !== "number") {
+      throw new Error(`${prefix}.scores.quality must be a number`);
+    }
+    if (!Array.isArray(scores.qualityBreakdown)) {
+      throw new Error(`${prefix}.scores.qualityBreakdown must be an array`);
+    }
+    for (const [scoreIndex, item] of scores.qualityBreakdown.entries()) {
+      if (typeof item !== "object" || item === null) {
+        throw new Error(`${prefix}.scores.qualityBreakdown[${scoreIndex}] must be an object`);
+      }
+      const breakdown = item as Record<string, unknown>;
+      if (typeof breakdown.id !== "string") {
+        throw new Error(`${prefix}.scores.qualityBreakdown[${scoreIndex}].id must be a string`);
+      }
+      if (typeof breakdown.label !== "string") {
+        throw new Error(`${prefix}.scores.qualityBreakdown[${scoreIndex}].label must be a string`);
+      }
+      if (typeof breakdown.points !== "number") {
+        throw new Error(`${prefix}.scores.qualityBreakdown[${scoreIndex}].points must be a number`);
+      }
+      if (typeof breakdown.earned !== "boolean") {
+        throw new Error(`${prefix}.scores.qualityBreakdown[${scoreIndex}].earned must be a boolean`);
+      }
+    }
+  }
+
   // Tags
   if (!Array.isArray(a.tags)) {
     throw new Error(`${prefix}.tags must be an array`);
@@ -438,5 +498,24 @@ function validateSummary(summary: Record<string, unknown>): void {
   }
   if (!Array.isArray(replicate.uniqueModels)) {
     throw new Error("summary.replicate.uniqueModels must be an array");
+  }
+
+  if (typeof summary.scores !== "object" || summary.scores === null) {
+    throw new Error("summary.scores must be an object");
+  }
+  const scores = summary.scores as Record<string, unknown>;
+  if (typeof scores.popularity !== "object" || scores.popularity === null) {
+    throw new Error("summary.scores.popularity must be an object");
+  }
+  const popularity = scores.popularity as Record<string, unknown>;
+  if (typeof popularity.forkWeight !== "number" || typeof popularity.starWeight !== "number") {
+    throw new Error("summary.scores.popularity must have forkWeight and starWeight numbers");
+  }
+  if (typeof scores.quality !== "object" || scores.quality === null) {
+    throw new Error("summary.scores.quality must be an object");
+  }
+  const quality = scores.quality as Record<string, unknown>;
+  if (typeof quality.maxPoints !== "number") {
+    throw new Error("summary.scores.quality.maxPoints must be a number");
   }
 }
