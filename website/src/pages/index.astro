@@ -3,13 +3,27 @@ import Layout from '../layouts/Layout.astro';
 import CloudflareProduct from '../components/CloudflareProduct.astro';
 import { Icon } from 'astro-icon/components';
 import data from '../data.json';
+import { getAppScores, getPopularityMax, getQualityMaxPoints } from '../lib/scores';
 
 const { apps, summary, lastUpdated, totalApps, cloudflareCatalog } = data;
+const baseUrl = import.meta.env.BASE_URL;
+const popularityMax = getPopularityMax(apps);
 
-// Sort apps by shipped date (newest first)
-const sortedApps = [...apps].sort(
-  (a, b) => new Date(b.shippedDate).getTime() - new Date(a.shippedDate).getTime()
+const appsWithScores = apps.map((app) => ({
+  ...app,
+  scores: getAppScores(app, popularityMax),
+}));
+
+const sortedApps = [...appsWithScores].sort(
+  (a, b) => b.scores.popularity - a.scores.popularity
 );
+
+const leaderboardRows = sortedApps.map((app, index) => ({
+  ...app,
+  rank: index + 1,
+}));
+
+const qualityMaxPoints = getQualityMaxPoints();
 
 const shortDescription = (description) => {
   if (!description) {
@@ -76,96 +90,74 @@ const missingProducts = cloudflareCatalog
     </p>
   </header>
 
-  <!-- Apps + Hygiene Table -->
+  <!-- Leaderboard -->
   <section class="mb-12">
-    <h2 class="text-2xl font-bold text-gray-900 mb-4">Apps</h2>
+    <h2 class="text-2xl font-bold text-gray-900 mb-2">Leaderboard</h2>
+    <p class="text-sm text-gray-600 mb-4">Default ranking uses popularity score (forks weighted higher than stars, 80/20). Use the toggle to sort by quality.</p>
+
+    <div class="flex flex-wrap gap-3 mb-4">
+      <button
+        class="score-toggle flex items-center gap-2 px-4 py-2 rounded-full border border-orange-200 text-orange-600 bg-orange-50 text-sm font-medium"
+        data-sort="popularity"
+        type="button"
+        aria-pressed="true"
+      >
+        <span class="w-2 h-2 rounded-full bg-orange-500"></span>
+        Popularity
+      </button>
+      <button
+        class="score-toggle flex items-center gap-2 px-4 py-2 rounded-full border border-gray-200 text-gray-700 bg-white text-sm font-medium"
+        data-sort="quality"
+        type="button"
+        aria-pressed="false"
+      >
+        <span class="w-2 h-2 rounded-full bg-gray-300"></span>
+        Quality
+      </button>
+      <span class="text-xs text-gray-500 self-center">
+        Quality max: {qualityMaxPoints} points
+      </span>
+    </div>
+
     <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
       <div class="overflow-x-auto">
         <table class="w-full">
           <thead class="bg-gray-50 border-b border-gray-200">
             <tr>
               <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">App</th>
-              <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">Stack</th>
-              <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700" title="Has tests">Tests</th>
-              <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700" title="Has CI">CI</th>
-              <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700" title="Has description">Desc</th>
-              <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700" title="Has website">Web</th>
-              <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700" title="Has README">README</th>
-              <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700" title="README has image">Image</th>
-              <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700" title="README has video">Video</th>
+              <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700" title="Popularity score">Popularity</th>
+              <th class="text-center px-4 py-3 text-sm font-semibold text-gray-700" title="Quality score">Quality</th>
               <th class="text-right px-4 py-3 text-sm font-semibold text-gray-700" title="GitHub stars">Stars</th>
+              <th class="text-right px-4 py-3 text-sm font-semibold text-gray-700" title="GitHub forks">Forks</th>
+              <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">Stack</th>
               <th class="text-left px-4 py-3 text-sm font-semibold text-gray-700">Products</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-gray-100">
-            {sortedApps.map((app) => (
-              <tr class="hover:bg-gray-50">
+          <tbody class="divide-y divide-gray-100" id="leaderboard-body">
+            {leaderboardRows.map((app, index) => (
+              <tr
+                class="hover:bg-gray-50"
+                data-popularity={app.scores.popularity}
+                data-quality={app.scores.quality}
+                data-index={index}
+              >
                 <td class="px-4 py-3">
-                  <a href={app.github} class="text-orange-600 hover:underline font-medium" target="_blank" rel="noopener">
+                  <a
+                    href={`${baseUrl}apps/${app.slug}/`}
+                    class="text-orange-600 hover:underline font-medium"
+                  >
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-orange-50 text-orange-600 text-xs font-semibold mr-2">{app.rank}</span>
                     {app.name}
                   </a>
                   <p class="text-xs text-gray-500 mt-1">{shortDescription(app.description)}</p>
                 </td>
+                <td class="px-4 py-3 text-center text-sm text-gray-800 font-semibold">{app.scores.popularity}</td>
+                <td class="px-4 py-3 text-center text-sm text-gray-800 font-semibold">{app.scores.quality}</td>
+                <td class="px-4 py-3 text-right text-sm text-gray-600">{app.hygiene?.stars ?? 0}</td>
+                <td class="px-4 py-3 text-right text-sm text-gray-600">{app.hygiene?.forks ?? 0}</td>
                 <td class="px-4 py-3 text-sm text-gray-600">
                   {typeof app.stack.framework === 'string' ? app.stack.framework.replace(/\s+\d+$/, '') : 'Multiple'}
                 </td>
-                <td class="px-4 py-3 text-center">
-                  <span class={`relative group inline-flex ${statusIconClass(app.testing.hasTests)}`}>
-                    <Icon name={statusIconName(app.testing.hasTests)} class="w-5 h-5" />
-                    <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs font-medium text-white bg-gray-900 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10">
-                      {statusTooltip(app.testing.hasTests, "Has tests", "No tests detected")}
-                    </span>
-                  </span>
-                </td>
-                <td class="px-4 py-3 text-center">
-                  <span class={`relative group inline-flex ${statusIconClass(app.ci.hasGitHubActions)}`}>
-                    <Icon name={statusIconName(app.ci.hasGitHubActions)} class="w-5 h-5" />
-                    <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs font-medium text-white bg-gray-900 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10">
-                      {statusTooltip(app.ci.hasGitHubActions, "Has CI", "No CI detected")}
-                    </span>
-                  </span>
-                </td>
-                <td class="px-4 py-3 text-center">
-                  <span class={`relative group inline-flex ${statusIconClass(app.hygiene?.hasDescription)}`}>
-                    <Icon name={statusIconName(app.hygiene?.hasDescription)} class="w-4 h-4" />
-                    <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs font-medium text-white bg-gray-900 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10">
-                      {statusTooltip(app.hygiene?.hasDescription, "Has description", "No description")}
-                    </span>
-                  </span>
-                </td>
-                <td class="px-4 py-3 text-center">
-                  <span class={`relative group inline-flex ${statusIconClass(app.hygiene?.hasWebsite)}`}>
-                    <Icon name={statusIconName(app.hygiene?.hasWebsite)} class="w-4 h-4" />
-                    <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs font-medium text-white bg-gray-900 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10">
-                      {statusTooltip(app.hygiene?.hasWebsite, "Has website", "No website")}
-                    </span>
-                  </span>
-                </td>
-                <td class="px-4 py-3 text-center">
-                  <span class={`relative group inline-flex ${statusIconClass(app.hygiene?.hasReadme)}`}>
-                    <Icon name={statusIconName(app.hygiene?.hasReadme)} class="w-4 h-4" />
-                    <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs font-medium text-white bg-gray-900 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10">
-                      {statusTooltip(app.hygiene?.hasReadme, "Has README", "No README")}
-                    </span>
-                  </span>
-                </td>
-                <td class="px-4 py-3 text-center">
-                  <span class={`relative group inline-flex ${statusIconClass(app.hygiene?.readmeHasImage)}`}>
-                    <Icon name={statusIconName(app.hygiene?.readmeHasImage)} class="w-4 h-4" />
-                    <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs font-medium text-white bg-gray-900 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10">
-                      {statusTooltip(app.hygiene?.readmeHasImage, "README has image", "No README image")}
-                    </span>
-                  </span>
-                </td>
-                <td class="px-4 py-3 text-center">
-                  <span class={`relative group inline-flex ${statusIconClass(app.hygiene?.readmeHasVideo)}`}>
-                    <Icon name={statusIconName(app.hygiene?.readmeHasVideo)} class="w-4 h-4" />
-                    <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs font-medium text-white bg-gray-900 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10">
-                      {statusTooltip(app.hygiene?.readmeHasVideo, "README has video", "No README video")}
-                    </span>
-                  </span>
-                </td>
-                <td class="px-4 py-3 text-right text-sm text-gray-600" title="GitHub stars">{app.hygiene?.stars ?? 0}</td>
                 <td class="px-4 py-3">
                   <div class="flex gap-1 flex-nowrap whitespace-nowrap">
                     {app.cloudflare.products.map((product) => (
@@ -180,6 +172,52 @@ const missingProducts = cloudflareCatalog
       </div>
     </div>
   </section>
+
+  <script>
+    const buttons = Array.from(document.querySelectorAll('.score-toggle'));
+    const tbody = document.getElementById('leaderboard-body');
+
+    const applySort = (sortKey) => {
+      if (!tbody) return;
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      rows.sort((a, b) => {
+        const aValue = Number(a.dataset[sortKey] || 0);
+        const bValue = Number(b.dataset[sortKey] || 0);
+        return bValue - aValue;
+      });
+      rows.forEach((row, index) => {
+        const badge = row.querySelector('span');
+        if (badge) {
+          badge.textContent = `${index + 1}`;
+        }
+        tbody.appendChild(row);
+      });
+    };
+
+    const updateButtonStyles = (activeKey) => {
+      buttons.forEach((button) => {
+        const isActive = button.dataset.sort === activeKey;
+        button.className = `score-toggle flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-medium ${
+          isActive
+            ? 'border-orange-200 text-orange-600 bg-orange-50'
+            : 'border-gray-200 text-gray-700 bg-white'
+        }`;
+        button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        const dot = button.querySelector('span');
+        if (dot) {
+          dot.className = `w-2 h-2 rounded-full ${isActive ? 'bg-orange-500' : 'bg-gray-300'}`;
+        }
+      });
+    };
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const sortKey = button.dataset.sort || 'popularity';
+        applySort(sortKey);
+        updateButtonStyles(sortKey);
+      });
+    });
+  </script>
 
   <!-- Cloudflare Products & Opportunities (grouped together) -->
   <div class="grid md:grid-cols-2 gap-8 mb-12 items-stretch">
