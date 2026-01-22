@@ -55,12 +55,12 @@ const prompt = `You are an expert engineer. Review this app's metadata and sugge
   <section class="grid gap-6 md:grid-cols-3 mb-10">
     <div class="bg-white rounded-lg border border-gray-100 p-5 shadow-sm">
       <p class="text-xs uppercase text-gray-500">Popularity score</p>
-      <p class="text-3xl font-bold text-gray-900 mt-2">{scores.popularity}</p>
+      <p class="text-2xl font-bold text-gray-900 mt-2">{scores.popularity}</p>
       <div class="text-sm text-gray-500 mt-2">Stars: {app.hygiene?.stars ?? 0} · Forks: {app.hygiene?.forks ?? 0} (forks weighted 80%)</div>
     </div>
     <div class="bg-white rounded-lg border border-gray-100 p-5 shadow-sm">
       <p class="text-xs uppercase text-gray-500">Quality score</p>
-      <p class="text-3xl font-bold text-gray-900 mt-2">{scores.quality}</p>
+      <p class="text-2xl font-bold text-gray-900 mt-2">{scores.quality}</p>
       <div class="text-sm text-gray-500 mt-2">Out of {qualityMaxPoints} possible points.</div>
     </div>
     <div class="bg-white rounded-lg border border-gray-100 p-5 shadow-sm">
@@ -122,7 +122,7 @@ const prompt = `You are an expert engineer. Review this app's metadata and sugge
         <li><span class="font-medium">Package manager:</span> {typeof app.stack.packageManager === 'string' ? app.stack.packageManager : 'Multiple'}</li>
         {app.stack.uiLibrary && <li><span class="font-medium">UI library:</span> {app.stack.uiLibrary}</li>}
         {app.stack.orm && <li><span class="font-medium">ORM:</span> {app.stack.orm}</li>}
-        {app.stack.auth && <li><span class="font-medium">Auth:</span> {app.stack.auth}</li>}
+        {(app.stack as any).auth && <li><span class="font-medium">Auth:</span> {(app.stack as any).auth}</li>}
         {app.stack.monorepo && <li><span class="font-medium">Monorepo:</span> Yes</li>}
       </ul>
     </div>

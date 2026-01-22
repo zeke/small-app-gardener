@@ -24,9 +24,9 @@ const leaderboardRows = sortedApps.map((app, index) => ({
 }));
 
 
-const shortDescription = (description) => {
+const shortDescription = (description: string | undefined | null) => {
   if (!description) {
-    return "";
+    return '';
   }
 
   const trimmed = description.trim();
@@ -40,9 +40,9 @@ const shortDescription = (description) => {
   return firstSentence;
 };
 
-const statusIconName = (value) => (value ? "lucide:check" : "lucide:x");
-const statusIconClass = (value) => (value ? "text-green-500" : "text-red-400");
-const statusTooltip = (value, yesLabel, noLabel) => (value ? yesLabel : noLabel);
+const statusIconName = (value: boolean) => (value ? 'lucide:check' : 'lucide:x');
+const statusIconClass = (value: boolean) => (value ? 'text-green-500' : 'text-red-400');
+const statusTooltip = (value: boolean, yesLabel: string, noLabel: string) => (value ? yesLabel : noLabel);
 
 // Get sorted products by frequency
 const sortedProducts = Object.entries(summary.cloudflareProducts)
@@ -122,18 +122,24 @@ const missingProducts = cloudflareCatalog
                 data-index={index}
               >
                 <td class="px-4 py-3">
-                  <a
-                    href={`${baseUrl}apps/${app.slug}/`}
-                    class="text-orange-600 hover:underline font-medium"
-                  >
-                    <span class="rank-badge inline-flex items-center justify-center w-6 h-6 rounded-full bg-orange-50 text-orange-600 text-xs font-semibold mr-2">{app.rank}</span>
-                    {app.name}
-                  </a>
-                  <p class="text-xs text-gray-500 mt-1">{shortDescription(app.description)}</p>
+                  <div class="flex items-center gap-3">
+                    <span class="rank-badge inline-flex items-center justify-center w-6 h-6 rounded-full bg-orange-50 text-orange-600 text-xs font-semibold tabular-nums">
+                      {app.rank}
+                    </span>
+                    <div class="min-w-0">
+                      <a
+                        href={`${baseUrl}apps/${app.slug}/`}
+                        class="text-orange-600 hover:underline font-medium"
+                      >
+                        {app.name}
+                      </a>
+                      <p class="text-xs text-gray-500 mt-1">{shortDescription(app.description)}</p>
+                    </div>
+                  </div>
                 </td>
                 <td class="px-4 py-3 text-left">
                   <div class="flex items-center justify-start gap-3">
-                    <span class="text-3xl font-semibold text-gray-900 tabular-nums">{app.scores.popularity}</span>
+                    <span class="text-2xl font-semibold text-gray-900 tabular-nums">{app.scores.popularity}</span>
                     <span class="flex items-center gap-2 text-xs text-gray-400">
                       <span class="inline-flex items-center gap-1">
                         <Icon name="lucide:star" class="w-3.5 h-3.5" />
@@ -147,7 +153,7 @@ const missingProducts = cloudflareCatalog
                   </div>
                 </td>
                 <td class="px-4 py-3 text-left">
-                  <span class="text-3xl font-semibold text-gray-900 tabular-nums">{app.scores.quality}</span>
+                  <span class="text-2xl font-semibold text-gray-900 tabular-nums">{app.scores.quality}</span>
                 </td>
                 <td class="px-4 py-3">
                   <div class="flex gap-1 flex-nowrap whitespace-nowrap">
@@ -165,19 +171,23 @@ const missingProducts = cloudflareCatalog
   </section>
 
   <script>
-    const sortButtons = Array.from(document.querySelectorAll('.sort-header'));
-    const tbody = document.getElementById('leaderboard-body');
+    type SortKey = 'popularity' | 'quality';
 
-    const applySort = (sortKey) => {
+    const sortButtons = Array.from(
+      document.querySelectorAll<HTMLButtonElement>('.sort-header')
+    );
+    const tbody = document.getElementById('leaderboard-body') as HTMLTableSectionElement | null;
+
+    const applySort = (sortKey: SortKey) => {
       if (!tbody) return;
-      const rows = Array.from(tbody.querySelectorAll('tr'));
+      const rows = Array.from(tbody.querySelectorAll<HTMLTableRowElement>('tr'));
       rows.sort((a, b) => {
         const aValue = Number(a.dataset[sortKey] || 0);
         const bValue = Number(b.dataset[sortKey] || 0);
         return bValue - aValue;
       });
       rows.forEach((row, index) => {
-        const badge = row.querySelector('.rank-badge');
+        const badge = row.querySelector<HTMLElement>('.rank-badge');
         if (badge) {
           badge.textContent = `${index + 1}`;
         }
@@ -185,11 +195,11 @@ const missingProducts = cloudflareCatalog
       });
     };
 
-    const updateSortHeaders = (activeKey) => {
+    const updateSortHeaders = (activeKey: SortKey) => {
       sortButtons.forEach((button) => {
-        const sortKey = button.dataset.sort;
+        const sortKey = button.dataset.sort as SortKey | undefined;
         const th = button.closest('th');
-        const indicator = button.querySelector('.sort-indicator');
+        const indicator = button.querySelector<HTMLElement>('.sort-indicator');
         const isActive = sortKey === activeKey;
 
         if (isActive) {
@@ -212,7 +222,7 @@ const missingProducts = cloudflareCatalog
 
     sortButtons.forEach((button) => {
       button.addEventListener('click', () => {
-        const sortKey = button.dataset.sort || 'popularity';
+        const sortKey = (button.dataset.sort as SortKey | undefined) ?? 'popularity';
         applySort(sortKey);
         updateSortHeaders(sortKey);
       });

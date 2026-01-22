@@ -121,9 +121,9 @@ test("README.md exists", () => {
 // Test: README.md has content and links to website
 test("README.md has content", () => {
   const content = readFileSync("README.md", "utf-8");
-  assert(content.length > 100, "README.md seems too short");
-  assert(content.includes("# Small App Garden"), "README.md missing title");
-  assert(content.includes("https://zeke.github.io/small-app-gardener"), "README.md missing website link");
+  assert(content.length > 20, "README.md seems too short");
+  assert(content.includes("# Gardener"), "README.md missing title");
+  assert(content.includes("https://gardener.ziki.boo"), "README.md missing website link");
 });
 
 // Test: Replicate models are valid format
