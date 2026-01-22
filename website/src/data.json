@@ -64,10 +64,13 @@
         "hasWebsite": false,
         "websiteUrl": null,
         "hasReadme": true,
+        "readmePath": "README.md",
         "hasAgentsMd": false,
+        "agentsMdPath": null,
         "readmeHasImage": true,
         "readmeHasVideo": false,
         "license": null,
+        "licensePath": null,
         "stars": 7,
         "forks": 3
       },
@@ -92,7 +95,8 @@
             "id": "readme",
             "label": "README documentation",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/replicate/image-editing-arena/blob/HEAD/README.md"
           },
           {
             "id": "agentsmd",
@@ -104,13 +108,15 @@
             "id": "readme-media",
             "label": "README images or videos",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/replicate/image-editing-arena/blob/HEAD/README.md"
           },
           {
             "id": "description",
             "label": "Repository description",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/replicate/image-editing-arena"
           },
           {
             "id": "website",
@@ -202,10 +208,13 @@
         "hasWebsite": true,
         "websiteUrl": "https://system.surf",
         "hasReadme": true,
+        "readmePath": "README.md",
         "hasAgentsMd": false,
+        "agentsMdPath": null,
         "readmeHasImage": false,
         "readmeHasVideo": false,
         "license": null,
+        "licensePath": null,
         "stars": 287,
         "forks": 14
       },
@@ -218,7 +227,8 @@
             "id": "tests",
             "label": "Automated tests",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/ygwyg/system/blob/HEAD/src/bridge/tools/__tests__/command.test.ts"
           },
           {
             "id": "ci",
@@ -230,7 +240,8 @@
             "id": "readme",
             "label": "README documentation",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/ygwyg/system/blob/HEAD/README.md"
           },
           {
             "id": "agentsmd",
@@ -248,13 +259,15 @@
             "id": "description",
             "label": "Repository description",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/ygwyg/system"
           },
           {
             "id": "website",
             "label": "Project website",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://system.surf"
           },
           {
             "id": "license",
@@ -351,10 +364,13 @@
         "hasWebsite": false,
         "websiteUrl": null,
         "hasReadme": true,
+        "readmePath": "README.md",
         "hasAgentsMd": true,
+        "agentsMdPath": "AGENTS.md",
         "readmeHasImage": true,
         "readmeHasVideo": true,
         "license": "MIT",
+        "licensePath": "LICENSE",
         "stars": 18,
         "forks": 3
       },
@@ -379,25 +395,29 @@
             "id": "readme",
             "label": "README documentation",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/craigsdennis/fauxto-booth/blob/HEAD/README.md"
           },
           {
             "id": "agentsmd",
             "label": "AGENTS.md instructions",
             "points": 20,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/craigsdennis/fauxto-booth/blob/HEAD/AGENTS.md"
           },
           {
             "id": "readme-media",
             "label": "README images or videos",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/craigsdennis/fauxto-booth/blob/HEAD/README.md"
           },
           {
             "id": "description",
             "label": "Repository description",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/craigsdennis/fauxto-booth"
           },
           {
             "id": "website",
@@ -409,7 +429,8 @@
             "id": "license",
             "label": "License file",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/craigsdennis/fauxto-booth/blob/HEAD/LICENSE"
           }
         ]
       }
@@ -518,10 +539,13 @@
         "hasWebsite": true,
         "websiteUrl": "https://thecoffeecluster.com/",
         "hasReadme": true,
+        "readmePath": "README.md",
         "hasAgentsMd": false,
+        "agentsMdPath": null,
         "readmeHasImage": true,
         "readmeHasVideo": true,
         "license": null,
+        "licensePath": null,
         "stars": 4,
         "forks": 2
       },
@@ -534,19 +558,22 @@
             "id": "tests",
             "label": "Automated tests",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/jillesme/thecoffeecluster/blob/HEAD/src/app/api/beans/[id]/route.test.ts"
           },
           {
             "id": "ci",
             "label": "Continuous integration",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/jillesme/thecoffeecluster/blob/HEAD/.github/workflows/ci.yml"
           },
           {
             "id": "readme",
             "label": "README documentation",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/jillesme/thecoffeecluster/blob/HEAD/README.md"
           },
           {
             "id": "agentsmd",
@@ -558,19 +585,22 @@
             "id": "readme-media",
             "label": "README images or videos",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/jillesme/thecoffeecluster/blob/HEAD/README.md"
           },
           {
             "id": "description",
             "label": "Repository description",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/jillesme/thecoffeecluster"
           },
           {
             "id": "website",
             "label": "Project website",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://thecoffeecluster.com/"
           },
           {
             "id": "license",
@@ -655,10 +685,13 @@
         "hasWebsite": true,
         "websiteUrl": "https://virtual-try-on.h-demo.workers.dev/",
         "hasReadme": true,
+        "readmePath": "README.md",
         "hasAgentsMd": false,
+        "agentsMdPath": null,
         "readmeHasImage": false,
         "readmeHasVideo": false,
         "license": "MIT",
+        "licensePath": "LICENSE",
         "stars": 9,
         "forks": 3
       },
@@ -683,7 +716,8 @@
             "id": "readme",
             "label": "README documentation",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/harshil1712/virtual-try-on-demo/blob/HEAD/README.md"
           },
           {
             "id": "agentsmd",
@@ -701,19 +735,22 @@
             "id": "description",
             "label": "Repository description",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/harshil1712/virtual-try-on-demo"
           },
           {
             "id": "website",
             "label": "Project website",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://virtual-try-on.h-demo.workers.dev/"
           },
           {
             "id": "license",
             "label": "License file",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/harshil1712/virtual-try-on-demo/blob/HEAD/LICENSE"
           }
         ]
       }
@@ -788,10 +825,13 @@
         "hasWebsite": false,
         "websiteUrl": null,
         "hasReadme": true,
+        "readmePath": "README.md",
         "hasAgentsMd": false,
+        "agentsMdPath": null,
         "readmeHasImage": true,
         "readmeHasVideo": false,
         "license": null,
+        "licensePath": null,
         "stars": 24,
         "forks": 2
       },
@@ -804,7 +844,8 @@
             "id": "tests",
             "label": "Automated tests",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/whoiskatrin/inboxbuddy/blob/HEAD/test/env.d.ts"
           },
           {
             "id": "ci",
@@ -816,7 +857,8 @@
             "id": "readme",
             "label": "README documentation",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/whoiskatrin/inboxbuddy/blob/HEAD/README.md"
           },
           {
             "id": "agentsmd",
@@ -828,13 +870,15 @@
             "id": "readme-media",
             "label": "README images or videos",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/whoiskatrin/inboxbuddy/blob/HEAD/README.md"
           },
           {
             "id": "description",
             "label": "Repository description",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/whoiskatrin/inboxbuddy"
           },
           {
             "id": "website",
@@ -955,10 +999,13 @@
         "hasWebsite": true,
         "websiteUrl": "https://kivo.lauragift.workers.dev",
         "hasReadme": true,
+        "readmePath": "README.md",
         "hasAgentsMd": true,
+        "agentsMdPath": "AGENTS.md",
         "readmeHasImage": true,
         "readmeHasVideo": true,
         "license": null,
+        "licensePath": null,
         "stars": 9,
         "forks": 2
       },
@@ -971,43 +1018,50 @@
             "id": "tests",
             "label": "Automated tests",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/lauragift21/kivo/blob/HEAD/apps/api/src/durable-objects/reminder-scheduler.test.ts"
           },
           {
             "id": "ci",
             "label": "Continuous integration",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/lauragift21/kivo/tree/HEAD/.github/workflows"
           },
           {
             "id": "readme",
             "label": "README documentation",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/lauragift21/kivo/blob/HEAD/README.md"
           },
           {
             "id": "agentsmd",
             "label": "AGENTS.md instructions",
             "points": 20,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/lauragift21/kivo/blob/HEAD/AGENTS.md"
           },
           {
             "id": "readme-media",
             "label": "README images or videos",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/lauragift21/kivo/blob/HEAD/README.md"
           },
           {
             "id": "description",
             "label": "Repository description",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/lauragift21/kivo"
           },
           {
             "id": "website",
             "label": "Project website",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://kivo.lauragift.workers.dev"
           },
           {
             "id": "license",
@@ -1101,10 +1155,13 @@
         "hasWebsite": false,
         "websiteUrl": null,
         "hasReadme": true,
+        "readmePath": "README.md",
         "hasAgentsMd": false,
+        "agentsMdPath": null,
         "readmeHasImage": true,
         "readmeHasVideo": false,
         "license": "Apache-2.0",
+        "licensePath": "LICENSE",
         "stars": 440,
         "forks": 50
       },
@@ -1117,7 +1174,8 @@
             "id": "tests",
             "label": "Automated tests",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/jonesphillip/weft/blob/HEAD/tests/mocks/cloudflare-sandbox.ts"
           },
           {
             "id": "ci",
@@ -1129,7 +1187,8 @@
             "id": "readme",
             "label": "README documentation",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/jonesphillip/weft/blob/HEAD/README.md"
           },
           {
             "id": "agentsmd",
@@ -1141,13 +1200,15 @@
             "id": "readme-media",
             "label": "README images or videos",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/jonesphillip/weft/blob/HEAD/README.md"
           },
           {
             "id": "description",
             "label": "Repository description",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/jonesphillip/weft"
           },
           {
             "id": "website",
@@ -1159,7 +1220,8 @@
             "id": "license",
             "label": "License file",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/jonesphillip/weft/blob/HEAD/LICENSE"
           }
         ]
       }
@@ -1226,10 +1288,13 @@
         "hasWebsite": true,
         "websiteUrl": "https://keyboardia.dev/",
         "hasReadme": true,
+        "readmePath": "README.md",
         "hasAgentsMd": false,
+        "agentsMdPath": null,
         "readmeHasImage": false,
         "readmeHasVideo": false,
         "license": null,
+        "licensePath": null,
         "stars": 1,
         "forks": 0
       },
@@ -1242,19 +1307,22 @@
             "id": "tests",
             "label": "Automated tests",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/adewale/keyboardia/blob/HEAD/app/e2e/accessibility.spec.ts"
           },
           {
             "id": "ci",
             "label": "Continuous integration",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/adewale/keyboardia/blob/HEAD/.github/workflows/ci.yml"
           },
           {
             "id": "readme",
             "label": "README documentation",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/adewale/keyboardia/blob/HEAD/README.md"
           },
           {
             "id": "agentsmd",
@@ -1272,13 +1340,15 @@
             "id": "description",
             "label": "Repository description",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/adewale/keyboardia"
           },
           {
             "id": "website",
             "label": "Project website",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://keyboardia.dev/"
           },
           {
             "id": "license",
@@ -1344,10 +1414,13 @@
         "hasWebsite": false,
         "websiteUrl": null,
         "hasReadme": true,
+        "readmePath": "README.md",
         "hasAgentsMd": false,
+        "agentsMdPath": null,
         "readmeHasImage": false,
         "readmeHasVideo": false,
         "license": null,
+        "licensePath": null,
         "stars": 4,
         "forks": 3
       },
@@ -1372,7 +1445,8 @@
             "id": "readme",
             "label": "README documentation",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/fayazara/webhookflare/blob/HEAD/README.md"
           },
           {
             "id": "agentsmd",
@@ -1477,10 +1551,13 @@
         "hasWebsite": true,
         "websiteUrl": "https://replicate.com/docs/guides/openai-realtime",
         "hasReadme": true,
+        "readmePath": "README.md",
         "hasAgentsMd": false,
+        "agentsMdPath": null,
         "readmeHasImage": true,
         "readmeHasVideo": true,
         "license": null,
+        "licensePath": null,
         "stars": 104,
         "forks": 26
       },
@@ -1493,19 +1570,22 @@
             "id": "tests",
             "label": "Automated tests",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/replicate/kontext-realtime/blob/HEAD/test/index.spec.ts"
           },
           {
             "id": "ci",
             "label": "Continuous integration",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/replicate/kontext-realtime/tree/HEAD/.github/workflows"
           },
           {
             "id": "readme",
             "label": "README documentation",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/replicate/kontext-realtime/blob/HEAD/README.md"
           },
           {
             "id": "agentsmd",
@@ -1517,19 +1597,22 @@
             "id": "readme-media",
             "label": "README images or videos",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/replicate/kontext-realtime/blob/HEAD/README.md"
           },
           {
             "id": "description",
             "label": "Repository description",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/replicate/kontext-realtime"
           },
           {
             "id": "website",
             "label": "Project website",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://replicate.com/docs/guides/openai-realtime"
           },
           {
             "id": "license",
