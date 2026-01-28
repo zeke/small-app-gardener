@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27",
+  "lastUpdated": "2026-01-28",
   "source": "https://developers.cloudflare.com/garden/",
   "totalApps": 11,
   "apps": [
@@ -14,7 +14,7 @@
         "github": "ygwyg",
         "avatar": "https://avatars.githubusercontent.com/ygwyg"
       },
-      "shippedDate": "2026-01-13",
+      "shippedDate": "2026-01-14",
       "stack": {
         "framework": "Express",
         "language": "TypeScript",
@@ -766,7 +766,7 @@
         "github": "whoiskatrin",
         "avatar": "https://avatars.githubusercontent.com/whoiskatrin"
       },
-      "shippedDate": "2026-01-13",
+      "shippedDate": "2026-01-14",
       "stack": {
         "framework": "Workers",
         "language": "TypeScript",
@@ -906,7 +906,7 @@
         "github": "lauragift21",
         "avatar": "https://avatars.githubusercontent.com/lauragift21"
       },
-      "shippedDate": "2026-01-13",
+      "shippedDate": "2026-01-14",
       "stack": {
         "framework": "Workers",
         "language": "TypeScript",
@@ -1083,7 +1083,7 @@
         "github": "jonesphillip",
         "avatar": "https://avatars.githubusercontent.com/jonesphillip"
       },
-      "shippedDate": "2026-01-13",
+      "shippedDate": "2026-01-14",
       "stack": {
         "framework": "React 19",
         "language": "TypeScript",
