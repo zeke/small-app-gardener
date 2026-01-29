@@ -1162,7 +1162,7 @@
         "readmeHasVideo": false,
         "license": "Apache-2.0",
         "licensePath": "LICENSE",
-        "stars": 455,
+        "stars": 456,
         "forks": 50
       },
       "tags": [],
@@ -1421,12 +1421,12 @@
         "readmeHasVideo": false,
         "license": null,
         "licensePath": null,
-        "stars": 4,
+        "stars": 5,
         "forks": 3
       },
       "tags": [],
       "scores": {
-        "popularity": 33,
+        "popularity": 34,
         "quality": 10,
         "qualityBreakdown": [
           {
