@@ -756,6 +756,146 @@
       }
     },
     {
+      "name": "InboxBuddy",
+      "slug": "inboxbuddy",
+      "description": "AI-powered scheduling assistant. Just CC the bot in any email and it handles meeting coordination, calendar checks, and booking automatically.",
+      "url": "https://developers.cloudflare.com/garden/inboxbuddy",
+      "github": "https://github.com/whoiskatrin/inboxbuddy",
+      "author": {
+        "name": "whoiskatrin",
+        "github": "whoiskatrin",
+        "avatar": "https://avatars.githubusercontent.com/whoiskatrin"
+      },
+      "shippedDate": "2026-01-08",
+      "stack": {
+        "framework": "Workers",
+        "language": "TypeScript",
+        "buildTool": "wrangler",
+        "packageManager": "npm",
+        "uiLibrary": null
+      },
+      "dependencies": {
+        "runtime": {
+          "@anthropic-ai/sdk": "^0.71.2",
+          "agents": "^0.3.3",
+          "mimetext": "^3.0.27",
+          "postal-mime": "^2.7.1"
+        },
+        "dev": {
+          "@cloudflare/vitest-pool-workers": "^0.8.19",
+          "@types/node": "^25.0.3",
+          "typescript": "^5.5.2",
+          "vitest": "~3.2.0",
+          "wrangler": "^4.54.0"
+        }
+      },
+      "testing": {
+        "hasTests": true,
+        "framework": "vitest",
+        "testFiles": [
+          "test/env.d.ts",
+          "test/index.spec.ts",
+          "test/tsconfig.json"
+        ]
+      },
+      "ci": {
+        "hasGitHubActions": false,
+        "workflows": []
+      },
+      "cloudflare": {
+        "products": [
+          "Workers",
+          "Agents",
+          "D1",
+          "KV",
+          "Durable Objects",
+          "Workers AI",
+          "Static Assets"
+        ],
+        "bindings": {}
+      },
+      "replicate": {
+        "usesReplicate": false,
+        "models": [],
+        "apiIntegration": null
+      },
+      "hygiene": {
+        "hasDescription": true,
+        "description": "AI Scheduling Assistant ",
+        "hasWebsite": false,
+        "websiteUrl": null,
+        "hasReadme": true,
+        "readmePath": "README.md",
+        "hasAgentsMd": false,
+        "agentsMdPath": null,
+        "readmeHasImage": true,
+        "readmeHasVideo": false,
+        "license": null,
+        "licensePath": null,
+        "stars": 24,
+        "forks": 2
+      },
+      "tags": [],
+      "scores": {
+        "popularity": 35,
+        "quality": 45,
+        "qualityBreakdown": [
+          {
+            "id": "tests",
+            "label": "Automated tests",
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/whoiskatrin/inboxbuddy/blob/HEAD/test/env.d.ts"
+          },
+          {
+            "id": "ci",
+            "label": "Continuous integration",
+            "points": 10,
+            "earned": false
+          },
+          {
+            "id": "readme",
+            "label": "README documentation",
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/whoiskatrin/inboxbuddy/blob/HEAD/README.md"
+          },
+          {
+            "id": "agentsmd",
+            "label": "AGENTS.md instructions",
+            "points": 20,
+            "earned": false
+          },
+          {
+            "id": "readme-media",
+            "label": "README images or videos",
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/whoiskatrin/inboxbuddy/blob/HEAD/README.md"
+          },
+          {
+            "id": "description",
+            "label": "Repository description",
+            "points": 15,
+            "earned": true,
+            "href": "https://github.com/whoiskatrin/inboxbuddy"
+          },
+          {
+            "id": "website",
+            "label": "Project website",
+            "points": 15,
+            "earned": false
+          },
+          {
+            "id": "license",
+            "label": "License file",
+            "points": 10,
+            "earned": false
+          }
+        ]
+      }
+    },
+    {
       "name": "Kivo",
       "slug": "kivo",
       "description": "A modern invoicing platform for freelancers and creators. Create professional invoices, track payments, and get paid faster.",
@@ -922,146 +1062,6 @@
             "points": 15,
             "earned": true,
             "href": "https://kivo.lauragift.workers.dev"
-          },
-          {
-            "id": "license",
-            "label": "License file",
-            "points": 10,
-            "earned": false
-          }
-        ]
-      }
-    },
-    {
-      "name": "InboxBuddy",
-      "slug": "inboxbuddy",
-      "description": "AI-powered scheduling assistant. Just CC the bot in any email and it handles meeting coordination, calendar checks, and booking automatically.",
-      "url": "https://developers.cloudflare.com/garden/inboxbuddy",
-      "github": "https://github.com/whoiskatrin/inboxbuddy",
-      "author": {
-        "name": "whoiskatrin",
-        "github": "whoiskatrin",
-        "avatar": "https://avatars.githubusercontent.com/whoiskatrin"
-      },
-      "shippedDate": "2026-01-08",
-      "stack": {
-        "framework": "Workers",
-        "language": "TypeScript",
-        "buildTool": "wrangler",
-        "packageManager": "npm",
-        "uiLibrary": null
-      },
-      "dependencies": {
-        "runtime": {
-          "@anthropic-ai/sdk": "^0.71.2",
-          "agents": "^0.3.3",
-          "mimetext": "^3.0.27",
-          "postal-mime": "^2.7.1"
-        },
-        "dev": {
-          "@cloudflare/vitest-pool-workers": "^0.8.19",
-          "@types/node": "^25.0.3",
-          "typescript": "^5.5.2",
-          "vitest": "~3.2.0",
-          "wrangler": "^4.54.0"
-        }
-      },
-      "testing": {
-        "hasTests": true,
-        "framework": "vitest",
-        "testFiles": [
-          "test/env.d.ts",
-          "test/index.spec.ts",
-          "test/tsconfig.json"
-        ]
-      },
-      "ci": {
-        "hasGitHubActions": false,
-        "workflows": []
-      },
-      "cloudflare": {
-        "products": [
-          "Workers",
-          "Agents",
-          "D1",
-          "KV",
-          "Durable Objects",
-          "Workers AI",
-          "Static Assets"
-        ],
-        "bindings": {}
-      },
-      "replicate": {
-        "usesReplicate": false,
-        "models": [],
-        "apiIntegration": null
-      },
-      "hygiene": {
-        "hasDescription": true,
-        "description": "AI Scheduling Assistant ",
-        "hasWebsite": false,
-        "websiteUrl": null,
-        "hasReadme": true,
-        "readmePath": "README.md",
-        "hasAgentsMd": false,
-        "agentsMdPath": null,
-        "readmeHasImage": true,
-        "readmeHasVideo": false,
-        "license": null,
-        "licensePath": null,
-        "stars": 24,
-        "forks": 2
-      },
-      "tags": [],
-      "scores": {
-        "popularity": 35,
-        "quality": 45,
-        "qualityBreakdown": [
-          {
-            "id": "tests",
-            "label": "Automated tests",
-            "points": 10,
-            "earned": true,
-            "href": "https://github.com/whoiskatrin/inboxbuddy/blob/HEAD/test/env.d.ts"
-          },
-          {
-            "id": "ci",
-            "label": "Continuous integration",
-            "points": 10,
-            "earned": false
-          },
-          {
-            "id": "readme",
-            "label": "README documentation",
-            "points": 10,
-            "earned": true,
-            "href": "https://github.com/whoiskatrin/inboxbuddy/blob/HEAD/README.md"
-          },
-          {
-            "id": "agentsmd",
-            "label": "AGENTS.md instructions",
-            "points": 20,
-            "earned": false
-          },
-          {
-            "id": "readme-media",
-            "label": "README images or videos",
-            "points": 10,
-            "earned": true,
-            "href": "https://github.com/whoiskatrin/inboxbuddy/blob/HEAD/README.md"
-          },
-          {
-            "id": "description",
-            "label": "Repository description",
-            "points": 15,
-            "earned": true,
-            "href": "https://github.com/whoiskatrin/inboxbuddy"
-          },
-          {
-            "id": "website",
-            "label": "Project website",
-            "points": 15,
-            "earned": false
           },
           {
             "id": "license",
@@ -1658,8 +1658,8 @@
       "Workers AI": 7,
       "Hyperdrive": 1,
       "D1": 2,
-      "Cron Triggers": 1,
       "KV": 1,
+      "Cron Triggers": 1,
       "Realtime": 1
     },
     "testing": {
