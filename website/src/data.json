@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29",
+  "lastUpdated": "2026-01-30",
   "source": "https://developers.cloudflare.com/garden/",
   "totalApps": 11,
   "apps": [
@@ -1421,12 +1421,12 @@
         "readmeHasVideo": false,
         "license": null,
         "licensePath": null,
-        "stars": 5,
-        "forks": 3
+        "stars": 0,
+        "forks": 0
       },
       "tags": [],
       "scores": {
-        "popularity": 34,
+        "popularity": 0,
         "quality": 10,
         "qualityBreakdown": [
           {
