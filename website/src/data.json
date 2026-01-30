@@ -1421,12 +1421,12 @@
         "readmeHasVideo": false,
         "license": null,
         "licensePath": null,
-        "stars": 0,
-        "forks": 0
+        "stars": 5,
+        "forks": 3
       },
       "tags": [],
       "scores": {
-        "popularity": 0,
+        "popularity": 34,
         "quality": 10,
         "qualityBreakdown": [
           {
