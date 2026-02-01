@@ -338,7 +338,7 @@
       },
       "tags": [],
       "scores": {
-        "popularity": 78,
+        "popularity": 77,
         "quality": 50,
         "qualityBreakdown": [
           {
@@ -1280,8 +1280,8 @@
         "readmeHasVideo": false,
         "license": "Apache-2.0",
         "licensePath": "LICENSE",
-        "stars": 460,
-        "forks": 50
+        "stars": 461,
+        "forks": 51
       },
       "tags": [],
       "scores": {
@@ -1544,7 +1544,7 @@
       },
       "tags": [],
       "scores": {
-        "popularity": 34,
+        "popularity": 33,
         "quality": 10,
         "qualityBreakdown": [
           {
@@ -1681,7 +1681,7 @@
       },
       "tags": [],
       "scores": {
-        "popularity": 82,
+        "popularity": 81,
         "quality": 70,
         "qualityBreakdown": [
           {
