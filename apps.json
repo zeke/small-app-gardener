@@ -47,8 +47,8 @@
         "apiIntegration": null
       },
       "hygiene": {
-        "hasDescription": false,
-        "description": null,
+        "hasDescription": true,
+        "description": "BucketDrop is a tiny, open-source menu bar app for uploading files to your own S3-compatible storage.  No dashboards. No syncing folders. No vendor lock-in.  Just drop a file and get a shareable URL instantly.",
         "hasWebsite": false,
         "websiteUrl": null,
         "hasReadme": true,
@@ -59,13 +59,13 @@
         "readmeHasVideo": false,
         "license": null,
         "licensePath": null,
-        "stars": 0,
-        "forks": 0
+        "stars": 188,
+        "forks": 26
       },
       "tags": [],
       "scores": {
-        "popularity": 0,
-        "quality": 20,
+        "popularity": 84,
+        "quality": 35,
         "qualityBreakdown": [
           {
             "id": "tests",
@@ -103,7 +103,8 @@
             "id": "description",
             "label": "Repository description",
             "points": 15,
-            "earned": false
+            "earned": true,
+            "href": "https://github.com/fayazara/bucketdrop"
           },
           {
             "id": "website",
@@ -1803,7 +1804,7 @@
       ]
     },
     "hygiene": {
-      "withDescription": 10,
+      "withDescription": 11,
       "withWebsite": 6,
       "withReadme": 12,
       "withAgentsMd": 2,
