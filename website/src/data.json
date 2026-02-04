@@ -1115,8 +1115,8 @@
         "apiIntegration": null
       },
       "hygiene": {
-        "hasDescription": true,
-        "description": "AI Scheduling Assistant ",
+        "hasDescription": false,
+        "description": null,
         "hasWebsite": false,
         "websiteUrl": null,
         "hasReadme": true,
@@ -1127,13 +1127,13 @@
         "readmeHasVideo": false,
         "license": null,
         "licensePath": null,
-        "stars": 24,
-        "forks": 2
+        "stars": 0,
+        "forks": 0
       },
       "tags": [],
       "scores": {
-        "popularity": 35,
-        "quality": 45,
+        "popularity": 0,
+        "quality": 30,
         "qualityBreakdown": [
           {
             "id": "tests",
@@ -1172,8 +1172,7 @@
             "id": "description",
             "label": "Repository description",
             "points": 15,
-            "earned": true,
-            "href": "https://github.com/whoiskatrin/inboxbuddy"
+            "earned": false
           },
           {
             "id": "website",
@@ -1804,7 +1803,7 @@
       ]
     },
     "hygiene": {
-      "withDescription": 11,
+      "withDescription": 10,
       "withWebsite": 6,
       "withReadme": 12,
       "withAgentsMd": 2,
