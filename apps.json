@@ -7,7 +7,7 @@
       "name": "BucketDrop",
       "slug": "bucketdrop",
       "description": "File uploads from your Mac menu bar. Bring your own R2 bucket.",
-      "url": "https://apps.apple.com/sg/app/bucketdrop-a-tiny-s3-client",
+      "url": "https://fonts.googleapis.com",
       "github": "https://github.com/fayazara/bucketdrop",
       "author": {
         "name": "fayazara",
@@ -125,7 +125,7 @@
       "name": "Image Editing Arena",
       "slug": "image-editing-arena",
       "description": "AI-powered image editing arena. Upload images and apply transformations using cutting-edge models, then compare results side-by-side.",
-      "url": "https://replicate.com/",
+      "url": "https://fonts.googleapis.com",
       "github": "https://github.com/replicate/image-editing-arena",
       "author": {
         "name": "replicate",
@@ -255,7 +255,7 @@
       "name": "SYSTEM",
       "slug": "system",
       "description": "Control your Mac from anywhere with AI. Play music, send messages, run commands, and automate with Raycast extensions.",
-      "url": "https://developers.cloudflare.com/garden/system",
+      "url": "https://fonts.googleapis.com",
       "github": "https://github.com/ygwyg/system",
       "author": {
         "name": "ygwyg",
@@ -557,7 +557,7 @@
       "name": "The Coffee Cluster",
       "slug": "the-coffee-cluster",
       "description": "An example Next.js application for PlanetScale with Hyperdrive",
-      "url": "https://thecoffeecluster.com/",
+      "url": "https://fonts.googleapis.com",
       "github": "https://github.com/jillesme/thecoffeecluster",
       "author": {
         "name": "jillesme",
@@ -1054,7 +1054,7 @@
       "name": "InboxBuddy",
       "slug": "inboxbuddy",
       "description": "AI-powered scheduling assistant. Just CC the bot in any email and it handles meeting coordination, calendar checks, and booking automatically.",
-      "url": "https://developers.cloudflare.com/garden/inboxbuddy",
+      "url": "https://fonts.googleapis.com",
       "github": "https://github.com/whoiskatrin/inboxbuddy",
       "author": {
         "name": "whoiskatrin",
@@ -1194,7 +1194,7 @@
       "name": "Weft",
       "slug": "weft",
       "description": "Task management where AI agents do your tasks. Create tasks, assign them to agents, and they work on emails, spreadsheets, PRs, and code.",
-      "url": "https://developers.cloudflare.com/garden/weft",
+      "url": "https://fonts.googleapis.com",
       "github": "https://github.com/jonesphillip/weft",
       "author": {
         "name": "jonesphillip",
@@ -1348,7 +1348,7 @@
       "name": "Keyboardia",
       "slug": "keyboardia",
       "description": "A multiplayer step sequencer with polyrhythmic patterns, built for real-time collaboration. Create/Collaborate. Remix. Share.",
-      "url": "https://developers.cloudflare.com/garden/keyboardia",
+      "url": "https://fonts.googleapis.com",
       "github": "https://github.com/adewale/keyboardia",
       "author": {
         "name": "adewale",
@@ -1603,7 +1603,7 @@
       "name": "Kontext Realtime",
       "slug": "kontext-realtime",
       "description": "Create and edit images using your voice.",
-      "url": "https://replicate.com/",
+      "url": "https://fonts.googleapis.com",
       "github": "https://github.com/replicate/kontext-realtime",
       "author": {
         "name": "replicate",
