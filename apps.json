@@ -177,8 +177,8 @@
         "apiIntegration": null
       },
       "hygiene": {
-        "hasDescription": false,
-        "description": null,
+        "hasDescription": true,
+        "description": "Image Editing Arena using Replicate",
         "hasWebsite": false,
         "websiteUrl": null,
         "hasReadme": true,
@@ -189,13 +189,13 @@
         "readmeHasVideo": false,
         "license": null,
         "licensePath": null,
-        "stars": 0,
-        "forks": 0
+        "stars": 7,
+        "forks": 3
       },
       "tags": [],
       "scores": {
-        "popularity": 0,
-        "quality": 20,
+        "popularity": 35,
+        "quality": 35,
         "qualityBreakdown": [
           {
             "id": "tests",
@@ -233,7 +233,8 @@
             "id": "description",
             "label": "Repository description",
             "points": 15,
-            "earned": false
+            "earned": true,
+            "href": "https://github.com/replicate/image-editing-arena"
           },
           {
             "id": "website",
@@ -797,25 +798,25 @@
         "apiIntegration": "replicate npm package"
       },
       "hygiene": {
-        "hasDescription": false,
-        "description": null,
-        "hasWebsite": false,
-        "websiteUrl": null,
+        "hasDescription": true,
+        "description": "Virtual try-on app for ugly winter jumpers, built with Workers and Replicate",
+        "hasWebsite": true,
+        "websiteUrl": "https://virtual-try-on.h-demo.workers.dev/",
         "hasReadme": true,
         "readmePath": "README.md",
         "hasAgentsMd": false,
         "agentsMdPath": null,
         "readmeHasImage": false,
         "readmeHasVideo": false,
-        "license": null,
+        "license": "MIT",
         "licensePath": "LICENSE",
-        "stars": 0,
-        "forks": 0
+        "stars": 9,
+        "forks": 3
       },
       "tags": [],
       "scores": {
-        "popularity": 0,
-        "quality": 10,
+        "popularity": 36,
+        "quality": 50,
         "qualityBreakdown": [
           {
             "id": "tests",
@@ -852,19 +853,22 @@
             "id": "description",
             "label": "Repository description",
             "points": 15,
-            "earned": false
+            "earned": true,
+            "href": "https://github.com/harshil1712/virtual-try-on-demo"
           },
           {
             "id": "website",
             "label": "Project website",
             "points": 15,
-            "earned": false
+            "earned": true,
+            "href": "https://virtual-try-on.h-demo.workers.dev/"
           },
           {
             "id": "license",
             "label": "License file",
             "points": 10,
-            "earned": false
+            "earned": true,
+            "href": "https://github.com/harshil1712/virtual-try-on-demo/blob/HEAD/LICENSE"
           }
         ]
       }
@@ -1111,8 +1115,8 @@
         "apiIntegration": null
       },
       "hygiene": {
-        "hasDescription": false,
-        "description": null,
+        "hasDescription": true,
+        "description": "AI Scheduling Assistant ",
         "hasWebsite": false,
         "websiteUrl": null,
         "hasReadme": true,
@@ -1123,13 +1127,13 @@
         "readmeHasVideo": false,
         "license": null,
         "licensePath": null,
-        "stars": 0,
-        "forks": 0
+        "stars": 24,
+        "forks": 2
       },
       "tags": [],
       "scores": {
-        "popularity": 0,
-        "quality": 30,
+        "popularity": 35,
+        "quality": 45,
         "qualityBreakdown": [
           {
             "id": "tests",
@@ -1168,7 +1172,8 @@
             "id": "description",
             "label": "Repository description",
             "points": 15,
-            "earned": false
+            "earned": true,
+            "href": "https://github.com/whoiskatrin/inboxbuddy"
           },
           {
             "id": "website",
@@ -1799,8 +1804,8 @@
       ]
     },
     "hygiene": {
-      "withDescription": 8,
-      "withWebsite": 5,
+      "withDescription": 11,
+      "withWebsite": 6,
       "withReadme": 12,
       "withAgentsMd": 2,
       "withImage": 8,
