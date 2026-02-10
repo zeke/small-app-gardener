@@ -15,6 +15,13 @@ import { execSync } from "child_process";
 import { join } from "path";
 import { tmpdir } from "os";
 import { CLOUDFLARE_PRODUCT_CATALOG } from "./schema";
+import {
+  buildQualityBreakdown,
+  calculatePopularityScore,
+  calculateQualityScore,
+  getPopularityMax,
+  getQualityMaxPoints,
+} from "./website/src/lib/scores";
 
 const GARDEN_URL = "https://developers.cloudflare.com/garden/";
 
@@ -105,6 +112,11 @@ interface RepoAnalysis {
     apiIntegration: string | null;
   };
   hygiene: RepoHygiene;
+  scores?: {
+    popularity: number;
+    quality: number;
+    qualityBreakdown: ReturnType<typeof buildQualityBreakdown>;
+  };
 }
 
 // Helper to fetch text content
@@ -973,6 +985,15 @@ function generateSummary(apps: Array<{ analysis: RepoAnalysis }>) {
       withImage,
       withVideo,
     },
+    scores: {
+      popularity: {
+        forkWeight: 0.8,
+        starWeight: 0.2,
+      },
+      quality: {
+        maxPoints: getQualityMaxPoints(),
+      },
+    },
   };
 }
 
@@ -1048,6 +1069,19 @@ async function main() {
     } catch (error) {
       console.error(`  Error processing ${app.name}:`, error);
     }
+  }
+
+  // Score apps
+  const popularityMax = getPopularityMax(apps);
+  for (const app of apps) {
+    const qualityBreakdown = buildQualityBreakdown(app);
+    const quality = calculateQualityScore(qualityBreakdown);
+    const popularity = calculatePopularityScore(app, popularityMax);
+    app.scores = {
+      popularity,
+      quality,
+      qualityBreakdown,
+    };
   }
 
   // Generate summary
