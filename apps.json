@@ -125,7 +125,7 @@
       "name": "Image Editing Arena",
       "slug": "image-editing-arena",
       "description": "AI-powered image editing arena. Upload images and apply transformations using cutting-edge models, then compare results side-by-side.",
-      "url": "https://fonts.googleapis.com",
+      "url": "https://replicate.com/",
       "github": "https://github.com/replicate/image-editing-arena",
       "author": {
         "name": "replicate",
@@ -1194,7 +1194,7 @@
       "name": "Weft",
       "slug": "weft",
       "description": "Task management where AI agents do your tasks. Create tasks, assign them to agents, and they work on emails, spreadsheets, PRs, and code.",
-      "url": "https://fonts.googleapis.com",
+      "url": "https://developers.cloudflare.com/garden/weft",
       "github": "https://github.com/jonesphillip/weft",
       "author": {
         "name": "jonesphillip",
