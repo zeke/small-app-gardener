@@ -931,6 +931,12 @@ function analyzeWranglerConfig(content: string, analysis: RepoAnalysis): void {
   if (content.includes("realtime") || content.includes("Realtime") || content.includes("calls")) {
     products.add("Realtime");
   }
+  if (content.includes("vectorize")) {
+    products.add("Vectorize");
+  }
+  if (content.includes("queues")) {
+    products.add("Queues");
+  }
 
   analysis.cloudflare.products = Array.from(products);
 }
