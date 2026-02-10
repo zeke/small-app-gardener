@@ -3,16 +3,18 @@ import Layout from '../../layouts/Layout.astro';
 import CloudflareProduct from '../../components/CloudflareProduct.astro';
 import { Icon } from 'astro-icon/components';
 import data from '../../data.json';
-import { getAppScores, getPopularityMax } from '../../lib/scores';
+import { getAppScores, getPopularityMax, type ScoreBreakdownItem } from '../../lib/scores';
+import { buildImprovementPrompt } from '../../lib/improvement-prompt';
+import type { AppsData } from '../../../../schema';
 
-const { apps } = data;
+const { apps } = data as unknown as AppsData;
 const { slug } = Astro.params;
 const app = apps.find((entry) => entry.slug === slug);
 const baseUrl = import.meta.env.BASE_URL;
 const popularityMax = getPopularityMax(apps);
 
 export function getStaticPaths() {
-  return apps.map((entry) => ({ params: { slug: entry.slug } }));
+  return (data as unknown as AppsData).apps.map((entry) => ({ params: { slug: entry.slug } }));
 }
 
 if (!app) {
@@ -20,11 +22,15 @@ if (!app) {
 }
 
 const scores = getAppScores(app, popularityMax);
-const qualityBreakdown = scores.qualityBreakdown;
-const missingItems = qualityBreakdown.filter((item) => !item.earned);
+const qualityBreakdown: ScoreBreakdownItem[] = scores.qualityBreakdown;
 const qualityMaxPoints = qualityBreakdown.reduce((total, item) => total + item.points, 0);
 
-const prompt = `You are an expert engineer. Review this app's metadata and suggest concrete improvements to raise its quality score and overall appeal.\n\nApp: ${app.name}\nRepository: ${app.github}\nDescription: ${app.description}\n\nCurrent quality score: ${scores.quality}/${qualityMaxPoints}\nMissing quality points:\n${missingItems.length ? missingItems.map((item) => `- ${item.label} (+${item.points})`).join("\n") : "- None"}\n\nPlease provide a prioritized checklist with quick wins first, then bigger improvements. Include specific file changes or tooling suggestions when possible.`;
+const prompt = buildImprovementPrompt({
+  app,
+  qualityScore: scores.quality,
+  qualityMaxPoints,
+  qualityBreakdown,
+});
 ---
 
 <Layout title={`${app.name} · Small App Garden`} description={`Score breakdown for ${app.name}`}> 
@@ -55,12 +61,12 @@ const prompt = `You are an expert engineer. Review this app's metadata and sugge
   <section class="grid gap-6 md:grid-cols-3 mb-10">
     <div class="bg-white rounded-lg border border-gray-100 p-5 shadow-sm">
       <p class="text-xs uppercase text-gray-500">Popularity score</p>
-      <p class="text-3xl font-bold text-gray-900 mt-2">{scores.popularity}</p>
+      <p class="text-2xl font-bold text-gray-900 mt-2">{scores.popularity}</p>
       <div class="text-sm text-gray-500 mt-2">Stars: {app.hygiene?.stars ?? 0} · Forks: {app.hygiene?.forks ?? 0} (forks weighted 80%)</div>
     </div>
     <div class="bg-white rounded-lg border border-gray-100 p-5 shadow-sm">
       <p class="text-xs uppercase text-gray-500">Quality score</p>
-      <p class="text-3xl font-bold text-gray-900 mt-2">{scores.quality}</p>
+      <p class="text-2xl font-bold text-gray-900 mt-2">{scores.quality}</p>
       <div class="text-sm text-gray-500 mt-2">Out of {qualityMaxPoints} possible points.</div>
     </div>
     <div class="bg-white rounded-lg border border-gray-100 p-5 shadow-sm">
@@ -80,7 +86,18 @@ const prompt = `You are an expert engineer. Review this app's metadata and sugge
               <Icon name={item.earned ? 'lucide:check' : 'lucide:x'} class="w-4 h-4" />
             </span>
             <div>
-              <p class="text-sm font-medium text-gray-800">{item.label}</p>
+              {(item as any).href ? (
+                <a
+                  class="text-sm font-medium text-gray-800 hover:underline decoration-current underline-offset-2"
+                  href={(item as any).href}
+                  target="_blank"
+                  rel="noopener"
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <p class="text-sm font-medium text-gray-800">{item.label}</p>
+              )}
               <p class="text-xs text-gray-500">{item.points} points</p>
             </div>
           </div>
@@ -122,7 +139,7 @@ const prompt = `You are an expert engineer. Review this app's metadata and sugge
         <li><span class="font-medium">Package manager:</span> {typeof app.stack.packageManager === 'string' ? app.stack.packageManager : 'Multiple'}</li>
         {app.stack.uiLibrary && <li><span class="font-medium">UI library:</span> {app.stack.uiLibrary}</li>}
         {app.stack.orm && <li><span class="font-medium">ORM:</span> {app.stack.orm}</li>}
-        {app.stack.auth && <li><span class="font-medium">Auth:</span> {app.stack.auth}</li>}
+        {(app.stack as any).auth && <li><span class="font-medium">Auth:</span> {(app.stack as any).auth}</li>}
         {app.stack.monorepo && <li><span class="font-medium">Monorepo:</span> Yes</li>}
       </ul>
     </div>
@@ -151,6 +168,10 @@ const prompt = `You are an expert engineer. Review this app's metadata and sugge
       <div class="flex items-center justify-between rounded-md border border-gray-100 p-3">
         <span class="text-sm text-gray-700">README</span>
         <span class="text-sm font-medium text-gray-600">{app.hygiene?.hasReadme ? 'Yes' : 'No'}</span>
+      </div>
+      <div class="flex items-center justify-between rounded-md border border-gray-100 p-3">
+        <span class="text-sm text-gray-700">AGENTS.md</span>
+        <span class="text-sm font-medium text-gray-600">{app.hygiene?.hasAgentsMd ? 'Yes' : 'No'}</span>
       </div>
       <div class="flex items-center justify-between rounded-md border border-gray-100 p-3">
         <span class="text-sm text-gray-700">README images</span>

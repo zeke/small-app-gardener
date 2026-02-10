@@ -4,8 +4,9 @@ import CloudflareProduct from '../components/CloudflareProduct.astro';
 import { Icon } from 'astro-icon/components';
 import data from '../data.json';
 import { getAppScores, getPopularityMax, getQualityMaxPoints } from '../lib/scores';
+import type { AppsData } from '../../../schema';
 
-const { apps, summary, lastUpdated, totalApps, cloudflareCatalog } = data;
+const { apps, summary, lastUpdated, totalApps, cloudflareCatalog } = data as unknown as AppsData;
 const baseUrl = import.meta.env.BASE_URL;
 const popularityMax = getPopularityMax(apps);
 
@@ -25,9 +26,9 @@ const leaderboardRows = sortedApps.map((app, index) => ({
 
 const qualityMaxPoints = getQualityMaxPoints();
 
-const shortDescription = (description) => {
+const shortDescription = (description: string | undefined | null) => {
   if (!description) {
-    return "";
+    return '';
   }
 
   const trimmed = description.trim();
@@ -41,9 +42,9 @@ const shortDescription = (description) => {
   return firstSentence;
 };
 
-const statusIconName = (value) => (value ? "lucide:check" : "lucide:x");
-const statusIconClass = (value) => (value ? "text-green-500" : "text-red-400");
-const statusTooltip = (value, yesLabel, noLabel) => (value ? yesLabel : noLabel);
+const statusIconName = (value: boolean) => (value ? 'lucide:check' : 'lucide:x');
+const statusIconClass = (value: boolean) => (value ? 'text-green-500' : 'text-red-400');
+const statusTooltip = (value: boolean, yesLabel: string, noLabel: string) => (value ? yesLabel : noLabel);
 
 // Get sorted products by frequency
 const sortedProducts = Object.entries(summary.cloudflareProducts)
@@ -146,7 +147,7 @@ const missingProducts = cloudflareCatalog
                     href={`${baseUrl}apps/${app.slug}/`}
                     class="text-orange-600 hover:underline font-medium"
                   >
-                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-orange-50 text-orange-600 text-xs font-semibold mr-2">{app.rank}</span>
+                    <span class="rank-badge inline-flex items-center justify-center w-6 h-6 rounded-full bg-orange-50 text-orange-600 text-xs font-semibold mr-2">{app.rank}</span>
                     {app.name}
                   </a>
                   <p class="text-xs text-gray-500 mt-1">{shortDescription(app.description)}</p>
@@ -174,19 +175,23 @@ const missingProducts = cloudflareCatalog
   </section>
 
   <script>
-    const buttons = Array.from(document.querySelectorAll('.score-toggle'));
-    const tbody = document.getElementById('leaderboard-body');
+    type SortKey = 'popularity' | 'quality';
 
-    const applySort = (sortKey) => {
+    const buttons = Array.from(
+      document.querySelectorAll<HTMLButtonElement>('.score-toggle')
+    );
+    const tbody = document.getElementById('leaderboard-body') as HTMLTableSectionElement | null;
+
+    const applySort = (sortKey: SortKey) => {
       if (!tbody) return;
-      const rows = Array.from(tbody.querySelectorAll('tr'));
+      const rows = Array.from(tbody.querySelectorAll<HTMLTableRowElement>('tr'));
       rows.sort((a, b) => {
         const aValue = Number(a.dataset[sortKey] || 0);
         const bValue = Number(b.dataset[sortKey] || 0);
         return bValue - aValue;
       });
       rows.forEach((row, index) => {
-        const badge = row.querySelector('span');
+        const badge = row.querySelector<HTMLElement>('.rank-badge');
         if (badge) {
           badge.textContent = `${index + 1}`;
         }
@@ -194,7 +199,7 @@ const missingProducts = cloudflareCatalog
       });
     };
 
-    const updateButtonStyles = (activeKey) => {
+    const updateButtonStyles = (activeKey: SortKey) => {
       buttons.forEach((button) => {
         const isActive = button.dataset.sort === activeKey;
         button.className = `score-toggle flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-medium ${
@@ -212,7 +217,7 @@ const missingProducts = cloudflareCatalog
 
     buttons.forEach((button) => {
       button.addEventListener('click', () => {
-        const sortKey = button.dataset.sort || 'popularity';
+        const sortKey = (button.dataset.sort as SortKey | undefined) ?? 'popularity';
         applySort(sortKey);
         updateButtonStyles(sortKey);
       });

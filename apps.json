@@ -1,13 +1,131 @@
 {
-  "lastUpdated": "2026-01-21",
+  "lastUpdated": "2026-02-10",
   "source": "https://developers.cloudflare.com/garden/",
-  "totalApps": 11,
+  "totalApps": 12,
   "apps": [
+    {
+      "name": "BucketDrop",
+      "slug": "bucketdrop",
+      "description": "File uploads from your Mac menu bar. Bring your own R2 bucket.",
+      "url": "https://fonts.googleapis.com",
+      "github": "https://github.com/fayazara/bucketdrop",
+      "author": {
+        "name": "fayazara",
+        "github": "fayazara",
+        "avatar": "https://avatars.githubusercontent.com/fayazara"
+      },
+      "shippedDate": "2026-02-03",
+      "stack": {
+        "framework": "Unknown",
+        "language": "Unknown",
+        "buildTool": "Unknown",
+        "packageManager": "npm",
+        "uiLibrary": null
+      },
+      "dependencies": {
+        "runtime": {},
+        "dev": {}
+      },
+      "testing": {
+        "hasTests": false,
+        "framework": null,
+        "testFiles": []
+      },
+      "ci": {
+        "hasGitHubActions": false,
+        "workflows": []
+      },
+      "cloudflare": {
+        "products": [
+          "Workers"
+        ],
+        "bindings": {}
+      },
+      "replicate": {
+        "usesReplicate": false,
+        "models": [],
+        "apiIntegration": null
+      },
+      "hygiene": {
+        "hasDescription": true,
+        "description": "BucketDrop is a tiny, open-source menu bar app for uploading files to your own S3-compatible storage.  No dashboards. No syncing folders. No vendor lock-in.  Just drop a file and get a shareable URL instantly.",
+        "hasWebsite": false,
+        "websiteUrl": null,
+        "hasReadme": true,
+        "readmePath": "README.md",
+        "hasAgentsMd": false,
+        "agentsMdPath": null,
+        "readmeHasImage": true,
+        "readmeHasVideo": false,
+        "license": null,
+        "licensePath": null,
+        "stars": 189,
+        "forks": 27
+      },
+      "tags": [],
+      "scores": {
+        "popularity": 85,
+        "quality": 35,
+        "qualityBreakdown": [
+          {
+            "id": "tests",
+            "label": "Automated tests",
+            "points": 10,
+            "earned": false
+          },
+          {
+            "id": "ci",
+            "label": "Continuous integration",
+            "points": 10,
+            "earned": false
+          },
+          {
+            "id": "readme",
+            "label": "README documentation",
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/fayazara/bucketdrop/blob/HEAD/README.md"
+          },
+          {
+            "id": "agentsmd",
+            "label": "AGENTS.md instructions",
+            "points": 20,
+            "earned": false
+          },
+          {
+            "id": "readme-media",
+            "label": "README images or videos",
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/fayazara/bucketdrop/blob/HEAD/README.md"
+          },
+          {
+            "id": "description",
+            "label": "Repository description",
+            "points": 15,
+            "earned": true,
+            "href": "https://github.com/fayazara/bucketdrop"
+          },
+          {
+            "id": "website",
+            "label": "Project website",
+            "points": 15,
+            "earned": false
+          },
+          {
+            "id": "license",
+            "label": "License file",
+            "points": 10,
+            "earned": false
+          }
+        ]
+      }
+    },
     {
       "name": "Image Editing Arena",
       "slug": "image-editing-arena",
       "description": "AI-powered image editing arena. Upload images and apply transformations using cutting-edge models, then compare results side-by-side.",
-      "url": "https://replicate.com/",
+      "url": "https://fonts.googleapis.com",
       "github": "https://github.com/replicate/image-editing-arena",
       "author": {
         "name": "replicate",
@@ -64,52 +182,59 @@
         "hasWebsite": false,
         "websiteUrl": null,
         "hasReadme": true,
+        "readmePath": "README.md",
+        "hasAgentsMd": false,
+        "agentsMdPath": null,
         "readmeHasImage": true,
         "readmeHasVideo": false,
         "license": null,
+        "licensePath": null,
         "stars": 7,
         "forks": 3
       },
       "tags": [],
       "scores": {
         "popularity": 35,
-        "quality": 30,
+        "quality": 35,
         "qualityBreakdown": [
           {
             "id": "tests",
             "label": "Automated tests",
-            "points": 20,
+            "points": 10,
             "earned": false
           },
           {
             "id": "ci",
             "label": "Continuous integration",
-            "points": 15,
+            "points": 10,
             "earned": false
           },
           {
             "id": "readme",
             "label": "README documentation",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/replicate/image-editing-arena/blob/HEAD/README.md"
           },
           {
-            "id": "readme-image",
-            "label": "README images",
-            "points": 5,
-            "earned": true
-          },
-          {
-            "id": "readme-video",
-            "label": "README videos or GIFs",
-            "points": 5,
+            "id": "agentsmd",
+            "label": "AGENTS.md instructions",
+            "points": 20,
             "earned": false
+          },
+          {
+            "id": "readme-media",
+            "label": "README images or videos",
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/replicate/image-editing-arena/blob/HEAD/README.md"
           },
           {
             "id": "description",
             "label": "Repository description",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/replicate/image-editing-arena"
           },
           {
             "id": "website",
@@ -120,7 +245,7 @@
           {
             "id": "license",
             "label": "License file",
-            "points": 15,
+            "points": 10,
             "earned": false
           }
         ]
@@ -130,14 +255,14 @@
       "name": "SYSTEM",
       "slug": "system",
       "description": "Control your Mac from anywhere with AI. Play music, send messages, run commands, and automate with Raycast extensions.",
-      "url": "https://developers.cloudflare.com/garden/system",
+      "url": "https://fonts.googleapis.com",
       "github": "https://github.com/ygwyg/system",
       "author": {
         "name": "ygwyg",
         "github": "ygwyg",
         "avatar": "https://avatars.githubusercontent.com/ygwyg"
       },
-      "shippedDate": "2026-01-08",
+      "shippedDate": "2026-01-19",
       "stack": {
         "framework": "Express",
         "language": "TypeScript",
@@ -201,63 +326,71 @@
         "hasWebsite": true,
         "websiteUrl": "https://system.surf",
         "hasReadme": true,
+        "readmePath": "README.md",
+        "hasAgentsMd": false,
+        "agentsMdPath": null,
         "readmeHasImage": false,
         "readmeHasVideo": false,
         "license": null,
-        "stars": 287,
-        "forks": 14
+        "licensePath": null,
+        "stars": 292,
+        "forks": 16
       },
       "tags": [],
       "scores": {
-        "popularity": 76,
-        "quality": 60,
+        "popularity": 78,
+        "quality": 50,
         "qualityBreakdown": [
           {
             "id": "tests",
             "label": "Automated tests",
-            "points": 20,
-            "earned": true
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/ygwyg/system/blob/HEAD/src/bridge/tools/__tests__/command.test.ts"
           },
           {
             "id": "ci",
             "label": "Continuous integration",
-            "points": 15,
+            "points": 10,
             "earned": false
           },
           {
             "id": "readme",
             "label": "README documentation",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/ygwyg/system/blob/HEAD/README.md"
           },
           {
-            "id": "readme-image",
-            "label": "README images",
-            "points": 5,
+            "id": "agentsmd",
+            "label": "AGENTS.md instructions",
+            "points": 20,
             "earned": false
           },
           {
-            "id": "readme-video",
-            "label": "README videos or GIFs",
-            "points": 5,
+            "id": "readme-media",
+            "label": "README images or videos",
+            "points": 10,
             "earned": false
           },
           {
             "id": "description",
             "label": "Repository description",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/ygwyg/system"
           },
           {
             "id": "website",
             "label": "Project website",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://system.surf"
           },
           {
             "id": "license",
             "label": "License file",
-            "points": 15,
+            "points": 10,
             "earned": false
           }
         ]
@@ -349,52 +482,60 @@
         "hasWebsite": false,
         "websiteUrl": null,
         "hasReadme": true,
+        "readmePath": "README.md",
+        "hasAgentsMd": true,
+        "agentsMdPath": "AGENTS.md",
         "readmeHasImage": true,
         "readmeHasVideo": true,
         "license": "MIT",
+        "licensePath": "LICENSE",
         "stars": 18,
         "forks": 3
       },
       "tags": [],
       "scores": {
         "popularity": 39,
-        "quality": 50,
+        "quality": 65,
         "qualityBreakdown": [
           {
             "id": "tests",
             "label": "Automated tests",
-            "points": 20,
+            "points": 10,
             "earned": false
           },
           {
             "id": "ci",
             "label": "Continuous integration",
-            "points": 15,
+            "points": 10,
             "earned": false
           },
           {
             "id": "readme",
             "label": "README documentation",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/craigsdennis/fauxto-booth/blob/HEAD/README.md"
           },
           {
-            "id": "readme-image",
-            "label": "README images",
-            "points": 5,
-            "earned": true
+            "id": "agentsmd",
+            "label": "AGENTS.md instructions",
+            "points": 20,
+            "earned": true,
+            "href": "https://github.com/craigsdennis/fauxto-booth/blob/HEAD/AGENTS.md"
           },
           {
-            "id": "readme-video",
-            "label": "README videos or GIFs",
-            "points": 5,
-            "earned": true
+            "id": "readme-media",
+            "label": "README images or videos",
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/craigsdennis/fauxto-booth/blob/HEAD/README.md"
           },
           {
             "id": "description",
             "label": "Repository description",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/craigsdennis/fauxto-booth"
           },
           {
             "id": "website",
@@ -405,8 +546,9 @@
           {
             "id": "license",
             "label": "License file",
-            "points": 15,
-            "earned": true
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/craigsdennis/fauxto-booth/blob/HEAD/LICENSE"
           }
         ]
       }
@@ -415,7 +557,7 @@
       "name": "The Coffee Cluster",
       "slug": "the-coffee-cluster",
       "description": "An example Next.js application for PlanetScale with Hyperdrive",
-      "url": "https://thecoffeecluster.com/",
+      "url": "https://fonts.googleapis.com",
       "github": "https://github.com/jillesme/thecoffeecluster",
       "author": {
         "name": "jillesme",
@@ -515,63 +657,73 @@
         "hasWebsite": true,
         "websiteUrl": "https://thecoffeecluster.com/",
         "hasReadme": true,
+        "readmePath": "README.md",
+        "hasAgentsMd": false,
+        "agentsMdPath": null,
         "readmeHasImage": true,
         "readmeHasVideo": true,
         "license": null,
+        "licensePath": null,
         "stars": 4,
         "forks": 2
       },
       "tags": [],
       "scores": {
-        "popularity": 28,
-        "quality": 85,
+        "popularity": 27,
+        "quality": 70,
         "qualityBreakdown": [
           {
             "id": "tests",
             "label": "Automated tests",
-            "points": 20,
-            "earned": true
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/jillesme/thecoffeecluster/blob/HEAD/src/app/api/beans/[id]/route.test.ts"
           },
           {
             "id": "ci",
             "label": "Continuous integration",
-            "points": 15,
-            "earned": true
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/jillesme/thecoffeecluster/blob/HEAD/.github/workflows/ci.yml"
           },
           {
             "id": "readme",
             "label": "README documentation",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/jillesme/thecoffeecluster/blob/HEAD/README.md"
           },
           {
-            "id": "readme-image",
-            "label": "README images",
-            "points": 5,
-            "earned": true
+            "id": "agentsmd",
+            "label": "AGENTS.md instructions",
+            "points": 20,
+            "earned": false
           },
           {
-            "id": "readme-video",
-            "label": "README videos or GIFs",
-            "points": 5,
-            "earned": true
+            "id": "readme-media",
+            "label": "README images or videos",
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/jillesme/thecoffeecluster/blob/HEAD/README.md"
           },
           {
             "id": "description",
             "label": "Repository description",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/jillesme/thecoffeecluster"
           },
           {
             "id": "website",
             "label": "Project website",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://thecoffeecluster.com/"
           },
           {
             "id": "license",
             "label": "License file",
-            "points": 15,
+            "points": 10,
             "earned": false
           }
         ]
@@ -651,196 +803,72 @@
         "hasWebsite": true,
         "websiteUrl": "https://virtual-try-on.h-demo.workers.dev/",
         "hasReadme": true,
+        "readmePath": "README.md",
+        "hasAgentsMd": false,
+        "agentsMdPath": null,
         "readmeHasImage": false,
         "readmeHasVideo": false,
         "license": "MIT",
+        "licensePath": "LICENSE",
         "stars": 9,
         "forks": 3
       },
       "tags": [],
       "scores": {
         "popularity": 36,
-        "quality": 55,
-        "qualityBreakdown": [
-          {
-            "id": "tests",
-            "label": "Automated tests",
-            "points": 20,
-            "earned": false
-          },
-          {
-            "id": "ci",
-            "label": "Continuous integration",
-            "points": 15,
-            "earned": false
-          },
-          {
-            "id": "readme",
-            "label": "README documentation",
-            "points": 10,
-            "earned": true
-          },
-          {
-            "id": "readme-image",
-            "label": "README images",
-            "points": 5,
-            "earned": false
-          },
-          {
-            "id": "readme-video",
-            "label": "README videos or GIFs",
-            "points": 5,
-            "earned": false
-          },
-          {
-            "id": "description",
-            "label": "Repository description",
-            "points": 15,
-            "earned": true
-          },
-          {
-            "id": "website",
-            "label": "Project website",
-            "points": 15,
-            "earned": true
-          },
-          {
-            "id": "license",
-            "label": "License file",
-            "points": 15,
-            "earned": true
-          }
-        ]
-      }
-    },
-    {
-      "name": "InboxBuddy",
-      "slug": "inboxbuddy",
-      "description": "AI-powered scheduling assistant. Just CC the bot in any email and it handles meeting coordination, calendar checks, and booking automatically.",
-      "url": "https://developers.cloudflare.com/garden/inboxbuddy",
-      "github": "https://github.com/whoiskatrin/inboxbuddy",
-      "author": {
-        "name": "whoiskatrin",
-        "github": "whoiskatrin",
-        "avatar": "https://avatars.githubusercontent.com/whoiskatrin"
-      },
-      "shippedDate": "2026-01-08",
-      "stack": {
-        "framework": "Workers",
-        "language": "TypeScript",
-        "buildTool": "wrangler",
-        "packageManager": "npm",
-        "uiLibrary": null
-      },
-      "dependencies": {
-        "runtime": {
-          "@anthropic-ai/sdk": "^0.71.2",
-          "agents": "^0.3.3",
-          "mimetext": "^3.0.27",
-          "postal-mime": "^2.7.1"
-        },
-        "dev": {
-          "@cloudflare/vitest-pool-workers": "^0.8.19",
-          "@types/node": "^25.0.3",
-          "typescript": "^5.5.2",
-          "vitest": "~3.2.0",
-          "wrangler": "^4.54.0"
-        }
-      },
-      "testing": {
-        "hasTests": true,
-        "framework": "vitest",
-        "testFiles": [
-          "test/env.d.ts",
-          "test/index.spec.ts",
-          "test/tsconfig.json"
-        ]
-      },
-      "ci": {
-        "hasGitHubActions": false,
-        "workflows": []
-      },
-      "cloudflare": {
-        "products": [
-          "Workers",
-          "Agents",
-          "D1",
-          "KV",
-          "Durable Objects",
-          "Workers AI",
-          "Static Assets"
-        ],
-        "bindings": {}
-      },
-      "replicate": {
-        "usesReplicate": false,
-        "models": [],
-        "apiIntegration": null
-      },
-      "hygiene": {
-        "hasDescription": true,
-        "description": "AI Scheduling Assistant ",
-        "hasWebsite": false,
-        "websiteUrl": null,
-        "hasReadme": true,
-        "readmeHasImage": true,
-        "readmeHasVideo": false,
-        "license": null,
-        "stars": 24,
-        "forks": 3
-      },
-      "tags": [],
-      "scores": {
-        "popularity": 40,
         "quality": 50,
         "qualityBreakdown": [
           {
             "id": "tests",
             "label": "Automated tests",
-            "points": 20,
-            "earned": true
+            "points": 10,
+            "earned": false
           },
           {
             "id": "ci",
             "label": "Continuous integration",
-            "points": 15,
+            "points": 10,
             "earned": false
           },
           {
             "id": "readme",
             "label": "README documentation",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/harshil1712/virtual-try-on-demo/blob/HEAD/README.md"
           },
           {
-            "id": "readme-image",
-            "label": "README images",
-            "points": 5,
-            "earned": true
+            "id": "agentsmd",
+            "label": "AGENTS.md instructions",
+            "points": 20,
+            "earned": false
           },
           {
-            "id": "readme-video",
-            "label": "README videos or GIFs",
-            "points": 5,
+            "id": "readme-media",
+            "label": "README images or videos",
+            "points": 10,
             "earned": false
           },
           {
             "id": "description",
             "label": "Repository description",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/harshil1712/virtual-try-on-demo"
           },
           {
             "id": "website",
             "label": "Project website",
             "points": 15,
-            "earned": false
+            "earned": true,
+            "href": "https://virtual-try-on.h-demo.workers.dev/"
           },
           {
             "id": "license",
             "label": "License file",
-            "points": 15,
-            "earned": false
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/harshil1712/virtual-try-on-demo/blob/HEAD/LICENSE"
           }
         ]
       }
@@ -856,7 +884,7 @@
         "github": "lauragift21",
         "avatar": "https://avatars.githubusercontent.com/lauragift21"
       },
-      "shippedDate": "2026-01-08",
+      "shippedDate": "2026-01-19",
       "stack": {
         "framework": "Workers",
         "language": "TypeScript",
@@ -949,63 +977,214 @@
         "hasWebsite": true,
         "websiteUrl": "https://kivo.lauragift.workers.dev",
         "hasReadme": true,
+        "readmePath": "README.md",
+        "hasAgentsMd": true,
+        "agentsMdPath": "AGENTS.md",
         "readmeHasImage": true,
         "readmeHasVideo": true,
         "license": null,
+        "licensePath": null,
         "stars": 9,
         "forks": 2
       },
       "tags": [],
       "scores": {
         "popularity": 31,
-        "quality": 85,
+        "quality": 90,
         "qualityBreakdown": [
           {
             "id": "tests",
             "label": "Automated tests",
-            "points": 20,
-            "earned": true
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/lauragift21/kivo/blob/HEAD/apps/api/src/durable-objects/reminder-scheduler.test.ts"
           },
           {
             "id": "ci",
             "label": "Continuous integration",
-            "points": 15,
-            "earned": true
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/lauragift21/kivo/tree/HEAD/.github/workflows"
           },
           {
             "id": "readme",
             "label": "README documentation",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/lauragift21/kivo/blob/HEAD/README.md"
           },
           {
-            "id": "readme-image",
-            "label": "README images",
-            "points": 5,
-            "earned": true
+            "id": "agentsmd",
+            "label": "AGENTS.md instructions",
+            "points": 20,
+            "earned": true,
+            "href": "https://github.com/lauragift21/kivo/blob/HEAD/AGENTS.md"
           },
           {
-            "id": "readme-video",
-            "label": "README videos or GIFs",
-            "points": 5,
-            "earned": true
+            "id": "readme-media",
+            "label": "README images or videos",
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/lauragift21/kivo/blob/HEAD/README.md"
           },
           {
             "id": "description",
             "label": "Repository description",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/lauragift21/kivo"
           },
           {
             "id": "website",
             "label": "Project website",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://kivo.lauragift.workers.dev"
           },
           {
             "id": "license",
             "label": "License file",
+            "points": 10,
+            "earned": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "InboxBuddy",
+      "slug": "inboxbuddy",
+      "description": "AI-powered scheduling assistant. Just CC the bot in any email and it handles meeting coordination, calendar checks, and booking automatically.",
+      "url": "https://fonts.googleapis.com",
+      "github": "https://github.com/whoiskatrin/inboxbuddy",
+      "author": {
+        "name": "whoiskatrin",
+        "github": "whoiskatrin",
+        "avatar": "https://avatars.githubusercontent.com/whoiskatrin"
+      },
+      "shippedDate": "2026-01-19",
+      "stack": {
+        "framework": "Workers",
+        "language": "TypeScript",
+        "buildTool": "wrangler",
+        "packageManager": "npm",
+        "uiLibrary": null
+      },
+      "dependencies": {
+        "runtime": {
+          "@anthropic-ai/sdk": "^0.71.2",
+          "agents": "^0.3.3",
+          "mimetext": "^3.0.27",
+          "postal-mime": "^2.7.1"
+        },
+        "dev": {
+          "@cloudflare/vitest-pool-workers": "^0.8.19",
+          "@types/node": "^25.0.3",
+          "typescript": "^5.5.2",
+          "vitest": "~3.2.0",
+          "wrangler": "^4.54.0"
+        }
+      },
+      "testing": {
+        "hasTests": true,
+        "framework": "vitest",
+        "testFiles": [
+          "test/env.d.ts",
+          "test/index.spec.ts",
+          "test/tsconfig.json"
+        ]
+      },
+      "ci": {
+        "hasGitHubActions": false,
+        "workflows": []
+      },
+      "cloudflare": {
+        "products": [
+          "Workers",
+          "Agents",
+          "D1",
+          "KV",
+          "Durable Objects",
+          "Workers AI",
+          "Static Assets"
+        ],
+        "bindings": {}
+      },
+      "replicate": {
+        "usesReplicate": false,
+        "models": [],
+        "apiIntegration": null
+      },
+      "hygiene": {
+        "hasDescription": true,
+        "description": "AI Scheduling Assistant ",
+        "hasWebsite": false,
+        "websiteUrl": null,
+        "hasReadme": true,
+        "readmePath": "README.md",
+        "hasAgentsMd": false,
+        "agentsMdPath": null,
+        "readmeHasImage": true,
+        "readmeHasVideo": false,
+        "license": null,
+        "licensePath": null,
+        "stars": 24,
+        "forks": 2
+      },
+      "tags": [],
+      "scores": {
+        "popularity": 35,
+        "quality": 45,
+        "qualityBreakdown": [
+          {
+            "id": "tests",
+            "label": "Automated tests",
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/whoiskatrin/inboxbuddy/blob/HEAD/test/env.d.ts"
+          },
+          {
+            "id": "ci",
+            "label": "Continuous integration",
+            "points": 10,
+            "earned": false
+          },
+          {
+            "id": "readme",
+            "label": "README documentation",
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/whoiskatrin/inboxbuddy/blob/HEAD/README.md"
+          },
+          {
+            "id": "agentsmd",
+            "label": "AGENTS.md instructions",
+            "points": 20,
+            "earned": false
+          },
+          {
+            "id": "readme-media",
+            "label": "README images or videos",
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/whoiskatrin/inboxbuddy/blob/HEAD/README.md"
+          },
+          {
+            "id": "description",
+            "label": "Repository description",
             "points": 15,
+            "earned": true,
+            "href": "https://github.com/whoiskatrin/inboxbuddy"
+          },
+          {
+            "id": "website",
+            "label": "Project website",
+            "points": 15,
+            "earned": false
+          },
+          {
+            "id": "license",
+            "label": "License file",
+            "points": 10,
             "earned": false
           }
         ]
@@ -1015,14 +1194,14 @@
       "name": "Weft",
       "slug": "weft",
       "description": "Task management where AI agents do your tasks. Create tasks, assign them to agents, and they work on emails, spreadsheets, PRs, and code.",
-      "url": "https://developers.cloudflare.com/garden/weft",
+      "url": "https://fonts.googleapis.com",
       "github": "https://github.com/jonesphillip/weft",
       "author": {
         "name": "jonesphillip",
         "github": "jonesphillip",
         "avatar": "https://avatars.githubusercontent.com/jonesphillip"
       },
-      "shippedDate": "2026-01-08",
+      "shippedDate": "2026-01-19",
       "stack": {
         "framework": "React 19",
         "language": "TypeScript",
@@ -1094,52 +1273,60 @@
         "hasWebsite": false,
         "websiteUrl": null,
         "hasReadme": true,
+        "readmePath": "README.md",
+        "hasAgentsMd": false,
+        "agentsMdPath": null,
         "readmeHasImage": true,
         "readmeHasVideo": false,
         "license": "Apache-2.0",
-        "stars": 439,
-        "forks": 49
+        "licensePath": "LICENSE",
+        "stars": 475,
+        "forks": 50
       },
       "tags": [],
       "scores": {
         "popularity": 100,
-        "quality": 65,
+        "quality": 55,
         "qualityBreakdown": [
           {
             "id": "tests",
             "label": "Automated tests",
-            "points": 20,
-            "earned": true
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/jonesphillip/weft/blob/HEAD/tests/mocks/cloudflare-sandbox.ts"
           },
           {
             "id": "ci",
             "label": "Continuous integration",
-            "points": 15,
+            "points": 10,
             "earned": false
           },
           {
             "id": "readme",
             "label": "README documentation",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/jonesphillip/weft/blob/HEAD/README.md"
           },
           {
-            "id": "readme-image",
-            "label": "README images",
-            "points": 5,
-            "earned": true
-          },
-          {
-            "id": "readme-video",
-            "label": "README videos or GIFs",
-            "points": 5,
+            "id": "agentsmd",
+            "label": "AGENTS.md instructions",
+            "points": 20,
             "earned": false
+          },
+          {
+            "id": "readme-media",
+            "label": "README images or videos",
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/jonesphillip/weft/blob/HEAD/README.md"
           },
           {
             "id": "description",
             "label": "Repository description",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/jonesphillip/weft"
           },
           {
             "id": "website",
@@ -1150,8 +1337,9 @@
           {
             "id": "license",
             "label": "License file",
-            "points": 15,
-            "earned": true
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/jonesphillip/weft/blob/HEAD/LICENSE"
           }
         ]
       }
@@ -1160,7 +1348,7 @@
       "name": "Keyboardia",
       "slug": "keyboardia",
       "description": "A multiplayer step sequencer with polyrhythmic patterns, built for real-time collaboration. Create/Collaborate. Remix. Share.",
-      "url": "https://developers.cloudflare.com/garden/keyboardia",
+      "url": "https://fonts.googleapis.com",
       "github": "https://github.com/adewale/keyboardia",
       "author": {
         "name": "adewale",
@@ -1190,9 +1378,9 @@
           "app/e2e/drag-to-paint.spec.ts",
           "app/e2e/feature-flags.spec.ts",
           "app/e2e/keyboard.spec.ts",
+          "app/e2e/landscape-alignment.spec.ts",
           "app/e2e/last-cell-flicker.spec.ts",
-          "app/e2e/mobile-android.spec.ts",
-          "app/e2e/mobile-iphone.spec.ts"
+          "app/e2e/mobile-android.spec.ts"
         ]
       },
       "ci": {
@@ -1218,63 +1406,72 @@
         "hasWebsite": true,
         "websiteUrl": "https://keyboardia.dev/",
         "hasReadme": true,
+        "readmePath": "README.md",
+        "hasAgentsMd": false,
+        "agentsMdPath": null,
         "readmeHasImage": false,
         "readmeHasVideo": false,
         "license": null,
+        "licensePath": null,
         "stars": 1,
         "forks": 0
       },
       "tags": [],
       "scores": {
         "popularity": 3,
-        "quality": 75,
+        "quality": 60,
         "qualityBreakdown": [
           {
             "id": "tests",
             "label": "Automated tests",
-            "points": 20,
-            "earned": true
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/adewale/keyboardia/blob/HEAD/app/e2e/accessibility.spec.ts"
           },
           {
             "id": "ci",
             "label": "Continuous integration",
-            "points": 15,
-            "earned": true
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/adewale/keyboardia/blob/HEAD/.github/workflows/ci.yml"
           },
           {
             "id": "readme",
             "label": "README documentation",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/adewale/keyboardia/blob/HEAD/README.md"
           },
           {
-            "id": "readme-image",
-            "label": "README images",
-            "points": 5,
+            "id": "agentsmd",
+            "label": "AGENTS.md instructions",
+            "points": 20,
             "earned": false
           },
           {
-            "id": "readme-video",
-            "label": "README videos or GIFs",
-            "points": 5,
+            "id": "readme-media",
+            "label": "README images or videos",
+            "points": 10,
             "earned": false
           },
           {
             "id": "description",
             "label": "Repository description",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/adewale/keyboardia"
           },
           {
             "id": "website",
             "label": "Project website",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://keyboardia.dev/"
           },
           {
             "id": "license",
             "label": "License file",
-            "points": 15,
+            "points": 10,
             "earned": false
           }
         ]
@@ -1335,45 +1532,50 @@
         "hasWebsite": false,
         "websiteUrl": null,
         "hasReadme": true,
+        "readmePath": "README.md",
+        "hasAgentsMd": false,
+        "agentsMdPath": null,
         "readmeHasImage": false,
         "readmeHasVideo": false,
         "license": null,
-        "stars": 4,
+        "licensePath": null,
+        "stars": 5,
         "forks": 3
       },
       "tags": [],
       "scores": {
-        "popularity": 33,
+        "popularity": 34,
         "quality": 10,
         "qualityBreakdown": [
           {
             "id": "tests",
             "label": "Automated tests",
-            "points": 20,
+            "points": 10,
             "earned": false
           },
           {
             "id": "ci",
             "label": "Continuous integration",
-            "points": 15,
+            "points": 10,
             "earned": false
           },
           {
             "id": "readme",
             "label": "README documentation",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/fayazara/webhookflare/blob/HEAD/README.md"
           },
           {
-            "id": "readme-image",
-            "label": "README images",
-            "points": 5,
+            "id": "agentsmd",
+            "label": "AGENTS.md instructions",
+            "points": 20,
             "earned": false
           },
           {
-            "id": "readme-video",
-            "label": "README videos or GIFs",
-            "points": 5,
+            "id": "readme-media",
+            "label": "README images or videos",
+            "points": 10,
             "earned": false
           },
           {
@@ -1391,7 +1593,7 @@
           {
             "id": "license",
             "label": "License file",
-            "points": 15,
+            "points": 10,
             "earned": false
           }
         ]
@@ -1401,7 +1603,7 @@
       "name": "Kontext Realtime",
       "slug": "kontext-realtime",
       "description": "Create and edit images using your voice.",
-      "url": "https://replicate.com/",
+      "url": "https://fonts.googleapis.com",
       "github": "https://github.com/replicate/kontext-realtime",
       "author": {
         "name": "replicate",
@@ -1467,63 +1669,73 @@
         "hasWebsite": true,
         "websiteUrl": "https://replicate.com/docs/guides/openai-realtime",
         "hasReadme": true,
+        "readmePath": "README.md",
+        "hasAgentsMd": false,
+        "agentsMdPath": null,
         "readmeHasImage": true,
         "readmeHasVideo": true,
         "license": null,
-        "stars": 104,
+        "licensePath": null,
+        "stars": 105,
         "forks": 26
       },
       "tags": [],
       "scores": {
         "popularity": 82,
-        "quality": 85,
+        "quality": 70,
         "qualityBreakdown": [
           {
             "id": "tests",
             "label": "Automated tests",
-            "points": 20,
-            "earned": true
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/replicate/kontext-realtime/blob/HEAD/test/index.spec.ts"
           },
           {
             "id": "ci",
             "label": "Continuous integration",
-            "points": 15,
-            "earned": true
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/replicate/kontext-realtime/tree/HEAD/.github/workflows"
           },
           {
             "id": "readme",
             "label": "README documentation",
             "points": 10,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/replicate/kontext-realtime/blob/HEAD/README.md"
           },
           {
-            "id": "readme-image",
-            "label": "README images",
-            "points": 5,
-            "earned": true
+            "id": "agentsmd",
+            "label": "AGENTS.md instructions",
+            "points": 20,
+            "earned": false
           },
           {
-            "id": "readme-video",
-            "label": "README videos or GIFs",
-            "points": 5,
-            "earned": true
+            "id": "readme-media",
+            "label": "README images or videos",
+            "points": 10,
+            "earned": true,
+            "href": "https://github.com/replicate/kontext-realtime/blob/HEAD/README.md"
           },
           {
             "id": "description",
             "label": "Repository description",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://github.com/replicate/kontext-realtime"
           },
           {
             "id": "website",
             "label": "Project website",
             "points": 15,
-            "earned": true
+            "earned": true,
+            "href": "https://replicate.com/docs/guides/openai-realtime"
           },
           {
             "id": "license",
             "label": "License file",
-            "points": 15,
+            "points": 10,
             "earned": false
           }
         ]
@@ -1532,29 +1744,29 @@
   ],
   "summary": {
     "byFramework": {
+      "Unknown": 2,
       "React 19": 2,
       "Express": 1,
       "React + Hono": 2,
       "Next.js 15": 1,
       "Workers": 3,
-      "Unknown": 1,
       "Hono": 1
     },
     "byLanguage": {
-      "TypeScript": 10,
-      "Unknown": 1
+      "Unknown": 2,
+      "TypeScript": 10
     },
     "byPackageManager": {
-      "npm": 9,
+      "npm": 10,
       "pnpm": 2
     },
     "byBuildTool": {
+      "Unknown": 3,
       "Vite": 5,
-      "Unknown": 2,
       "wrangler": 4
     },
     "cloudflareProducts": {
-      "Workers": 11,
+      "Workers": 12,
       "Static Assets": 9,
       "Agents": 2,
       "R2": 4,
@@ -1564,20 +1776,20 @@
       "Workers AI": 7,
       "Hyperdrive": 1,
       "D1": 2,
-      "KV": 1,
       "Cron Triggers": 1,
+      "KV": 1,
       "Realtime": 1
     },
     "testing": {
       "withTests": 7,
-      "withoutTests": 4,
+      "withoutTests": 5,
       "testFrameworks": {
         "vitest": 6
       }
     },
     "ci": {
       "withGitHubActions": 4,
-      "withoutGitHubActions": 7
+      "withoutGitHubActions": 8
     },
     "replicate": {
       "appsUsingReplicate": 3,
@@ -1592,10 +1804,11 @@
       ]
     },
     "hygiene": {
-      "withDescription": 10,
+      "withDescription": 11,
       "withWebsite": 6,
-      "withReadme": 11,
-      "withImage": 7,
+      "withReadme": 12,
+      "withAgentsMd": 2,
+      "withImage": 8,
       "withVideo": 4
     },
     "scores": {

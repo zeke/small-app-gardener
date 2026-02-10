@@ -5,8 +5,9 @@ import icon from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://zeke.github.io',
-  base: process.env.NODE_ENV === 'development' ? '/' : '/small-app-gardener',
+  // Custom domain deploys at the origin root.
+  site: process.env.NODE_ENV === 'development' ? 'http://localhost:4321' : 'https://gardener.ziki.boo',
+  base: '/',
   vite: {
     plugins: [tailwindcss()]
   },
