@@ -14,7 +14,7 @@ const baseUrl = import.meta.env.BASE_URL;
 const popularityMax = getPopularityMax(apps);
 
 export function getStaticPaths() {
-  return data.apps.map((entry) => ({ params: { slug: entry.slug } }));
+  return (data as unknown as AppsData).apps.map((entry) => ({ params: { slug: entry.slug } }));
 }
 
 if (!app) {
