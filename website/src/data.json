@@ -1194,7 +1194,7 @@
       "name": "Weft",
       "slug": "weft",
       "description": "Task management where AI agents do your tasks. Create tasks, assign them to agents, and they work on emails, spreadsheets, PRs, and code.",
-      "url": "https://fonts.googleapis.com",
+      "url": "https://developers.cloudflare.com/garden/weft",
       "github": "https://github.com/jonesphillip/weft",
       "author": {
         "name": "jonesphillip",
