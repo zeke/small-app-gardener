@@ -438,21 +438,37 @@ async function analyzeRepo(githubUrl: string): Promise<RepoAnalysis> {
       analyzePackageJson(pkg, analysis);
     }
 
-    // Check for monorepo package.json files
-    const appsDir = join(cloneDir, "apps");
-    if (existsSync(appsDir)) {
-      analysis.monorepo = true;
-      const appDirs = readdirSync(appsDir).filter(d => 
-        statSync(join(appsDir, d)).isDirectory()
-      );
-      for (const appDir of appDirs) {
-        const appPkgPath = join(appsDir, appDir, "package.json");
-        if (existsSync(appPkgPath)) {
-          const appPkg = JSON.parse(fsReadFileSync(appPkgPath, "utf-8"));
-          analyzePackageJson(appPkg, analysis);
+    // Check for monorepo package.json files in common subdirectories
+    const monorepoParentDirs = ["apps", "packages", "worker", "workers"];
+    for (const parentName of monorepoParentDirs) {
+      const parentDir = join(cloneDir, parentName);
+      if (existsSync(parentDir) && statSync(parentDir).isDirectory()) {
+        analysis.monorepo = true;
+        const subDirs = readdirSync(parentDir).filter(d => 
+          statSync(join(parentDir, d)).isDirectory()
+        );
+        for (const subDir of subDirs) {
+          const subPkgPath = join(parentDir, subDir, "package.json");
+          if (existsSync(subPkgPath)) {
+            const subPkg = JSON.parse(fsReadFileSync(subPkgPath, "utf-8"));
+            analyzePackageJson(subPkg, analysis);
+          }
+          analyzeWranglerInDir(join(parentDir, subDir), analysis);
         }
-        // Check for wrangler config in app dirs
-        analyzeWranglerInDir(join(appsDir, appDir), analysis);
+      }
+    }
+
+    // Check common single-app subdirectories for package.json and wrangler config
+    const singleAppDirs = ["app", "web", "site", "frontend", "server", "api"];
+    for (const dirName of singleAppDirs) {
+      const subDir = join(cloneDir, dirName);
+      if (existsSync(subDir) && statSync(subDir).isDirectory()) {
+        const subPkgPath = join(subDir, "package.json");
+        if (existsSync(subPkgPath)) {
+          const subPkg = JSON.parse(fsReadFileSync(subPkgPath, "utf-8"));
+          analyzePackageJson(subPkg, analysis);
+        }
+        analyzeWranglerInDir(subDir, analysis);
       }
     }
 
