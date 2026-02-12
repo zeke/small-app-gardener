@@ -59,7 +59,7 @@
         "readmeHasVideo": false,
         "license": null,
         "licensePath": null,
-        "stars": 190,
+        "stars": 191,
         "forks": 28
       },
       "tags": [],
@@ -125,7 +125,7 @@
       "name": "Image Editing Arena",
       "slug": "image-editing-arena",
       "description": "AI-powered image editing arena. Upload images and apply transformations using cutting-edge models, then compare results side-by-side.",
-      "url": "https://fonts.googleapis.com",
+      "url": "https://replicate.com/",
       "github": "https://github.com/replicate/image-editing-arena",
       "author": {
         "name": "replicate",
