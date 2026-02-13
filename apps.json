@@ -64,7 +64,7 @@
       },
       "tags": [],
       "scores": {
-        "popularity": 86,
+        "popularity": 87,
         "quality": 35,
         "qualityBreakdown": [
           {
@@ -347,7 +347,7 @@
       },
       "tags": [],
       "scores": {
-        "popularity": 78,
+        "popularity": 79,
         "quality": 50,
         "qualityBreakdown": [
           {
@@ -679,7 +679,7 @@
       },
       "tags": [],
       "scores": {
-        "popularity": 27,
+        "popularity": 28,
         "quality": 70,
         "qualityBreakdown": [
           {
@@ -1292,8 +1292,8 @@
         "readmeHasVideo": false,
         "license": "Apache-2.0",
         "licensePath": "LICENSE",
-        "stars": 474,
-        "forks": 50
+        "stars": 473,
+        "forks": 46
       },
       "tags": [],
       "scores": {
@@ -1726,11 +1726,11 @@
         "license": null,
         "licensePath": null,
         "stars": 104,
-        "forks": 26
+        "forks": 25
       },
       "tags": [],
       "scores": {
-        "popularity": 81,
+        "popularity": 82,
         "quality": 70,
         "qualityBreakdown": [
           {
