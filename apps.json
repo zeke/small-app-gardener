@@ -347,7 +347,7 @@
       },
       "tags": [],
       "scores": {
-        "popularity": 78,
+        "popularity": 77,
         "quality": 50,
         "qualityBreakdown": [
           {
@@ -1293,7 +1293,7 @@
         "license": "Apache-2.0",
         "licensePath": "LICENSE",
         "stars": 474,
-        "forks": 46
+        "forks": 47
       },
       "tags": [],
       "scores": {
