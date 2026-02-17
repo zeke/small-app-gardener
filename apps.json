@@ -7,7 +7,7 @@
       "name": "BucketDrop",
       "slug": "bucketdrop",
       "description": "File uploads from your Mac menu bar. Bring your own R2 bucket.",
-      "url": "https://fonts.googleapis.com",
+      "url": "https://apps.apple.com/sg/app/bucketdrop-a-tiny-s3-client",
       "github": "https://github.com/fayazara/bucketdrop",
       "author": {
         "name": "fayazara",
@@ -1205,7 +1205,7 @@
       "name": "Weft",
       "slug": "weft",
       "description": "Task management where AI agents do your tasks. Create tasks, assign them to agents, and they work on emails, spreadsheets, PRs, and code.",
-      "url": "https://fonts.googleapis.com",
+      "url": "https://developers.cloudflare.com/garden/weft",
       "github": "https://github.com/jonesphillip/weft",
       "author": {
         "name": "jonesphillip",
