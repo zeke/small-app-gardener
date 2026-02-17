@@ -567,7 +567,7 @@
       "name": "The Coffee Cluster",
       "slug": "the-coffee-cluster",
       "description": "An example Next.js application for PlanetScale with Hyperdrive",
-      "url": "https://thecoffeecluster.com/",
+      "url": "https://fonts.googleapis.com",
       "github": "https://github.com/jillesme/thecoffeecluster",
       "author": {
         "name": "jillesme",
@@ -1360,7 +1360,7 @@
       "name": "Keyboardia",
       "slug": "keyboardia",
       "description": "A multiplayer step sequencer with polyrhythmic patterns, built for real-time collaboration. Create/Collaborate. Remix. Share.",
-      "url": "https://developers.cloudflare.com/garden/keyboardia",
+      "url": "https://fonts.googleapis.com",
       "github": "https://github.com/adewale/keyboardia",
       "author": {
         "name": "adewale",
