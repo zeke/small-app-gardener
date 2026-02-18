@@ -1360,7 +1360,7 @@
       "name": "Keyboardia",
       "slug": "keyboardia",
       "description": "A multiplayer step sequencer with polyrhythmic patterns, built for real-time collaboration. Create/Collaborate. Remix. Share.",
-      "url": "https://fonts.googleapis.com",
+      "url": "https://developers.cloudflare.com/garden/keyboardia",
       "github": "https://github.com/adewale/keyboardia",
       "author": {
         "name": "adewale",
@@ -1652,7 +1652,7 @@
       "name": "Kontext Realtime",
       "slug": "kontext-realtime",
       "description": "Create and edit images using your voice.",
-      "url": "https://fonts.googleapis.com",
+      "url": "https://replicate.com/",
       "github": "https://github.com/replicate/kontext-realtime",
       "author": {
         "name": "replicate",
