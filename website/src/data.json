@@ -7,7 +7,7 @@
       "name": "BucketDrop",
       "slug": "bucketdrop",
       "description": "File uploads from your Mac menu bar. Bring your own R2 bucket.",
-      "url": "https://apps.apple.com/sg/app/bucketdrop-a-tiny-s3-client",
+      "url": "https://fonts.googleapis.com",
       "github": "https://github.com/fayazara/bucketdrop",
       "author": {
         "name": "fayazara",
@@ -255,7 +255,7 @@
       "name": "SYSTEM",
       "slug": "system",
       "description": "Control your Mac from anywhere with AI. Play music, send messages, run commands, and automate with Raycast extensions.",
-      "url": "https://developers.cloudflare.com/garden/system",
+      "url": "https://fonts.googleapis.com",
       "github": "https://github.com/ygwyg/system",
       "author": {
         "name": "ygwyg",
@@ -1205,7 +1205,7 @@
       "name": "Weft",
       "slug": "weft",
       "description": "Task management where AI agents do your tasks. Create tasks, assign them to agents, and they work on emails, spreadsheets, PRs, and code.",
-      "url": "https://developers.cloudflare.com/garden/weft",
+      "url": "https://fonts.googleapis.com",
       "github": "https://github.com/jonesphillip/weft",
       "author": {
         "name": "jonesphillip",
