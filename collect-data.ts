@@ -14,6 +14,7 @@ import { writeFileSync, existsSync, rmSync, readdirSync, statSync, readFileSync 
 import { execSync } from "child_process";
 import { join } from "path";
 import { tmpdir } from "os";
+import { pathToFileURL } from "url";
 import { CLOUDFLARE_PRODUCT_CATALOG, type App } from "./schema";
 import {
   buildQualityBreakdown,
@@ -144,26 +145,40 @@ async function fetchText(url: string): Promise<string> {
   return response.text();
 }
 
+export function parseGardenSlugs(html: string): string[] {
+  const slugs = new Set<string>();
+  const slugPatterns = [
+    /href="\/garden\/([^"\/]+)"/g,
+    /data-slug="([^"]+)"/g,
+    /href="\/([^"\/?#]+)\/"/g,
+  ];
+
+  for (const pattern of slugPatterns) {
+    let match;
+    while ((match = pattern.exec(html)) !== null) {
+      const slug = match[1];
+      if (
+        slug &&
+        !slug.startsWith("?") &&
+        slug !== "images" &&
+        slug !== "submit"
+      ) {
+        slugs.add(slug);
+      }
+    }
+  }
+
+  return [...slugs];
+}
+
 // Fetch the garden page and extract app slugs
 async function fetchGardenSlugs(): Promise<string[]> {
   console.log("Fetching garden page...");
   const html = await fetchText(GARDEN_URL);
+  const slugs = parseGardenSlugs(html);
 
-  // Extract app cards from the HTML
-  // Look for links to /garden/{slug} pages
-  const appLinkRegex = /href="\/garden\/([^"\/]+)"/g;
-  const slugs = new Set<string>();
-
-  let match;
-  while ((match = appLinkRegex.exec(html)) !== null) {
-    const slug = match[1];
-    if (slug && !slug.startsWith("?") && slug !== "images") {
-      slugs.add(slug);
-    }
-  }
-
-  console.log(`Found ${slugs.size} app slugs`);
-  return [...slugs];
+  console.log(`Found ${slugs.length} app slugs`);
+  return slugs;
 }
 
 async function fetchGardenApps(): Promise<AppBasicInfo[]> {
@@ -231,7 +246,7 @@ async function checkForAppChanges(): Promise<void> {
 
 async function fetchAppDetails(slug: string): Promise<AppBasicInfo | null> {
   console.log(`  Fetching details for ${slug}...`);
-  const url = `${GARDEN_URL}${slug}`;
+  const url = `${GARDEN_URL}${slug}/`;
   const html = await fetchText(url);
 
   // Extract app name from <h1> or <title>
@@ -1213,4 +1228,7 @@ async function main() {
   console.log(`Wrote ${apps.length} apps to apps.json`);
 }
 
-main().catch(console.error);
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch(console.error);
+}
+
