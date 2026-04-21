@@ -7,27 +7,39 @@ interface Props {
 
 const { product } = Astro.props;
 
-// Map Cloudflare products to Lucide icons
+// Map Cloudflare products to Lucide icons.
+// Extended from https://github.com/adewale/demoscene to cover more of this repo's catalog.
 const productConfig: Record<string, { icon: string; color: string }> = {
   "Workers": { icon: "lucide:cpu", color: "text-orange-500" },
-  "D1": { icon: "lucide:database", color: "text-blue-500" },
-  "R2": { icon: "lucide:archive", color: "text-purple-500" },
-  "KV": { icon: "lucide:key", color: "text-yellow-600" },
-  "Durable Objects": { icon: "lucide:lock", color: "text-green-600" },
-  "Hyperdrive": { icon: "lucide:zap", color: "text-cyan-500" },
   "Pages": { icon: "lucide:file-text", color: "text-blue-400" },
-  "Workflows": { icon: "lucide:git-branch", color: "text-indigo-500" },
-  "Cloudflare Images": { icon: "lucide:image", color: "text-pink-500" },
-  "Browser Rendering": { icon: "lucide:globe", color: "text-teal-500" },
-  "Rate Limiting": { icon: "lucide:gauge", color: "text-red-500" },
+  "D1": { icon: "lucide:database", color: "text-blue-500" },
+  "KV": { icon: "lucide:key", color: "text-yellow-600" },
+  "R2": { icon: "lucide:archive", color: "text-purple-500" },
+  "Durable Objects": { icon: "lucide:lock", color: "text-green-600" },
+  "Queues": { icon: "lucide:list-ordered", color: "text-indigo-500" },
+  "Workflows": { icon: "lucide:workflow", color: "text-indigo-500" },
+  "Vectorize": { icon: "lucide:radar", color: "text-green-600" },
   "Workers AI": { icon: "lucide:brain", color: "text-violet-500" },
+  "AI Gateway": { icon: "lucide:network", color: "text-fuchsia-500" },
+  "Browser Rendering": { icon: "lucide:monitor", color: "text-teal-500" },
+  "Containers": { icon: "lucide:boxes", color: "text-cyan-500" },
+  "Hyperdrive": { icon: "lucide:rocket", color: "text-cyan-500" },
+  "Cloudflare Images": { icon: "lucide:image", color: "text-pink-500" },
+  "Email Routing": { icon: "lucide:mail", color: "text-red-500" },
+  "Analytics": { icon: "lucide:chart-column", color: "text-emerald-600" },
+  "Cloudflare for Platforms": { icon: "lucide:app-window", color: "text-slate-500" },
+  "Secrets Store": { icon: "lucide:vault", color: "text-lime-500" },
+  "Realtime": { icon: "lucide:radio", color: "text-rose-500" },
+  "Stream": { icon: "lucide:play", color: "text-pink-500" },
+  "Sandbox SDK": { icon: "lucide:square-dashed", color: "text-amber-500" },
+  "Agents": { icon: "lucide:bot", color: "text-orange-400" },
+
+  // Existing small-app-gardener-specific mappings.
+  "Rate Limiting": { icon: "lucide:gauge", color: "text-red-500" },
   "AI Search": { icon: "lucide:search", color: "text-emerald-500" },
   "Static Assets": { icon: "lucide:folder", color: "text-gray-500" },
   "Cron Triggers": { icon: "lucide:clock", color: "text-amber-500" },
   "Turnstile": { icon: "lucide:shield-check", color: "text-green-500" },
-  "Realtime": { icon: "lucide:radio", color: "text-rose-500" },
-  "AI Gateway": { icon: "lucide:network", color: "text-fuchsia-500" },
-  "Agents": { icon: "lucide:bot", color: "text-orange-400" },
 };
 
 const config = productConfig[product] || { icon: "lucide:box", color: "text-gray-400" };
