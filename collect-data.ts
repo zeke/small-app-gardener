@@ -38,6 +38,7 @@ const CLOUDFLARE_PACKAGE_PRODUCT_RULES: CloudflarePackageRule[] = [
   { match: "@cloudflare/ai", products: ["Workers AI"] },
   { match: "@cloudflare/ai-gateway", products: ["AI Gateway"] },
   { match: "@cloudflare/ai-search", products: ["AI Search"] },
+  { match: "@cloudflare/analytics-engine", products: ["Analytics"] },
   { match: "@cloudflare/d1", products: ["D1"] },
   { match: "@cloudflare/kv-asset-handler", products: ["KV"] },
   { match: "@cloudflare/queues", products: ["Queues"] },
@@ -46,7 +47,12 @@ const CLOUDFLARE_PACKAGE_PRODUCT_RULES: CloudflarePackageRule[] = [
   { match: "@cloudflare/turnstile", products: ["Turnstile"] },
   { match: "@cloudflare/workers-types", products: ["Workers"] },
   { match: "wrangler", products: ["Workers"] },
+  { prefix: "@cloudflare/containers", products: ["Containers"] },
+  { prefix: "@cloudflare/email-workers", products: ["Email Routing"] },
   { prefix: "@cloudflare/pages", products: ["Pages"] },
+  { prefix: "@cloudflare/sandbox", products: ["Sandbox SDK"] },
+  { prefix: "@cloudflare/secret-store", products: ["Secrets Store"] },
+  { prefix: "@cloudflare/workers-for-platforms", products: ["Cloudflare for Platforms"] },
 ];
 
 interface Author {
@@ -885,6 +891,7 @@ function analyzePyproject(content: string, analysis: RepoAnalysis): void {
 function analyzeWranglerConfig(content: string, analysis: RepoAnalysis): void {
   // Detect Cloudflare products from wrangler config
   const products = new Set(analysis.cloudflare.products);
+  const normalizedContent = content.toLowerCase();
 
   if (content.includes("d1_database") || content.includes('"d1"') || content.includes("'d1'") || content.includes("D1Database")) {
     products.add("D1");
@@ -898,44 +905,62 @@ function analyzeWranglerConfig(content: string, analysis: RepoAnalysis): void {
   if (content.includes("durable_object") || content.includes("durableObjects") || content.includes("DurableObject")) {
     products.add("Durable Objects");
   }
-  if (content.includes("hyperdrive")) {
+  if (normalizedContent.includes("hyperdrive")) {
     products.add("Hyperdrive");
   }
-  if (content.includes("browser") || content.includes("Browser") || content.includes("puppeteer")) {
+  if (normalizedContent.includes("browser") || normalizedContent.includes("puppeteer")) {
     products.add("Browser Rendering");
   }
-  if (content.includes("workflow") || content.includes("Workflow")) {
+  if (normalizedContent.includes("workflow")) {
     products.add("Workflows");
   }
-  if (content.includes("images") || content.includes("Images") || content.includes("IMAGE")) {
+  if (normalizedContent.includes("images") || content.includes("IMAGE")) {
     products.add("Cloudflare Images");
   }
-  if (content.includes("rate_limit") || content.includes("rateLimiting") || content.includes("RateLimit")) {
+  if (normalizedContent.includes("rate_limit") || content.includes("rateLimiting") || content.includes("RateLimit")) {
     products.add("Rate Limiting");
   }
-  if ((content.includes("ai") || content.includes("AI")) && content.includes("binding")) {
+  if ((content.includes("ai") || content.includes("AI")) && normalizedContent.includes("binding")) {
     products.add("Workers AI");
   }
-  if (content.includes("autorag") || content.includes("ai_search") || content.includes("AutoRAG")) {
+  if (normalizedContent.includes("autorag") || normalizedContent.includes("ai_search")) {
     products.add("AI Search");
   }
-  if (content.includes("assets") || content.includes("Assets")) {
+  if (normalizedContent.includes("assets")) {
     products.add("Static Assets");
   }
-  if (content.includes("crons") || content.includes("cron") || content.includes("triggers")) {
+  if (normalizedContent.includes("crons") || normalizedContent.includes("cron") || normalizedContent.includes("triggers")) {
     products.add("Cron Triggers");
   }
-  if (content.includes("turnstile") || content.includes("Turnstile")) {
+  if (normalizedContent.includes("turnstile")) {
     products.add("Turnstile");
   }
-  if (content.includes("realtime") || content.includes("Realtime") || content.includes("calls")) {
+  if (normalizedContent.includes("realtime") || normalizedContent.includes("calls")) {
     products.add("Realtime");
   }
-  if (content.includes("vectorize")) {
+  if (normalizedContent.includes("vectorize")) {
     products.add("Vectorize");
   }
-  if (content.includes("queues")) {
+  if (normalizedContent.includes("queues")) {
     products.add("Queues");
+  }
+  if (normalizedContent.includes("container")) {
+    products.add("Containers");
+  }
+  if (normalizedContent.includes("send_email") || normalizedContent.includes("email_workers") || normalizedContent.includes("email-routing")) {
+    products.add("Email Routing");
+  }
+  if (normalizedContent.includes("analytics_engine")) {
+    products.add("Analytics");
+  }
+  if (normalizedContent.includes("dispatch_namespace") || normalizedContent.includes("workers_for_platforms")) {
+    products.add("Cloudflare for Platforms");
+  }
+  if (normalizedContent.includes("secrets_store") || normalizedContent.includes("secret_store") || normalizedContent.includes("secret-store")) {
+    products.add("Secrets Store");
+  }
+  if (normalizedContent.includes("sandbox")) {
+    products.add("Sandbox SDK");
   }
 
   analysis.cloudflare.products = Array.from(products);
