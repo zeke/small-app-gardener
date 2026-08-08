@@ -6,6 +6,7 @@
 
 import { readFileSync, existsSync } from "fs";
 import { validateAppsData } from "./schema.js";
+import { parseGardenSlugs } from "./collect-data.ts";
 
 let passed = 0;
 let failed = 0;
@@ -27,6 +28,16 @@ function assert(condition: boolean, message: string) {
     throw new Error(message);
   }
 }
+
+// Test: collector parses current Garden card structure
+
+test("parseGardenSlugs supports current Garden card markup", () => {
+  const html = `<div data-slug="inboxbuddy"><a href="/inboxbuddy/">InboxBuddy</a></div><a href="/submit">Suggest an app</a>`;
+
+  const slugs = parseGardenSlugs(html);
+  assert(slugs.includes("inboxbuddy"), "Missing inboxbuddy slug");
+  assert(!slugs.includes("submit"), "Included submit CTA as an app slug");
+});
 
 // Test: apps.json exists
 test("apps.json exists", () => {
